@@ -1,0 +1,2614 @@
+%change section to theorem environments
+%correct references
+%correct overfull hboxes
+
+\date{}
+\documentclass[fleqn, a4paper, 12pt]{article}
+\usepackage{amsmath, amssymb, amsthm, thmtools, amsfonts}
+\usepackage{datetime}
+\usepackage{hyperref}
+\usepackage{ulem}
+\usepackage{tikz}
+\usepackage{enumerate, enumitem}
+%\usepackage{background}
+\setcounter{secnumdepth}{4}
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+\DeclareMathOperator{\vspan}{\mathrm{span}} %declares span operator for matrices
+
+\newenvironment{amatrix}[1]{%declares augmented matrix environment
+	\left(\begin{array}{@{}*{#1}{c}|c@{}}
+	}{%
+\end{array}\right)
+} 
+
+\theoremstyle{definition}
+\newtheorem{example}{Example} %defines example environment
+\newtheorem{definition}{Definition} %defines definition environment
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem} %defines theorem environment
+\newtheorem{corollary}{Corollary}
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\newtheorem{case}{Case}
+
+\newcommand{\suchthat}{\mathrm{\,s.t.\,}}
+
+\newcommand{\R}{\mathrm{R}}
+
+\newcommand{\C}{\mathrm{C}}
+
+\newcommand{\rr}{\mathrm{rr}}
+
+\newcommand{\im}{\mathrm{im}\,}
+
+\newenvironment{solution} %declares solution environment and removes qed at end
+	{\begin{proof}[Solution]\let\qed\relax}
+	{\end{proof}}
+
+\makeatletter
+\@addtoreset{section}{part} %resets section numbers in new part
+\makeatother
+
+\makeatletter
+\@addtoreset{theorem}{part} %resets theorem numbers in new part
+\makeatother
+
+\makeatletter
+\@addtoreset{corollary}{theorem} %resets corollary numbers after a theorem
+\makeatother
+
+\numberwithin{equation}{theorem}
+
+\makeatletter %changes spacing between rows of matrices to fit fractions
+\newif\ifcenter@asb@\center@asb@false
+\def\center@arstrutbox{%
+	\setbox\@arstrutbox\hbox{$\vcenter{\box\@arstrutbox}$}%
+}
+\newcommand*{\CenteredArraystretch}[1]{%
+	\ifcenter@asb@\else
+	\pretocmd{\@mkpream}{\center@arstrutbox}{}{}%
+	\center@asb@true
+	\fi
+	\renewcommand{\arraystretch}{#1}%
+}
+\makeatother
+
+\title{Linear Algebra}
+\author{Aakash Jog}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\newpage
+\part{General Information}
+
+\section{Contact Information}
+
+\textbf{Boris Kunyavskii}\\
+kunyav@gmail.com\\
+
+\section{Grades}
+
+Final Exam: 80\%\\
+Midterm Exam: 10\%\\
+Homework: 10\%\\
+Passing Criteria: 60\%
+
+\newpage
+\part{Fields}
+\section{Definition}
+
+\begin{definition}[Field]
+	The set $\mathbb{F}$ is a field if there are operations +, $\centerdot$ satisfying the following properties:
+	
+	\begin{enumerate}[label=(A\arabic*)]
+		\item	$\forall a, b \in \mathbb{F}; a + b = b + a $
+		\item	$\forall a, b \in \mathbb{F};  (a+b)+c = a+(b+c)$
+		\item	There is an element $0 \in \mathbb{F} $ s.t. $a+0 = 0+a = a$
+		\item	$\forall a \in F, \exists \, b \in \mathbb{F}$ s.t. $a + b = 0$
+	\end{enumerate}
+	
+	\begin{enumerate}[label=(M\arabic*)]
+		\item	$\forall a, b \in \mathbb{F}, a \cdot b = b \cdot a$
+		\item	$\forall a, b \in \mathbb{F}, (a \cdot b) \cdot c = a \cdot (b \cdot c)$
+		\item	There is an element $1 \in \mathbb{F}$ s.t. $a \cdot 1 = 1 \cdot a = a (1 \neq 0)$
+		\item	$\forall a \in \mathbb{F}, (a \neq 0), \exists \, b \in \mathbb{F}$ s.t. $a \cdot b = 1$
+	\end{enumerate}
+	
+	\begin{enumerate}[label=(AM)]
+		\item	$(a + b) \cdot c = (a \cdot c) + (b \cdot c)$
+	\end{enumerate}
+	
+	If $\mathbb{F}$ is a field, one can define subtraction and division as follows.
+	\begin{align*}
+	a - b &\dot{=} a + (-b)\\
+	\dfrac{a}{b} &\dot{=} a \cdot \dfrac{1}{b}
+	\end{align*}
+\end{definition}
+
+\subsection{Examples of Fields}
+\begin{enumerate}
+	\item	$\mathbb{R}$
+	\item	$\mathbb{C}$
+	\item	$\mathbb{F}_p$
+\end{enumerate}
+
+\subsection{Examples of Non-fields (Rings)}
+\begin{enumerate}
+	\item	$\mathbb{Z}$, as M4 is not satisfied.
+\end{enumerate}
+
+If we define $\mathbb{F}_2 = {0,1}; 0 + 0 = 0; 0 + 1 = 1 + 0 = 1$; then, necessarily, $1 + 1 = 0$, otherwise, $1$ will have no additive inverse.\\
+
+\section{Examples}
+
+\begin{example}
+	Let $p$ be a prime number.\\
+	$\mathbb{F}_p$ is defined as follows.
+	\begin{align*}
+	\forall m \in \mathbb{Z}, m &= a \centerdot p + \overline{m}
+	\end{align*}
+	
+	The operations $+$ and $\centerdot$ are defined as
+	\begin{align*}
+	\overline{a} + \overline{b} = \overline{(a + b)}\\
+	\overline{a} \centerdot \overline{b} = \overline{(a \centerdot b)}
+	\end{align*}
+	\begin{enumerate}
+		\item	$\mathbb{F}_p$ is a field.
+		\item	If $\mathbb{F}$ is a set of $q$ elements, we can define on $\mathbb{F}$ a structure of a field iff $q = p^t$, where $p$ is prime, $t \geq 1$.
+	\end{enumerate}
+
+\end{example}
+
+\begin{example}
+	For a field of 4 elements \{0, 1 $\alpha$, $\beta$\}, the addition and multiplication tables are as follows.\\
+	
+	\begin{tabular}{|c|c|c|c|c|}
+		
+		\hline
+		+ & 0 & 1 & $\alpha$ & $\beta$ \\
+		\hline
+		0 & 0 & 1 & $\alpha$ & $\beta$ \\
+		\hline
+		1 & 1 & 0 & $\beta$ & $\alpha$ \\
+		\hline
+		$\alpha$ & $\alpha$ & $\beta$ & 0 & 1\\
+		\hline
+		$\beta$ & $\beta$ & $\alpha$ & 0 & 1 \\
+		\hline
+		
+	\end{tabular}
+
+\end{example}
+\newpage
+\part{Matrices}
+
+\section{Definition}
+\begin{definition}[Matrix]
+	Let $\mathbb{F}$ be a field, $m, n \geq 1$.\\
+	Then, $A(m \times n)$ is a table consisting of $m$ rows and $n$ columns, filled by elements of $\mathbb{F}$.\\
+	
+	\begin{equation*}
+	A =
+	\begin{pmatrix}
+		a_{11} & a_{12} & \dots & a_{1n}\\	
+		a_{21} & a_{22} & \dots & a_{2n}\\
+		\vdots & \vdots & & \vdots\\
+		a_{m1} & a_{m2} & \dots & a_{mn}\\
+	\end{pmatrix}
+\end{equation*}
+
+\end{definition}
+\section{Addition of Matrices}
+
+\begin{definition}[Addition of matrices]\label{addition of matrices}
+	Let $A$, $B$ be $m \times n$ matrices over $\mathbb{F}$.\\
+	Then, $C = A + B$ is defined as follows.
+	
+	\begin{equation*}
+	c_{ij} = a_{ij} + b{ij}\\
+	\end{equation*}
+\end{definition}
+
+\subsubsection{Properties}
+
+\begin{enumerate}
+	\item	$A + B = B + A, \forall A, B$ s.t. the sum is defined\\
+	\item	$(A + B) + C = A + (B + C), \forall A, B, C$ s.t. the sums are defined\\
+	\item	There is a matrix $\mathbb{O}$, s.t. $A + \mathbb{O} = \mathbb{O} + A = A$
+	\item	For any $A, \exists B$ s.t. $B = -A$
+\end{enumerate}
+
+\section{Multiplication of a matrix by a scalar}
+
+\begin{definition}[Multiplication of a matrix by a scalar]\label{multiplication of a matrix by a scalar}
+	Let $A$ be a $m \times n$ matrix over $\mathbb{F}$. Let $\alpha \in \mathbb{F}$ be a scalar.
+	Then, $C = \alpha A$ is defined as follows.
+	\begin{equation*}
+	c_{ij} = \alpha a_{ij}
+	\end{equation*}
+\end{definition}
+
+\section{Multiplication of matrices}
+
+\begin{definition}[Multiplication of matrices]
+	Let $A$ be a $m \times n$ matrix over $\mathbb{F}$.\\
+	Let $B$ be a $n \times p$ matrix over $\mathbb{F}$.\\
+	Then, $C = AB$ is defined as follows.
+	\begin{equation*}
+		c_{ik} = \sum_{j = 1}^{n} a_{ij} b_{jk}
+	\end{equation*}
+\end{definition}
+
+\begin{example}
+	For matrices $A,B$, of same size, is $AB = BA$?
+	\begin{solution}
+		$
+		A = 
+		\begin{pmatrix}
+		0 & 1\\
+		0 & 0\\
+		\end{pmatrix}
+		,
+		B = 
+		\begin{pmatrix}
+		1 & 0\\
+		0 & 0\\
+		\end{pmatrix}
+		\\
+		\therefore AB = 
+		\begin{pmatrix}
+		0 & 0\\
+		0 & 0\\
+		\end{pmatrix}
+		,
+		BA = 
+		\begin{pmatrix}
+		0 & 1\\
+		0 & 0\\
+		\end{pmatrix}
+		\\
+		\therefore AB \neq BA\\
+		$
+	\end{solution}
+\end{example}
+
+\begin{remark}
+	$A \neq \mathbb{O}, B \neq \mathbb{O}$, but $AB = \mathbb{O}$.
+\end{remark}
+
+\section{Zero Divisor}
+
+\begin{definition}[Zero divisor]
+	We say that a square matrix $A \neq \mathbb{O}$ is a \emph{zero divisor} if either there is a square matrix $B$ s.t. $AB = \mathbb{O}$, or there is a square matrix C, s.t. $CA = \mathbb{O}$.
+\end{definition}
+
+\begin{remark}
+	$\mathbb{O}B = C\mathbb{O} = \mathbb{O}$.
+\end{remark}
+
+\begin{remark}
+	$AC = BC \nRightarrow A = B$. In general, we cannot cancel matrices on either side of an equation.
+	\begin{equation*}
+		A = 
+		\begin{pmatrix}
+			0 & 1\\
+			0 & 0\\
+		\end{pmatrix}
+		,
+		B = 
+		\begin{pmatrix}
+			1 & 0\\
+			0 & 0\\
+		\end{pmatrix}
+		,
+		C = \mathbb{O}
+	\end{equation*}
+	\begin{equation*}
+		\therefore AB = CB = \mathbb{O} \,\&\, B \neq \mathbb{O}
+	\end{equation*}
+	But, we cannot cancel $B$, as $A \neq C$.
+\end{remark}
+
+\newpage
+\section{Theorem ('Good properties of matrix multiplication')}
+
+\begin{theorem}
+	\begin{align}
+	(AB)C &= A(BC) \\
+	A(B + C) &= AB + AC\\
+	(A + B)C &= AC + BC\\
+	(\alpha A) &= \alpha (AB)
+	\end{align}
+\end{theorem}
+
+\begin{proof}
+	Denote $AB = D, BC = G, (AB)C = F, A(BC) = H$\\
+	We need to prove $F = H$\\
+	Let the dimensions of the matrices be as follows.\\
+	$A_{m \times n}, B_{n \times p}, C_{p \times q}$\\
+	$\therefore F_{m \times q}, H_{m \times q}$\\
+	\vspace{1 cm}
+	\begin{align*}
+		d_{ik} &= \sum_{j} a_{ij} b_{jk} \\
+		\therefore g_{jl}  &= \sum_{k} b_{jk} b{kl} \\
+		f_{il} &= \sum_{k} d_{ik} c{kl} = \sum_{k} (\sum_{j} a_{ij} b{jk}) c_{kl} = \sum_{k} \sum_{j} a_{ij} b_{jk} c_{kl}\\
+		h_{il} &= \sum_{j} a_{ij} g{jl} = \sum_{j} a_{ij} (\sum_{k} b{jk} c_{kl}) = \sum_{k} \sum_{j} a_{ij} b_{jk} c_{kl}\\
+		f_{il} &= h_{il}\\
+		F &= H
+	\end{align*}
+\end{proof}
+
+\newpage
+\section{Square Matrices}
+
+Let $A$ be a square matrix of size $n \times n, n \geq 1$
+\subsection{Diagonal Matrices}
+
+\begin{definition}[Diagonal matrix]
+	We say that A is a \emph{diagonal matrix} if $a_{ij} = 0$, whenever $i \neq j$.
+\end{definition}
+
+\begin{theorem}
+	Let $A$ and $B$ be diagonal $n \times n$ matrices.\\
+	\begin{equation*}
+		a_{rr} = \alpha_r, b_{rr} = \beta_r
+	\end{equation*}
+	Then, $AB = BA = C, C $ is a diagonal matrix with $c_{rr} = a_{rr} b_{rr}$.
+\end{theorem}
+\subsubsection{Proof}
+
+$
+a_{ij} = 
+\begin{cases}
+0, i \neq j\\
+\alpha_i, i = j\\
+\end{cases}\\
+$
+$
+b_{ij} = 
+\begin{cases}
+0, i \neq j\\
+\beta_i, i = j\\
+\end{cases}\\
+$
+$
+c_{ik} = \sum_{j = 1}^{n} a_{ij} b{jk} = a_{ii} b_{ik} = \alpha_i b_{ik} = 
+\begin{cases}
+0, i \neq k\\
+\alpha_i \beta_i, i = k\\
+\end{cases}\\
+$
+Similarly for $BA$.
+
+\subsection{Upper-triangular Matrices}
+
+We say that A is an \emph{upper-triangular matrix} if $a_{ij} = 0$, whenever $i > j$.
+
+\subsection{Lower-triangular Matrices}
+
+We say that A is a \emph{lower-triangular matrix} if $a_{ij} = 0$, whenever $i < j$.
+
+\subsubsection*{Remark}
+Diagonal matrices are upper-triangular and lower-triangular. Conversely, if a matrix is both upper-triangular and lower-triangular, it is a diagonal matrix.
+
+\subsection{Theorem}
+
+If  $A$ and $B$ are both upper-triangular, then $AB$ and $BA$ are upper-triangular too.\\
+
+\subsubsection{Proof}
+
+Denote $C = AB$.\\
+\[\therefore	c_{ik} = \sum_{j = 1}^{n} a_{ij} b_{jk}\]\\
+Suppose $i > k$, then, either $i>j$ or $j>k$. So, in each case, atleast one of $a_{ij}$ or $b_{jk}$ is 0.
+
+\subsection{Identity Matrix}
+
+Let $n \geq 1$. We call $I_n$ the $n \times n$ \emph{identity matrix}.\\
+$
+I_n = 
+\begin{pmatrix}
+1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & \ddots & 0 \\
+0 & 0 & 0 & 1\\
+\end{pmatrix}
+$
+
+\subsection{Theorem}
+
+Let $I_n$ be the identity $n \times n$ matrix. Then, for any $n \times n$ matrix $B$, we have
+\[I_n B = B I_n = B\]
+
+\subsubsection{Proof}
+
+$I_n = (e_{ij}); e_{ij} = 
+\begin{cases}
+0, i \neq j\\
+1, i = j\\
+\end{cases}
+$\\
+Denote $C = I_n B$. We have
+\begin{align*}
+c_{ik} &= \sum_{j =1}^{n} e_{ij} b_{jk} = e_{ii} b_{ik} = 1 \cdot b_{ik} = b_{ik}\\
+\therefore C &= B \Rightarrow I_n B = B
+\end{align*}
+Similarly for $B I_n = B$.
+
+\subsection{Inverse of Matrix}
+
+Let $A$ be an $n \times n$ matrix. We say that $A$ is \emph{invertible} if there exist $B, C$, s.t.
+$AB = I_n$ and $CA = I_n$\\
+
+\subsubsection*{Remark}
+$A = \mathbb{O}$ is not invertible because $\mathbb{O} B = C \mathbb{O} = \mathbb{O} \neq I_n$\\
+
+\subsubsection*{Remark}
+There are \emph{non-zero} matrices which are not invertible.\\
+Let 
+$
+A = 
+\begin{pmatrix}
+0 & 1 \\
+0 & 0 \\
+\end{pmatrix}
+$\\
+If possible, let there be $C$ s.t. $CA = I_2$.\\
+Let
+$
+B = 
+\begin{pmatrix}
+1 & 0 \\
+0 & 0 \\
+\end{pmatrix}
+$\\
+We have $CA = I$. \\
+$
+\therefore	(CA)B = IB \\
+\therefore	C(AB) = B \\
+\therefore	C \mathbb{O} = B \\
+\therefore	\mathbb{O} = B \\
+$
+But, $B \neq 0$. Therefore, $C$ does not exist.\\
+
+\subsubsection{If $AB = I_n$ and $CA = I_n$, then $B = C$}
+
+\begin{align*}
+C &= CI \\
+&= C(AB) \\
+&= (CA)B \\
+&= IB \\
+&= B \\
+\end{align*}
+
+\subsubsection{Inverse of a Matrix}
+
+If $A$ is invertible, i.e. if there exists $B$, s.t. $AB = BA = I$, then, $B$ is called the \emph{inverse} of $A$, and is denoted by $A^{-1}$.
+
+\subsubsection{If $AB = I$, then $BA = I$.}
+
+\subsubsection{If $A$ is invertible, then $A$ \emph{cannot} be a zero divisor.}
+
+If possible, let $A$ be a zero divisor.\\
+Therefore, either $AB = \mathbb{O}$, for some $B \neq \mathbb{O}$; or $CA = \mathbb{O}$, for some $C \neq \mathbb{O}$\\
+
+\paragraph*{Case I: $AB = \mathbb{O}$}
+
+\begin{align*}
+	AB = \mathbb{O}\\
+	\therefore A^{-1}(AB) = A^{-1}\mathbb{O}\\
+	\therefore (A^{-1}A)B = \mathbb{O}\\
+	\therefore IB = \mathbb{O}\\
+	\therefore B = \mathbb{O}
+\end{align*}
+
+This contradicts the assumption $B \neq \mathbb{O}$
+
+\paragraph*{Case II: $CA = \mathbb{O}$}
+
+\begin{align*}
+CA = \mathbb{O}\\
+\therefore (CA)A^{-1} = \mathbb{O}A^{-1}\\
+\therefore C(A^{-1}A) = \mathbb{O}\\
+\therefore CI = \mathbb{O}\\
+\therefore C = \mathbb{O}
+\end{align*}
+
+This contradicts the assumption $C \neq \mathbb{O}$
+
+\subsubsection{If $A$ and $B$ are invertible, then $A+B$ may or may not be invertible.}
+
+If $A = B$, then $A + B = 2A$ is invertible.\\
+If $A = -B$, then $A + B = \mathbb{O}$ is not invertible.
+
+\subsubsection{If $A$ and $B$ are invertible, then $AB$ must be invertible.}
+
+\begin{align*}
+	(AB) (B^{-1} A^{-1}) &= A(B B^{-1}) A^{-1}\\
+	&= A I A^{-1}\\
+	&= A A^{-1}\\
+	&= I\\
+	\text{Similarly, }& (B^{-1} A^{-1})(AB) = I\\
+	\therefore (AB)^{-1} &= B^{-1} A^{-1}
+\end{align*}
+
+\section{Transpose of a Matrix}
+
+Let $A$ be a $m \times n$ matrix, $A = (a_{ij})_{1 \leq i \leq m; 1\leq j \leq n}$\\
+
+$B = A^{t}$ is defined as follows.
+\begin{equation*}
+	b_{ji} = a_{ij}
+\end{equation*}
+
+\subsection{Properties of $A^{t}$}
+
+\begin{enumerate}
+	\item	$(A + B)^t = A^t + B^t$
+	\item	$(\alpha A)^t = \alpha A^t$
+	\item	$(AB)^t = B^t A^t$
+	\item	If $A$ is invertible, then, $A^t$ must be invertible, and $(A^t)^{-1} = (A^{-1})^t$
+\end{enumerate}
+
+\section{Adjoint Matrix}
+
+\begin{equation*}
+	A^* \dot{=} \overline{A}^t
+\end{equation*}
+For example,
+\begin{align*}
+	A &= 
+	\begin{pmatrix}
+	1 & 1+i & 2-1 \\
+	i & -5i & 3 \\
+	\end{pmatrix}\\
+	B &=
+	\begin{pmatrix}
+	1 & -i \\
+	1-i & 5i \\
+	2+i & 3 \\
+	\end{pmatrix}
+\end{align*}
+
+\subsubsection{Properties of Adjoint Matrices}
+
+\begin{enumerate}
+	\item $(A + B)^* = A^* + B^* $
+	\item $(\alpha A)^* = \overline{\alpha} A^*$
+	\item $(AB)^* = B^* A^*$
+	\item If $A$ is invertible, then $A^*$ is invertible, and $(A^*)^{-1} = (A^{-1})^*$
+\end{enumerate}
+
+\section{Row Operations on Matrices}
+
+\subsection{Elementary Row Operations}
+
+Let $A$ be a $m \times n$ matrix with rows $a_1, \dots a_m$. We define 3 types of \emph{elementary row operations}.
+
+\begin{enumerate}[label=\Roman*]
+	\item $a_i \leftrightarrow a_j$ (Switch of the $i^{\text{th}}$ and $j^{\text{th}}$ rows.) \label{elementary row operation 1}
+	\item $a_i \rightarrow \alpha a_i (\alpha \neq 0)$ (Multiplication of a row by a non-zero scalar.) \label{elementary row operation 2}
+	\item $a_i \rightarrow a_i + \alpha a_j (j \neq i)$ (Addition of a row multiplied by a scalar, and another row.) \label{elementary row operation 3}
+\end{enumerate}
+$E_\text{I}, E_\text{II}, E_\text{III}$ are matrices obtained from the identity matrix by applying elementary row operations \ref{elementary row operation 1}, \ref{elementary row operation 2}, \ref{elementary row operation 3}, respectively. These matrices are called elementary matrices.
+
+\subsection{Theorems}
+
+Let 
+$
+e_i = 
+\begin{pmatrix}
+0 & \dots & 0 & 1 & 0 & \dots & 0\\
+\end{pmatrix}
+$
+be a $1 \times m$ matrix.\\
+Let $A$ be any ${m \times n}$ matrix.\\
+Then, $e_i A = $ the $i^{\text{th}}$ row of A.
+
+\subsubsection{$E_\text{I} A = $ the matrix obtained from $A$ by an elementary row operation \ref{elementary row operation 1}}
+\paragraph*{Proof\\}
+Let $A$ be any $m \times n$ matrix.\\
+\begin{align*}
+	\therefore E_\text{I} A = 
+	\begin{pmatrix}
+		e_1 A\\
+		\vdots\\
+		e_j A\\
+		\vdots\\
+		e_i A\\
+		\vdots\\
+		e_m A\\
+	\end{pmatrix}
+\end{align*}
+
+\subsubsection{$E_\text{II} A = $ the matrix obtained from $A$ by an elementary row operation \ref{elementary row operation 2}}
+
+\paragraph*{Proof\\}
+Let $A$ be any $m \times n$ matrix.\\
+\begin{align*}
+\therefore E_\text{I} A = 
+\begin{pmatrix}
+e_1 A\\
+\vdots\\
+\alpha e_i A\\
+\vdots\\
+e_m A\\
+\end{pmatrix}
+\end{align*}
+
+\subsubsection{$E_\text{III} A = $ the matrix obtained from $A$ by an elementary row operation \ref{elementary row operation 3}}
+
+\paragraph*{Proof\\}
+Let $A$ be any $m \times n$ matrix.\\
+\begin{align*}
+\therefore E_\text{I} A &= 
+\begin{pmatrix}
+e_1 A\\
+\vdots\\
+a_{i1} + \alpha a_{j1} \dots + a_{in}+ \alpha a_{jn}\\
+\vdots\\
+e_j A\\
+\vdots\\
+e_m A\\
+\end{pmatrix}\\
+&=
+\begin{pmatrix}
+1^{\text{st}} \text{ row of }A\\
+\vdots\\
+i^{\text{th}} \text{ row of }A + \alpha (j^{\text{th}}) \text{ row of }A\\
+\vdots\\
+j^{\text{th}} \text{ row of }A\\
+\vdots\\
+m^{\text{th}} \text{ row of }A\\
+\end{pmatrix}
+\end{align*}
+
+\subsubsection{All elementary matrices are invertible, moreover, the inverses of $E_{\text{I}}, E_{\text{II}}, E_{\text{III}}$ are also elementary matrices of the same type.}
+
+\begin{align*}
+	E_{\text{I}}^{-1} &=  E_{\text{I}}\\
+	\Leftrightarrow E_{\text{I}}^2 &= I_m
+\end{align*}
+\begin{align*}
+	E_{\text{I}}^2 &= E_{\text{I}} E_{\text{I}}\\
+	&= 
+	\begin{pmatrix}
+		e_1 E_{\text{I}}\\
+		\vdots\\
+		e_j E_{\text{I}}\\
+		\vdots\\
+		e_i E_{\text{I}}\\
+		\vdots\\
+		e_m E_{\text{I}}\\
+	\end{pmatrix}\\
+	&= 
+	\begin{pmatrix}
+		1^{\text{st}} \text{ row of }A\\
+		\vdots\\
+		j^{\text{th}} \text{ row of }A\\
+		\vdots\\
+		i^{\text{th}} \text{ row of }A\\
+		\vdots\\
+		m^{\text{th}} \text{ row of }A\\
+	\end{pmatrix}\\
+	&=
+	\begin{pmatrix}
+		e_1\\
+		\vdots\\
+		e_j\\
+		\vdots\\
+		e_i\\
+		\vdots\\
+		e_m\\
+	\end{pmatrix}
+	= I_m
+\end{align*}
+Similarly for $E_{\text{II}}$, to get the inverse, $\alpha$ is replaced by $\dfrac{1}{\alpha}$\\
+\begin{align*}
+	E_{\text{II}} &=
+	\begin{pmatrix}
+		1 & 0 & 0 & \dots & 0\\
+		0 & 1 & 0 & \dots & 0\\
+		0 & 0 & \alpha & \dots & 0\\
+		\vdots & \vdots & \vdots & \ddots & \vdots \\
+		0 & 0 & 0 & \dots & 1\\
+	\end{pmatrix}\\
+	\therefore 
+	E_{\text{II}}^{-1} &=
+		\begin{pmatrix}
+		1 & 0 & 0 & \dots & 0\\
+		0 & 1 & 0 & \dots & 0\\
+		0 & 0 & \dfrac{1}{\alpha} & \dots & 0\\
+		\vdots & \vdots & \vdots & \ddots & \vdots \\
+		0 & 0 & 0 & \dots & 1\\
+	\end{pmatrix}
+\end{align*}
+Similarly for $E_{\text{III}}$, to get the inverse, $\alpha$ is replaced by $-\alpha$\\
+
+\begin{align*}
+	E_{\text{III}} &=
+	\begin{pmatrix}
+		1 & 0 & 0 & \dots & 0\\
+		0 & 1 & \alpha & \dots & 0\\
+0 & 0 & 1 & \dots & 0\\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+0 & 0 & 0 & \dots & 1\\
+\end{pmatrix}\\
+\therefore 
+E_{\text{III}}^{-1} &=
+\begin{pmatrix}
+1 & 0 & 0 & \dots & 0\\
+0 & 1 & -\alpha & \dots & 0\\
+0 & 0 & 1 & \dots & 0\\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+0 & 0 & 0 & \dots & 1\\
+\end{pmatrix}
+\end{align*}
+
+\subsection{Row-equivalent of a Matrix}
+
+A matrix $A'$ is a \emph{row-equivalent} of $A$, if $A'$ is obtained for $A$, by a finite sequence of elementary row operations.
+
+\section{Row Echelon Form of a Matrix}
+
+\subsection{Definition}
+Let $A$ be an $m \times n$ matrix.\\
+Denote the $i^{\text{th}}$ row of $A$ by $a_i$.\\
+The \emph{leading entry} of a non-zero row $a_i$ is its \emph{first non-zero entry}.\\
+Denote the column where the leading entry occurs by $l_i$.
+\begin{align*}
+	a_{ij} = 0 &\text{ if } j < l(i)\\
+	a_{ij} \neq 0 &\text{ if } j = l(i)\\
+\end{align*}
+We say that $A$ is in row echelon form(REF) if the following conditions hold.
+\begin{enumerate}
+	\item The non-zero rows are at the top of $A$. ($r = $ the number of non-zero rows)
+	\item The leading entries go right as we go down, i.e. $l(1) < l_2 < \dots < l(r)$
+	\item All leading entries equal $1$, i.e. if $j = l(i)$, then, $a_{ij} = 1$
+	\item Any column which contains a leading entry must have all other entries equal to $0$, i.e. if $j = l(i)$, then, $a_{kj} = 0; \forall k \neq i$
+\end{enumerate}
+
+\subsection{Notation}
+
+The REF of $A$ will be denoted by $A_R$. 
+
+\section{Row Rank of a Matrix}
+
+The number of non-zero rows in $A_R$ is called the row rank of $A$. It is denoted by $r$.
+\begin{equation*}
+	r \leq n
+\end{equation*}
+
+\section{Gauss Theorem}
+
+Any $m \times n$ matrix $A$ can be brought to REF by a sequence of elementary row operations.
+
+\subsection{Elimination Algorithm}
+
+\begin{enumerate}[label=Step \arabic*]
+	\item Find the first non-zero column $C_p$ of $A$. \label{First step}
+	\item Denote by $a_{ip}$ the first non-zero entry of $C_p$.
+	\item Switch the $1^{\text{st}}$ and $i^{\text{th}}$ rows.
+	\item Multiply the $1^{\text{st}}$ row by $\dfrac{1}{a_{ip}}$.
+	\item Using row operations of type III, make all other entries of the $p^{\text{th}}$ column zeros. \label{Last step}
+	\item Ignoring the top row and $C_p$, repeat steps \ref{First step} to \ref{Last step}.
+\end{enumerate}
+
+\subsubsection{Example}
+$
+\begin{pmatrix}
+	0 & 0 & 0 & -1 \\
+	0 & -1 & 4 & 7 \\
+	0 & -1 & 7 & 6 \\
+\end{pmatrix}
+\xrightarrow{R_1 \rightarrow R_2}
+\begin{pmatrix}
+	0 & -1 & 4 & 7 \\
+	0 & 0 & 0 & -1 \\
+	0 & -1 & 7 & 6 \\
+\end{pmatrix}
+\xrightarrow{R_1 \rightarrow -R_1}
+\begin{pmatrix}
+	0 & 1 & -4 & -7 \\
+	0 & 0 & 0 & -1 \\
+	0 & -1 & 7 & 6 \\
+\end{pmatrix}
+\xrightarrow{R_3 \rightarrow R_3 + R_1}
+\begin{pmatrix}
+	0 & 1 & -4 & -7 \\
+	0 & 0 & 0 & -1 \\
+	0 & 0 & 3 & -1 \\
+\end{pmatrix}
+\xrightarrow{R_2 \leftrightarrow R_3}
+\begin{pmatrix}
+	0 & 1 & -4 & -7 \\
+	0 & 0 & 3 & -1 \\
+	0 & 0 & 0 & -1 \\
+\end{pmatrix}
+\xrightarrow{R_2 \rightarrow \frac{R_2}{3}}
+\CenteredArraystretch{2}
+\begin{pmatrix}
+	0 & 1 & -4 & -7 \\
+	0 & 0 & 1 & -\dfrac{1}{3} \\
+	0 & 0 & 0 & -1 \\
+\end{pmatrix}
+\xrightarrow{R_1 \rightarrow R_1 + 4 R_2}
+\CenteredArraystretch{2}
+\begin{pmatrix}
+	0 & 1 & 0 & -\dfrac{25}{3} \\
+	0 & 0 & 1 & -\dfrac{1}{3} \\
+	0 & 0 & 0 & -1 \\
+\end{pmatrix}
+\xrightarrow{R_3 \rightarrow -R_3}
+\CenteredArraystretch{2}
+\begin{pmatrix}
+	0 & 1 & 0 & -\dfrac{25}{3} \\
+	0 & 0 & 1 & -\dfrac{1}{3} \\
+	0 & 0 & 0 & 1 \\
+\end{pmatrix}
+\xrightarrow{R_1 \rightarrow R_1 + \frac{25}{3} R_3}
+\CenteredArraystretch{2}
+\begin{pmatrix}
+	0 & 1 & 0 & 0 \\
+	0 & 0 & 1 & -\dfrac{1}{3} \\
+	0 & 0 & 0 & 1 \\
+\end{pmatrix}
+\xrightarrow{R_2 \rightarrow R_2 + \frac{1}{3} R_3}
+\CenteredArraystretch{1}
+\begin{pmatrix}
+	0 & 1 & 0 & 0 \\
+	0 & 0 & 1 & 0 \\
+	0 & 0 & 0 & 1 \\
+\end{pmatrix}
+$
+
+\subsection{Row Spaces of Matrices}
+
+\begin{definition}[Row space of a matrix]
+	Let $A$ be a $m \times n$ matrix over $\mathbb{F}$.
+	$\R(A)$ is defined as 
+	\begin{equation*}
+	\R(A) = \vspan{v_1, \dots, v_m}
+	\end{equation*}
+	where $v_1, \dots, v_m$ are rows of $A$.\\
+	$\R(A)$ a subspace of the vector space of all rows of length $n$, is called the row space of $A$.
+\end{definition}
+
+\begin{definition}[Row rank of a matrix]
+	$\dim \R(A)$ is called the row-rank of $A$, and is denoted by $\rr(A)$.
+\end{definition}
+
+\begin{theorem}	
+	Let $P$ be a $l \times m$ matrix. Then
+	\begin{enumerate}
+		\item $\R(P A) \subseteq \R(A)$
+		\item If $P$ is an invertible $m \times m$ matrix, then $\R(P A) = \R(A)$
+	\end{enumerate}
+\end{theorem}
+
+\begin{corollary}
+	\begin{equation*}
+	A' \stackrel{\R}{\sim} A \implies \R(A') = \R(A)
+	\end{equation*}
+\end{corollary}
+
+\begin{theorem}
+	If $A$ is in REF, and if $r$ is the number of non-zero rows in $A$, then
+	\begin{equation*}
+	\rr(A) = r
+	\end{equation*}
+\end{theorem}
+
+\begin{corollary}
+	The following are equivalent
+	\begin{enumerate}
+		\item $A \stackrel{R}{\sim} A'$
+		\item There is an invertible matrix $P, \suchthat A' = P A$
+		\item $\R(A) = \R(A')$
+		\item $A$ and $A'$ have the same REF
+	\end{enumerate}
+\end{corollary}
+
+\subsection{Column Equivalence}
+
+\begin{definition}
+	If $A$ is a $m \times n$ matrix, we can define elementary column operations, column equivalence ($A \stackrel{C}{\sim}$) and column echelon form (CEF), the column space of $A$ ($\C(A)$), and the column rank of $A$ ($\mathrm{cr}(A)$).
+\end{definition}
+
+\begin{theorem}
+	\begin{equation*}
+	\mathrm{cr}(A) = \rr(A) =  r
+	\end{equation*}
+\end{theorem}
+
+\begin{proof}
+	Let $r = \rr(A) = \dim \R(A)$.\\
+	Choose $r$ rows of $A$ which form a basis of $\R(A)$, WLG, say ${v_1, \dots, v_r}$.\\
+	Let 
+	\begin{equation*}
+	X_{r \times n} = 
+	\begin{pmatrix}
+	v_1\\
+	\vdots\\
+	v_r\\
+	\end{pmatrix}
+	\end{equation*}
+	
+	\begin{equation*}
+	\vspan(X) = \R(A)
+	\end{equation*}
+	Hence, any row of $A$ can be expressed as a linear combination of $v_1, \dots, v_r$
+	\begin{equation*}
+	v_i = \sum_{j = 1}^{r} y_{ij} v_j
+	\end{equation*}
+	Let 
+	\begin{equation*}
+	Y_{m \times r} = (y_{ij})
+	\end{equation*}
+	Therefore,
+	\begin{equation*}
+	A = Y X
+	\end{equation*}
+	Considering each column of $A$ as a linear combination of columns of $Y$,
+	\begin{gather*}
+	\C(A) \subseteq \C(Y)\\
+	\therefore \mathrm{cr}(A) \leq \mathrm{cr}(Y) \leq r = \rr(A)\\
+	\therefore \mathrm{cr}(A) \leq \rr(A)
+	\intertext{Similarly,}
+	\rr(A) \leq \mathrm{cr}(A)
+	\therefore \mathrm{cr}(A) = \rr(A)
+	\end{gather*}
+\end{proof}
+
+\begin{corollary}
+	The following are equivalent
+	\begin{enumerate}
+		\item $A \stackrel{C}{\sim} A'$
+		\item There is an invertible matrix $Q, \suchthat A' = Q A$
+		\item $\C(A) = \C(A')$
+		\item $A$ and $A'$ have the same CEF
+	\end{enumerate}
+\end{corollary}
+
+\newpage
+\part{Linear Systems}
+
+\section{Definition}
+
+\begin{align*}
+	a_{11} x_{1} + a_{12} x_{2} + \dots + a_{1n} x_{n} &= b_{1} \\
+	a_{21} x_{1} + a_{22} x_{2} + \dots + a_{2n} x_{n} &= b_{2} \\
+	\vdots\\
+	a_{m1} x_{1} + a_{m2} x_{2} + \dots + a_{mn} x_{n} &= b_{m} \\
+\end{align*}
+Here, all $x_i$ are taken to be unknowns, and all $a_{ij}, b_i$ are given. \\
+A \emph{solution} to such a system is a collection $d_1, \dots, d_n$, s.t. after replacing $x_i$ by $d_i$, we get equalities.\\
+We assume that all $a_{ij}, b_i$ belond to $\mathbb{F}$, and we are looking for solutions $d_i \in \mathbb{F}$.\\
+Given such a system, we define $A_{m \times n} = (a_{ij}), b_{m \times 1} = 
+\begin{pmatrix}
+	b_1\\
+	\vdots\\
+	b_m\\
+\end{pmatrix} 
+,
+x_{n \times 1} = 
+\begin{pmatrix}
+	x_1\\
+	\vdots\\
+	x_n\\
+\end{pmatrix}
+$\\
+Then, we can write the system as
+\begin{equation*}
+	A x = b
+\end{equation*}
+A solution to this system is 
+$
+d_n = 
+\begin{pmatrix}
+	d_1\\
+	\vdots\\
+	d_n\\
+\end{pmatrix}
+$
+, s.t. $A d = b$
+
+Let $D$ be the set of all 
+$
+d = 
+\begin{pmatrix}
+	d_1\\
+	\vdots\\
+	d_n\\
+\end{pmatrix}\\
+$
+$D$ may be empty, infinite, or a singleton set.
+
+\section{Equivalent Systems}
+
+Two systems $A x = b$ and $A' x = b'$ are called \emph{equivalent}, if every solution of the first system is also a solution of the second system, and vice versa.
+
+\section{Solution of a System of Equations}
+
+We want to bring a given system
+\begin{equation*}
+	A x = b
+\end{equation*}
+to the form 
+\begin{equation*}
+	A_R x = b_R
+\end{equation*}
+using elementary row operations.\\
+We denote the augmented or extended matrix of the system as follows.
+\begin{equation*}
+	\overline{A}_{m \times (n+1)} = (A_{m \times n} | b_{m \times 1})
+\end{equation*}
+Then apply Gaussian elimination method to $\overline{A}$, in order to get the matrix 
+\begin{equation*}
+	(A_R | b_R)
+\end{equation*}
+As $A_R$ is obtained from $A$ using elementary row operations,
+\begin{equation*}
+	A_R = E_n \dots E_2 E_1 A
+\end{equation*}
+where every $E_i$ is an elementary matrix.\\
+Let $P = E_n \dots E_2 E_1$. $P$ is invertible, as it is a product of elementary matrices.
+\begin{align*}
+	A_R &= P A \\
+	\therefore A_R d &= P A d\\
+	&= P b \\
+	&= b_R
+\end{align*}
+Conversely, let $d$ be a solution to 
+\begin{align*}
+	A_R d &= b_R \\
+	\therefore P A d &= b_R \\
+	\therefore P^{-1} (P A d) &= P^{-1} b_R \\
+	\therefore A d &= b
+\end{align*}
+If we have a system $A x = b$, we may and will assume that $A$ is in REF, i.e. $A = A_R, b = b_R$.\\
+Let $l(1), \dots l(r)$ denote the numbers of the columns containing leading entries.
+Let $b = 
+\begin{pmatrix}
+	b_1\\
+	\vdots\\
+	b_r\\
+	b_{r+1}\\
+	\vdots\\
+	b_m\\
+\end{pmatrix}
+$\\
+Therefore, 
+\begin{align*}
+	1 \cdot x_{l(1)} + \dots &= b_1\\
+	1 \cdot x_{l(2)} + \dots &= b_2\\
+	& \vdots\\
+	1 \cdot x_{l(r)} &= b_r\\
+	0 &= b_{r+1}\\
+	& \vdots\\
+	0 &= b_m\\
+\end{align*}
+
+\section{Homogeneous Systems}
+
+\subsection{Definition}
+
+A system of the form 
+\begin{equation*}
+	A x = \mathbb{O}
+\end{equation*}
+is called a homogeneous system.
+
+\subsubsection*{Remark}
+
+Any homogeneous system is consistent and has a trivial solution $x = \mathbb{O}$
+
+\subsection {Solutions of Homogeneous Systems}
+
+If $r = $ number of non-zero rows, let $t = n - r = $ number of free variables. If $t > 0$ , denote the numbers of the columns that \emph{do not} contain leading entries by $z(1), \dots, z(t)$
+
+\subsubsection{Example}
+
+\begin{equation*}
+	A = 
+	\begin{pmatrix}
+		0 & 1 & 2 & 0 & 0 & -3 \\
+		0 & 0 & 0 & 1 & 0 & -1 \\
+		0 & 0 & 0 & 0 & 1 & 7 \\
+		0 & 0 & 0 & 0 & 0 & 0 \\
+	\end{pmatrix}
+\end{equation*}
+Therefore,
+\begin{align*}
+	m &= 4 \\
+	n &= 6 \\
+	r &= 3 \\
+	t &= 3 \\
+	l(1) &= 2 \\
+	l(2) &= 4 \\
+	l(3) &= 5 \\
+	z(1) &= 1 \\
+	z(2) &= 3 \\
+	z(3) &= 6
+\end{align*}
+Therefore, 
+\begin{align*}
+	x_2 + 2x_3 - 3x_6 &= 0\\
+	x_4 - x_6 &= 0 \\
+	x_5 + 7x_6 &= 0
+\end{align*}
+Therefore, 
+\begin{align*}
+	x_2 &= -2x_3 + 3x_6 \\
+	x_4 &= x _6 \\
+	x_5 &= -7 x_6
+\end{align*}
+\begin{equation*}
+	\begin{pmatrix}
+		x_2 \\
+		x_4 \\
+		x_5 \\
+	\end{pmatrix}
+	=
+	C_{3 \times 3} 
+	\begin{pmatrix}
+		x_1 \\
+		x_3 \\
+		x_6 \\
+	\end{pmatrix}
+\end{equation*}
+where $C_{3 \times 3} = 
+\begin{pmatrix}
+	0 & -2 & 3 \\
+	0 & 0 & 1 \\
+	0 & 0 & -7 \\
+\end{pmatrix}
+$\\
+The free variables $x_1, x_3, x_6$ can be considered as parameters, $x_1 = \gamma_1 , x_2 = \gamma_2 , x_3 = \gamma_3$.\\
+Therefore, 
+\begin{align*}
+x_2 &= -2\gamma_3 + 3\gamma_6 \\
+x_4 &=  \gamma_6 \\
+x_5 &= -7 \gamma_6
+\end{align*}
+
+\subsubsection{General Solution}
+
+\paragraph{Case I: $t = 0$\\}
+If $t = 0$, there are no free variables, and the system has a unique trivial solution.
+
+\paragraph{Case II: $t > 0$}
+
+\begin{equation*}
+	\begin{pmatrix}
+		x_{l(1)} \\
+		x_{l(2)} \\
+		\vdots \\
+		x_{l(r)} \\
+	\end{pmatrix}
+	=
+	C_{r \times t}
+	\begin{pmatrix}
+		x_{z(1)} \\
+		x_{z(2)} \\
+		\vdots \\
+		x_{z(t)} \\
+	\end{pmatrix}
+\end{equation*}
+$C$ is filled by coefficients of the equations obtained after shifting the terms containing all $z_i$ to the RHS.
+
+\subsection{Properties}
+
+\subsubsection{For a homogeneous system $A x = 0$, if $c$ and $d$ are solutions, then $c + d$ is also a solution.}
+
+\begin{align*}
+	A c &= \mathbb{O} \\
+	A d &= \mathbb{O} \\
+	\therefore A(c + d) &= A c + A d \\
+	&= \mathbb{O} + \mathbb{O} \\
+	&= \mathbb{O}
+\end{align*}
+
+\subsubsection{For a homogeneous system $A x = 0$, if $c$ is a solution and $\alpha \in \mathbb{F}$, then, $\alpha c$ is a solution too.}
+
+\begin{align*}
+	A c &= \mathbb{O} \\
+	\therefore A(\alpha c) &= \alpha (A c) \\
+	&= \alpha \mathbb{O} \\
+	&= \mathbb{O} 
+\end{align*}
+
+\subsection{Fundamental Solutions}
+
+We define $t$ fundamental solutions or basic solutions, $v_1, \dots v_t$.\\
+We define $t$ columns, each of length $n$ as follows.\\
+For the $i^{\text{th}}$ column $v_i$, we set
+\begin{align*}
+	x_{z(1)} &= 0 \\
+	x_{z(i)} &= 1 \\
+	\vdots \\
+	x_{z(t)} &= 0 \\
+\end{align*}
+and for $x_{l(1)} , \dots , x_{l(r)}$,
+\begin{equation*}
+	\begin{pmatrix}
+		x_{l(1)} \\
+		\vdots \\
+		x_{l(r)} \\
+	\end{pmatrix}
+	=
+	C
+	\begin{pmatrix}
+	x_{z(1)} \\
+	\vdots \\
+	x_{z(t)} \\
+	\end{pmatrix}
+	= i^{\text{th}}\text{column of } C
+\end{equation*}
+
+\subsubsection{Theorem: Any solution $d$ of the system $A x = \mathbb{O}$ can be obtained from the basic solutions $v_1, \dots, v_t$ as a linear combination of the basic solutions, $d = \alpha_1 v_1 + \dots \alpha_t v_t$}
+
+One can choose another collection $v'_1, \dots, v'_t$ s.t. any solution of $A x = \mathbb{O}$ can be obtained as a linear combination of $v'_1, \dots, v'_t$. In such a case, we get another form of the general solution.
+
+\subsection{}
+
+\begin{align*}
+	r \leq \min{m, n} \\
+\end{align*}
+
+If $r = n$, i.e. $t = 0$, the system has a unique solution.\\
+If $r < n$, i.e. $t > 0$, the system has more than one solutions. Its general solution can be expressed as in terms of $t$ parameters, where each free variable serves as a parameter, whose value can be any element of $\mathbb{F}$. \\
+If $m < n$, then $r < n$. Therefore, the system has more than one solution. 
+
+\section{Non-Homogeneous Systems}
+
+\subsection{Definition}
+
+Consider a system $A x = b ; b \neq \mathbb{O}$. The extended matrix is defined as
+\begin{equation*}
+	\tilde{A} = (A|b) = 
+	\begin{pmatrix}
+		a_{11} & \dots & a_{1n} & b_1 \\
+		\vdots & & \vdots & \vdots \\
+		a_{m1} & \dots & a_{mn} & b_m \\
+	\end{pmatrix}
+\end{equation*}
+
+\subsection{Solutions of Non-Homogeneous Systems}
+
+Let $\tilde{r}$ be the number of non-zero rows in the REF of $\tilde{A}$, i.e. $\tilde{A_R}$.
+
+\subsubsection{Case I: $\tilde{r} = r$}
+
+\begin{equation*}
+	b'_{r+1} = \dots = b'_{m} = 0
+\end{equation*}
+
+\paragraph{Case a: $r = n$, i.e. $t=0$\\}
+
+Therefore,
+\begin{align*}
+	x_1 &= b'_1 \\
+	\dots \\
+	x_r &= b'_r \\
+\end{align*}
+Hence, the system has a unique solution. 
+
+\paragraph{Case b: $r < n$, i.e. $t > 0$\\}
+
+Therefore,
+\begin{align*}
+	x_l(1) &= b'_1 + c_{11} x_{z(1)} + \dots + c_{1t} x_{z(t)} \\
+	&\vdots \\
+	x_l(r) &= b'_1 + c_{r1} x_{z(1)} + \dots + c_{rt} x_{z(t)}
+\end{align*}
+
+\subsubsection{Case II: $\tilde{r} > r$}
+
+In this case, the $(r+1)^{\text{th}}$ row represents an equation of the form $0 = 1$. Therefore, the system is inconsistent.
+
+\subsection{General Solution}
+
+The general solution of $A x = b$ can be expressed by adding the general solution of $A x = b$ and any particular solution of $A x = b$. \\ \\
+If $c$ is a solution of $A x = \mathbb{O}$, and $d$ is a solution of $A x = b$, then $c + d$ is a solution of $A x = b$.\\ 
+Conversely, if $d$ and $d'$ are solutions of $A x = b$, then, $c = d' - d$ is a solution of $A x = \mathbb{O}$.
+
+\newpage
+\part{Vector Spaces}
+
+\section{Definition}
+
+Let $\mathbb{F}$ be a field. A vector space $V$, over $\mathbb{F}$, is a set on which there are two operations, denoted by $+$ and $\cdot$ , where
+\begin{itemize}
+	\item[] $+$ is the addition of elements of $V$
+	\item[] $\cdot$ is the multiplication of an element of $V$ by an element of $\mathbb{F}$
+\end{itemize}
+s.t. the sum of elements of $V$ lies in $V$, and the product of an element of $V$ by an element of $\mathbb{F}$ lies in $V$, and the following properties hold.
+\begin{enumerate}[label=(A\arabic*)]
+	\item $x + y = y + x ; \forall x, y \in V$ \label{Vector Spaces: A1}
+	\item $(x + y) + x = x + (y + z) ; \forall x, y, z \in V$ \label{Vector Spaces: A2}
+	\item $\exists \mathbb{O} \in V$, s.t. $\mathbb{O} + x = x + \mathbb{O} = x ; \forall x \in V$ \label{Vector Spaces: A3}
+	\item $\forall x \in V, \exists y \in V$, s.t. $x + y = \mathbb{O}$. ($y$ is denoted as $-x$.) \label{Vector Spaces: A4}
+\end{enumerate}
+\begin{enumerate}[label=(M\arabic*)]
+	\item $\alpha (x + y) = \alpha x + \alpha y ; \forall \alpha \in \mathbb{F}, \forall x, y \in V$ \label{Vector Spaces: M1}
+	\item $(\alpha + \beta) x = \alpha x + \beta y ; \forall \alpha, \beta \in \mathbb{F}, \forall x \in V$ \label{Vector Spaces: M2}
+	\item $(\alpha \beta) x = \alpha (\beta x) = \beta (\alpha x) ; \forall \alpha, \beta \in \mathbb{F}, \forall x \in V$ \label{Vector Spaces: M3}
+	\item $1 \cdot x = x ; \forall x \in V$ \label{Vector Spaces: M4}
+\end{enumerate}
+Elements of $V$ are called \emph{vectors}, and elements of $\mathbb{F}$ are called \emph{scalars}.
+
+\subsection{Examples}
+
+\subsubsection{Geometric Vectors in Plane}
+
+\subsubsection{Arithmetic Vector Space}
+
+Let $\mathbb{F}$ be a field, and $n \geq 1 \in \mathbb{Z}$.\\
+Let $V = \mathbb{F}^n$ be a set of ordered n-tuples.\\
+We define 
+\begin{align*}
+	(\alpha_1, \dots, \alpha_n) + (\beta_1, \dots, \beta_n) &= (\alpha_1 + \beta_2, \dots, \alpha_n + \beta_n) \\
+	\alpha (\alpha_1, \dots, \alpha_n) &= (\alpha \alpha_1, \dots, \alpha \alpha_n)
+\end{align*}
+
+\subsubsection{}
+
+Let $\mathbb{F}$ be a field, and $m, n \geq 1 \in \mathbb{Z}$.\\
+Let $V = \mathbb{F}^{mn}$ be the set of all $(m \times n)$ matrices over $\mathbb{F}$, i.e. a set of ordered mn-tuples. For $X, Y \in V$, we use the usual definitions of $X + Y$ and $\alpha X$ from algebra of matrices.
+
+\subsection{Properties}
+
+\begin{enumerate}
+	\item $\alpha \mathbb{O} = \mathbb{O} ; \forall \alpha \in F$ \label{Vector Spaces: Multiplication by 0}
+	\item $\alpha (-x) = -(\alpha x)$
+	\item $x - y \doteq x + (-y)$ 
+	\item $0 x = \mathbb{O} ; \forall x \in V$
+	\item $(-1) x = -x ; \forall x \in V$
+	\item $(\alpha - \beta) = \alpha x - \beta x ; \forall \alpha, \beta \in F, \forall x \in V$
+\end{enumerate}
+
+\subsubsection{Proof of \ref{Vector Spaces: Multiplication by 0}}
+
+\begin{align*}
+	\alpha \mathbb{O} &= \alpha (\mathbb{O} + \mathbb{O} \\
+	&= \alpha \mathbb{O} + \alpha \mathbb{O} \\
+\end{align*}
+For $\alpha \mathbb{O} \exists y$ s.t. $\alpha \mathbb{O} + y = \mathbb{O}$. \\
+Therefore,
+\begin{align*}
+	\alpha \mathbb{O} + y &= (\alpha \mathbb{O} + \alpha \mathbb{O}) + y \\
+	\therefore \mathbb{O} &= \alpha \mathbb{O} + (\mathbb{O} + y) \\
+	&= \alpha \mathbb{O} + \mathbb{O} \\
+	&= \alpha \mathbb{O}
+\end{align*}
+
+\section{Subspaces}
+
+Let $V$ be a vector space over $\mathbb{F}$. Let $U \subseteq V$. $U$ is called a subspace of $V$ if the following properties hold.
+\begin{enumerate}[label=Axiom \arabic*]
+	\item $\mathbb{O} \in U$ \label{Axiom 1}
+	\item If $x, y \in U$, then, $(x + y) \in U$ \label{Axiom 2}
+	\item If $x \in U, \alpha \in \mathbb{F}$, then, $\alpha x \in U$ \label{Axiom 3}
+\end{enumerate}
+
+\subsection{Examples}
+
+\begin{example}
+	Let $V$ be the set of all geometric vectors in plane.\\
+	If $U_1$ is the set of all vectors along the $x$-axis, $U_2$ is the singleton set of a specific vector along the $x$-axis, and $U_3$ is the set of all vectors along the $x$-axis and a specific vector not along the $x$-axis. Which of $U_1, U_2, U_3$ are subspaces of $V$?
+\end{example}
+
+\begin{solution}
+	$U_1$ is a subspace of $V$ as it satisfies all three axioms. \\
+	$U_2$ is not a subspace of $V$ as it does not satisfy any of the three axioms. \\
+	$U_3$ is not a subspace of $V$ as it does not satisfy \ref{Axiom 3}
+\end{solution}
+
+\begin{example}
+	\begin{align*}
+		\mathbb{F} &= \mathbb{R} \\
+		V &= \mathbb{C} = \{\alpha + \beta i ; \alpha, \beta \in \mathbb{R}\} \\
+		\intertext{where $+$ is addition in $\mathbb{C}$ and $\cdot$ is multiplication by real scalars.}
+		U_1 &= \{\alpha + 0 i\} \\
+		U_2 &= \{0 + \beta i\}
+	\end{align*}
+	Which of $U_1, U_2, U_3$ are subspaces of $V$?
+\end{example}
+\begin{solution}
+	Both $U_1$ and $U_2$ are subspaces of $V$, as they satisfy all three axioms.
+\end{solution}
+
+\begin{example}
+	Let $V = \mathbb{F}$, where $+$ is addition in $\mathbb{F}$, and $\cdot$ is multiplication in $\mathbb{F}$.\\
+	\begin{align*}
+		U_1 &= \{\alpha + 0 i\} \\
+		U_2 &= \{0 + \beta i\}
+	\end{align*}
+	Which of $U_1, U_2$ are subspaces of $V$?
+\end{example}
+
+\begin{solution}
+	Neither $U_1$ nor $U_2$ are subspaces of $V$.
+\end{solution}
+
+\begin{example}
+	Let $V = \{f : [0, 1] \rightarrow \mathbb{R}\}$, where $+$ and $\cdot$ is defined as follows.
+	\begin{align*}
+		(f + g)(x) &= f(x) + g(x) \\
+		(\alpha f)(x) &= \alpha f(x) \\
+	\end{align*}
+	$\mathbb{O}$ is the function with graph $x = 0$.
+	\begin{align*}
+		U = \{\text{all continuous functions} [0,1] \rightarrow \mathbb{R}\}
+	\end{align*}
+	Is $U$ is subspace?
+\end{example}
+
+\begin{solution}
+	$\mathbb{O} \in \mathbb{R}$. Therefore, \ref{Axiom 1} is satisfied. Similarly, \ref{Axiom 2} and \ref{Axiom 3} are also satisfied.
+\end{solution}
+
+\subsection{Operations on Subspaces}
+
+Let $V/F$ be a vector space, and $U_1, U_2$ be subspaces of $V$.
+
+\begin{align*}
+	U_1 \cap U_2 &= \{x \in V : x \in U_1 \text{ and } x \in U_2\}\\
+	U_1 \cup U_2 &= \{x \in V : x \in U_1 \text{ or } x \in U_2\}\\
+	U_1 + U_2 &= \{x \in V : x = x_1 + x_2, x_1 \in U_1, x_2 \in U_2\}\\
+\end{align*}
+
+\begin{example}
+	Let $V$ be a set of geometric vectors in 3D space. \\
+	Let $U_1$ be the $xy$-plane, and $U_2$ be the $yz$-plane.
+	If $U_1 \cap U_2$ a subspace of $V$?
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		\mathbb{O} \in U_1, \mathbb{O} \in U_2 &\Rightarrow \mathbb{O} \in U_1 \cap U_2 \\
+		x, y \in U_1 \cap U_2 &\Rightarrow x, y \in U_1, x, y \in U_2 \\
+		&\Rightarrow x+y \in U_1, x+y \in U_2 \\
+		&= x+y \in U_1 \cap U_2
+	\end{align*}
+	Similarly, if $x \in U_1 \cap U_2, \alpha in \mathbb{F}$, then, $\alpha x \in U_1 \cap U_2$.
+	Therefore, $U_1 \cap U_2$ is a subspace of $V$.
+\end{solution}
+
+\section{Spans}
+
+\begin{definition}[Span]
+	Let $V/\mathbb{F}$ be a vector space. Let $S \subset V$ be non-empty.\\
+	\begin{equation*}
+	\vspan(S) = \{x\in V : x = \alpha_1 v_1 + \dots + \alpha_m v_m, \alpha_1, 
+	\dots, \alpha_m \in \mathbb{F}, v_1, \dots, v_m \in S\}
+	\end{equation*}
+	$\vspan(S)$ is the collection of all linear combinations of finite number of vectors of $S$ with coefficients from $\mathbb{F}$
+\end{definition}
+
+\begin{theorem}
+	$\vspan(S)$ is a subspace of $V$ 
+\end{theorem}
+
+\begin{proof}
+	\begin{align*}
+		\mathbb{O} = 0 v &\Rightarrow \mathbb{O} \in \vspan(S)
+	\end{align*}
+	\begin{align*}
+		x, y \in \vspan(S) &\Rightarrow x = \alpha_1 v_1 + \dots + \alpha_m v_m, \beta_1 w_1 + \dots + \beta_m w_m\\
+		&\Rightarrow x+y = \alpha_1 v_1 + \dots + \alpha_m v_m + \beta_1 w_1 + \dots + \beta_m w_m \in \vspan(S)
+	\end{align*}
+	\begin{align*}
+		x \in \vspan(S), \alpha \in \mathbb{F} &\Rightarrow \alpha_1 v_1 + \dots + \alpha_m v_m \\
+		&\Rightarrow \alpha x = \alpha(\alpha_1 v_1 + \dots + \alpha_m v_m) \\
+		&\Rightarrow \alpha x = \alpha \alpha_1 v_1 + \dots + \alpha \alpha_m v_m \in \vspan(S)
+	\end{align*}
+\end{proof}
+
+\begin{definition}[Spanning sets and dimensionality]
+	Let $V/\mathbb{F}$ be a vector space. A set $S \subseteq V$ is said to be a spanning set, if $\vspan(S) = V$.\\
+	If $V$ has atleast one finite spanning set, $V$ is said to be finite-dimensional. Otherwise, $V$ is said to be infinite-dimensional.
+	\begin{remark}
+		$V$ may have many finite spanning sets, of different sizes
+	\end{remark}
+\end{definition}
+
+\begin{definition}[Basis of a vector space]
+	Let $V/\mathbb{F}$ be a vector space. We say that $B = \{v_1, \dots, v_n\} \subset V$ is a basis of $V$ if every vector $v \in V$ can be expressed in a unique way 
+	\begin{equation*}
+		v = \alpha_1 v_1 + \dots + \alpha_n v_n \quad; \alpha_1, \dots, \alpha_n \in \mathbb{F}
+	\end{equation*}
+	that is, as a linear combination of elements of $B$.
+\end{definition}
+
+\begin{definition}[Isomorphic spaces]
+	Let $V/\mathbb{F}$ and $W/\mathbb{F}$ be vector spaces. We say that $V$ is isomorphic to $W$ if there is a map $\varphi : V \to W$, s.t.
+	\begin{enumerate}
+		\item $\varphi$ is one-to-one and onto
+		\item $\varphi(v_1 + v_2) = \varphi(v_1) + \varphi(v_2) ; \forall v_1, v_2 \in V$
+		\item $\varphi(\alpha v) = \alpha \varphi(v) ; \forall v \in V, \forall \alpha \in \mathbb{F}$
+	\end{enumerate}
+\end{definition}
+
+\begin{theorem}
+	If a vector space $V/\mathbb{F}$ has a basis $B = \{v_1, \dots, v_n\}$ consisting of $n$ elements, then it is isomorphic to the space 
+	\begin{equation*}
+		W = \mathbb{F}^n = 
+		\left\lbrace
+			\begin{pmatrix}
+				\alpha_1 \\
+				\vdots \\
+				\alpha_n \\
+			\end{pmatrix}
+		\right\rbrace
+	\end{equation*}
+\end{theorem}
+
+\begin{proof}
+	Let $B' = \{e_1, \dots, e_n\}$, where 
+	\begin{equation*}
+	e_1 = 
+	\begin{pmatrix}
+		1\\
+		\vdots\\
+		0\\
+	\end{pmatrix}
+	, \dots, 
+	e_n = 
+	\begin{pmatrix}
+		0\\
+		\vdots\\
+		1\\
+	\end{pmatrix}
+	\end{equation*}
+	$B'$ is a basis of $Q$, as any $w = 
+	\begin{pmatrix}
+		\alpha_1\\
+		\vdots\\
+		\alpha_n \\
+	\end{pmatrix} \in W$ can be expressed in a unique way 
+	\begin{equation*}
+		w = \alpha_1 e_1 + \dots + \alpha_n e_n 
+	\end{equation*}
+	Let $\varphi : V \to W$, 
+	\begin{align*}
+		\varphi(v_1) &= e_1\\
+		\vdots\\
+		\varphi(v_n) &= e_n\\
+	\end{align*}
+	For any $v = \alpha_1 v_1 + \dots + \alpha_n v_n \in V$, 
+	\begin{equation*}
+		\varphi(v) = 
+		\begin{pmatrix}
+			\alpha_1\\
+			\vdots\\
+			\alpha_n\\
+		\end{pmatrix}
+	\end{equation*}
+	Therefore,
+	\begin{align*}
+		\varphi(\alpha_1 v_1 + \dots + \alpha_n v_n) &= \alpha_1 e_1 + \alpha_n e_n \\
+		&= \alpha_1 \varphi(v_1) + \dots + \alpha_n \varphi(v_n)
+	\end{align*}
+	If $v \neq v'$, 
+	\begin{align*}
+		v &= \alpha_1 v_1 + \dots + \alpha_n v_n  \\
+		v' &= \alpha'_1 v_1 + \dots + \alpha'_n v_n 
+	\end{align*}
+	Hence $\varphi$ is one-to-one.\\
+	For any $w = 
+	\begin{pmatrix}
+		\alpha_1\\
+		\vdots\\
+		\alpha_n\\
+	\end{pmatrix}
+	\in W$.\\
+	Let $v = \alpha_1 v_1 + \dots + \alpha_n v_n$.\\
+	Therefore, 
+	\begin{equation*}
+		\varphi(v) = 
+		\begin{pmatrix}
+			\alpha_1\\
+			\vdots\\
+			\alpha_n\\
+		\end{pmatrix}
+		= w
+	\end{equation*}
+	Therefore, $\varphi$ is onto.
+\end{proof}
+
+\section{Linear Dependence}
+
+\begin{definition}[Linearly dependent subsets]
+	Let $V/\mathbb{F}$ be a vector space. Let $S \subseteq V$ be a finite subset. $S$ is said to be linearly dependent if there exist scalars $\alpha_1, \dots, \alpha_n \in \mathbb{F}$, not all equal to zero, s.t. 
+	\begin{equation*}
+		\alpha_1 v_1 + \dots + \alpha_n v_n = \mathbb{O}
+	\end{equation*}
+	Otherwise, $S$ is said to be linearly independent if all $\alpha_1 = \dots = \alpha_n = 0$.
+\end{definition}
+
+\begin{example}
+	Is $S = \{v_1, \dots, v_l, v, \alpha v\}$ linearly dependent?
+\end{example}
+
+\begin{solution}
+	\begin{equation*}
+		(0) v_1 + \dots + (0) v_l + (-\alpha) v + (1) \alpha v = \mathbb{O}
+	\end{equation*}
+	Therefore, as not all coefficients are zero, $S$ is linearly dependent.
+\end{solution}
+
+\begin{example}
+	Is $S = \{v_1, \dots, v_l, \mathbb{O}\}$ linearly dependent?
+\end{example}
+
+\begin{solution}
+	\begin{equation*}
+	(0) v_1 + \dots + (0) v_l + (1) \mathbb{O} = \mathbb{O}
+	\end{equation*}
+	Therefore, as not all coefficients are zero, $S$ is linearly dependent.
+\end{solution}
+
+\begin{theorem}
+	Any basis $B = \{v_1, \dots, v_n\}$ of a vector space $V$ is linearly independent.
+\end{theorem}
+
+\begin{proof}
+	Let 
+	\begin{equation*}
+		\alpha_1 v_1 + \dots + \alpha_n v_n = \mathbb{O}
+	\end{equation*}
+	Also,
+	\begin{align}
+		(0) v_1 + \dots +(0) v_n = \mathbb{O}
+	\end{align}
+	Therefore, there are two representations of $v = \mathbb{O}$ as linear combinations of elements of $B$. By the definition of basis, they must coincide.\\
+	Therefore,
+	\begin{align*}
+		\alpha_1 &= 0\\
+		\vdots\\
+		\alpha_n &= 0
+	\end{align*}
+	Hence, $B$ is linearly independent.
+\end{proof}
+
+\subsection{Properties of Linearly Dependent and Independent Sets}
+
+\begin{theorem}
+	If $S \subseteq S'$ and $S$ is linearly dependent, then $S'$ is also linearly dependent.
+\end{theorem}
+
+\begin{theorem}
+	If $S \subseteq S'$ and $S'$ is linearly independent, then $S$ is also linearly independent.
+\end{theorem}
+
+\begin{theorem}
+	Let $S = \{v_1, \dots, v_n\}$. $S$ is linearly dependent iff one of the $v_i$s is a linear combination of the others.
+\end{theorem}
+
+\begin{proof}[Proof of statement]
+	Suppose
+	\begin{gather*}
+		v_n = \alpha_1 v_1 + \dots + \alpha_{n-1} v_{n-1}\\
+		\therefore \alpha_1 v_1 + \dots + \alpha_{n-1} v_{n-1} + (-1) v_n = \mathbb{O}
+	\end{gather*}
+	Therefore, $S$ is linearly dependent.
+\end{proof}
+
+\begin{proof}[Proof of converse]
+	Suppose
+	\begin{equation*}
+		\alpha_1 v_1 + \dots + \alpha_{n-1} v_{n-1} + \alpha_n v_n = \mathbb{O}
+	\end{equation*}
+	not all of $\alpha_i$s are 0. WLG, let $\alpha_n \neq 0$
+	\begin{equation*}
+		\therefore v_n = -\dfrac{\alpha_1}{\alpha_m} v_1 - \dots - \dfrac{\alpha_{n-1}}{\alpha_m} v_{m-1}
+	\end{equation*}
+\end{proof}
+
+\begin{theorem}
+	Let $S = \{v_1, \dots, v_m\}$. Let $w \in V$. Suppose $w$ is a linear combination of $v_i$s
+	\begin{equation*}
+		w = \alpha_1 v_1 + \dots + \alpha_n v_n
+	\end{equation*}
+	Then, such an expression is unique iff $S$ is linearly dependent.
+\end{theorem}
+
+\begin{proof}[Proof of statement]
+	Let
+	\begin{equation*}
+		w = \alpha_1 v_1 + \dots + \alpha_n v_n
+	\end{equation*}
+	be unique.\\
+	If possible, let
+	\begin{equation*}
+	\beta_1 v_1 + \dots + \beta_n v_n = \mathbb{O}
+	\end{equation*}
+	not all $\beta_i$s are zero.\\
+	Then, 
+	\begin{equation*}
+		(\alpha_1 + \beta_1) v_1 + \dots + (\alpha_n \beta_n) v_n = w
+	\end{equation*}
+	This is another expression for $w$, and contradicts the assumption.
+\end{proof}
+
+\begin{proof}[Proof of converse]
+	If possible, let $S$ be linearly independent.
+	Assume 
+	\begin{equation*}
+	w = \alpha'_1 v_1 + \dots + \alpha'_n v_n
+	\end{equation*}
+	Therefore,
+	\begin{equation*}
+		(\alpha_1 - \alpha'_1) v_1 + \dots + (\alpha_n - \alpha'_n) v_n = \mathbb{O}
+	\end{equation*}
+	Therefore, $S$ is linearly dependent, which contradicts the assumption.
+\end{proof}
+
+\begin{theorem}[Main Lemma on Linear Independence]\label{main lemma on linear independence}
+	Suppose $V$ is spanned by $n$ vectors.\\
+	Let $S = \{v_1, \dots, v_m\} \subset V$. Suppose $m > n$.\\
+	Then, $S$ is linearly dependent.
+\end{theorem}
+
+\begin{proof}
+	Let $E = \{w_1, \dots, w_n\}$ be a spanning set for $V$, $V = \vspan(E)$.\\
+	Therefore, all elements of $S$ can be represented as linear combinations of elements of $E$.
+	\begin{align*}
+		v_1 &= \beta_{11} w_1 + \dots + \beta_{1n} w_n \\
+		&\vdots\\
+		v_m &= \beta_{m1} w_1 + \dots + \beta{mn} w_n
+	\end{align*}
+	Let
+	\begin{align*}
+		\alpha_1 v_1 + \dots + \alpha_m v_m &= \mathbb{O} \\
+		\therefore \alpha_1 (\beta_{11} w_1 + \dots + \beta_{1n} w_n) + \dots + \alpha_m (\beta_{m1} w_1 + \dots + \beta_{mn} w_n) &= \mathbb{O}\\
+		\therefore (\alpha_1 \beta_{11} + \dots + \alpha_m \beta_{m1}) w_1 + \dots +  (\alpha_1 \beta_{1n} + \dots + \alpha_m \beta_{mn}) &= \mathbb{O}
+	\end{align*}
+	Therefore
+	\begin{align*}
+		\alpha_1 \beta_{11} + \dots + \alpha_m \beta_{m1} &= 0\\
+		&\vdots \\
+		\alpha_1 \beta_{1n} + \dots + \alpha_m \beta_{mn} &= 0
+	\end{align*}
+	These equations form a homogeneous linear system with respect to $\alpha_1, \dots, \alpha_m$.\\
+	As $m > n$, the system has a non-zero solution. Therefore not all $\alpha_i$s are zero.\\
+	Hence $S$ is linearly dependent.
+\end{proof}
+
+\begin{definition}[Alternative definition of a basis]
+	$B = \{v_1, \dots, v_n\}$ is said to be a basis of $V$ if $B$ is a spanning set and $B$ is linearly independent.
+\end{definition}
+
+\begin{theorem}
+	If $B$ and $B'$ are bases of $V$, then they contain the same number of elements.
+\end{theorem}
+
+\begin{proof}
+	If possible, let $B$ contain $n$ elements $\{v_1, \dots, v_n\}$, and $B'$ contain $m$ elements $\{w_1, \dots, w_m\}$, $m > n$.\\
+	Therefore, $B$ is a spanning set and $B'$ contains more elements than $n$, hence by \nameref{main lemma on linear independence}, $B'$ is linearly dependent. Also, $B'$ is a basis, so it is linearly independent.\\
+	This is a contradiction.	
+\end{proof}
+
+\begin{definition}[Dimension of a vector space]
+	Let $V/\mathbb{F}$ be a finite-dimensional vector space. The number of elements in any basis $B$ of $V$ is called the dimension of $V$.
+	\begin{equation*}
+		n = \dim V
+	\end{equation*}
+\end{definition}
+
+\begin{remark}
+	If $V$ and $W$ are vector spaces over $\mathbb{F}$, s.t. 
+	\begin{equation*}
+	\dim V = \dim W
+	\end{equation*}
+	then, $V$ is isomorphic to $W$
+\end{remark}
+
+\begin{theorem}
+	If $S = \{v_1, \dots, v_m\}$ is a spanning set of $V$, and if $S$ is not a basis of $V$, a basis $B$ of $V$ can be obtained by removing some elements from $S$.
+\end{theorem}
+
+\begin{proof}
+	If $S$ is linearly independent, then it is a basis.\\
+	Otherwise, if $S$ is linearly dependent, it has an element, WLG, say $v_m$, which is a linear combination of the others.
+	\begin{equation*}
+		v_m = \alpha_1 v_1 + \dots + \alpha_{m-1} v_{m-1}
+	\end{equation*} 
+	Let 
+	\begin{equation*}
+		S' = S - \{v_m\}
+	\end{equation*}
+	$S'$ is a spanning set.\\
+	Therefore, $\forall v \in V$
+	\begin{align*}
+		v &= \beta_1 v_1 + \dots + \beta_{m-1} v_{m-1} + \beta_m v_m \\
+		&= \beta_1 v_1 + \dots + \beta_{m-1} + \beta_m (\alpha_1 v_1 + \dots + \alpha_{m-1} v_{m-1})\\
+		&= \gamma_1 v_1 + \dots + \gamma_{m-1} v_{m-1}
+	\end{align*}
+	If $S'$ is linearly independent, then it is a basis, else the same process above can be repeated till we get a basis.\\
+	Therefore, a basis is a smallest spanning set.
+\end{proof}
+
+\begin{theorem}
+	If $B_0 = \{v_1, \dots, v_n\}$ is a linearly independent set, and if $B_0$ is a basis of $V$, a basis of $V$ can be obtained by adding elements to $B_0$.
+\end{theorem}
+
+\begin{theorem}
+	Let $V$ be a vector space, s.t. $\dim V = n$.\\
+	If $B$ satisfies 2 out of the 3 following conditions, then it is a basis.
+	\begin{enumerate}
+		\item $B$ has $n$ elements.
+		\item $B$ is a spanning set.
+		\item $B$ is linearly dependent.
+	\end{enumerate}
+\end{theorem}
+
+\begin{theorem}[Dimension Theorem]
+	\begin{equation*}
+		\dim (U + W) = \dim U + \dim W - \dim (U \cap W)
+	\end{equation*}
+\end{theorem}
+
+\begin{theorem}
+	\begin{equation*}
+		U + W = \vspan (U \cup W)\\
+	\end{equation*}
+	If 
+	\begin{align*}
+		U &= \vspan (B)\\
+		W &= \vspan (B')
+	\end{align*}
+	then, 
+	\begin{equation*}
+		U + W = \vspan (B \cup B')
+	\end{equation*}
+\end{theorem}
+
+\begin{proof}
+	Let $v \in U + W$.\\
+	Then,
+	\begin{align*}
+		v &= u + w \quad; u \in U, w \in W\\
+		u &\in U \cup W\\
+		w &\in U \cup W\\
+		\therefore v &\in \vspan(U \cup W)\\
+	\end{align*}
+	Let
+	\begin{align*}
+		v \in \vspan (U \cup W)
+		\therefore v&= \alpha_1 v_1 + \dots + \alpha_k v_k \quad;v_i \in U \cup W
+	\end{align*}
+	Let
+	\begin{align*}
+		v_1, \dots, v_l &\in U\\
+		v_{l+1}, \dots, v_k &\in W
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		v &= (\alpha_1 v_1 + \dots + \alpha_l v_l)+ (\alpha_{l+1} v_{l+1} + \dots + \alpha k v_k)\\
+		\therefore v &\in U + W
+	\end{align*}
+\end{proof}
+
+\subsection{Changing a Basis}
+
+Let $B = \{v_1, \dots, v_n\}$ be a basis of $V$, s.t. $\dim V = n$. Let $B' = \{v'_1, \dots, v'_n\}$.\\
+As $B$ is a spanning set, all of $v'_1, \dots, v'_n$ can be expressed as a linear combination of $v_1, \dots, v_n$.
+\begin{align*}
+	v'_1 &= \gamma_{11} v_1 + \dots + \gamma_{n1} v_n\\
+	&\vdots\\
+	v'_n &= \gamma_{1n} v_1 + \dots + \gamma_{nn} v_n
+\end{align*}
+
+\begin{definition}[Transition matrix]
+	The matrix
+	\begin{equation*}
+		C = 
+		\begin{pmatrix}
+			\gamma_{11} & \dots &\gamma _{1n}\\
+			\vdots & &\vdots\\
+			\gamma_{n1} & \dots &\gamma_{nn}\\
+		\end{pmatrix}
+	\end{equation*}
+	is called the transition matrix from $B$ to $B'$.
+\end{definition}
+
+If $B$ and $B'$ are considered as row vectors of length $n$ filled by vectors,
+\begin{align*}
+v'_1 &= \gamma_{11} v_1 + \dots + \gamma_{n1} v_n\\
+&\vdots\\
+v'_n &= \gamma_{1n} v_1 + \dots + \gamma_{nn} v_n
+\end{align*}
+can be written as 
+\begin{equation*}
+B'_{1 \times n} = B_{1 \times n} C_{n \times n}
+\end{equation*}
+
+
+\begin{theorem}
+	$B'$ is a basis of $V$ iff $C$ is invertible.
+\end{theorem}
+
+\begin{proof}[Proof of statement]
+	Let $B' = B C$ be a basis.\\
+	$B'$ is a basis, and hence is a spanning set. Therefore, any vector from $B$ can be expressed as a linear combination of elements of $B'$.\\
+	Therefore,
+	\begin{align*}
+		B &= B' Q\\
+		&= B C Q\\
+		\intertext{Also,}
+		B &= B I\\
+		\intertext{Therefore,}
+		I &= C Q
+	\end{align*}
+	Similarly,
+	\begin{align*}
+		B' &= B C\\
+		&= B' Q C\\
+		\intertext{Also,}
+		B' &= B' I\\
+		\intertext{Therefore,}
+		I &= Q C
+	\end{align*}
+	Therefore,
+	\begin{equation*}
+		C Q = Q C = I
+	\end{equation*}
+	Hence $C$ is invertible.
+\end{proof}
+
+\begin{proof}[Proof of converse]
+	Let $B' = B C$ and $C$ be invertible. Therefore, $B'$ is a basis iff $B'$ is a spanning set.\\
+	Let $z \in V$. As $B$ is a spanning set, 
+	\begin{equation*}
+		z = \alpha_1 v_1 + \dots + \alpha_n v_n
+	\end{equation*}
+	Therefore,
+	\begin{align*}
+		z &= B g\\
+		\intertext{where}
+		g &= 
+		\begin{pmatrix}
+			\alpha_1\\
+			\vdots\\
+			\alpha_n\\
+		\end{pmatrix}\\
+		\therefore z &= Bg\\
+		&= B(Ig)\\
+		&= B(C C^{-1}) g\\
+		&= (B C) (C^{-1} g)\\
+		\intertext{Let $C^{-1} g = f$}
+		\therefore z &= B' f
+	\end{align*}
+	Therefore, $z$ can be expressed as a linear combination of vectors from $B'$.
+\end{proof}
+
+\begin{remark}
+	Let $B$ be a basis of $V$. If 
+	\begin{equation*}
+		B P = B Q
+	\end{equation*}
+	where $P$ and $Q$ are $n \times n$ matrices, then
+	\begin{equation*}
+		P = Q
+	\end{equation*}
+\end{remark}
+
+\begin{example}
+	Let $B = \{e_1, e_2\}$ and $B' = \{e'_1, e'_2\}$, where 
+	\begin{align*}
+		e'_1 &= e_1 + e_2\\
+		e'_2 &= -e_1 + e_2
+	\end{align*}
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		e'_1 &= e_1 + e_2\\
+		e'_2 &= -e_1 + e_2\\
+		\therefore C &= 
+		\begin{pmatrix}
+			1 & -1\\
+			1 & 1\\
+		\end{pmatrix}
+	\end{align*}
+	\begin{align*}
+		e_1 &= \dfrac{1}{2} e'_1 - \dfrac{1}{2} e'_2\\
+		e_2 &= \dfrac{1}{2} e'_1 + \dfrac{1}{2} e'_2\\
+		\therefore C^{-1} &=
+		\CenteredArraystretch{2}
+		\begin{pmatrix}
+			\dfrac{1}{2} & \dfrac{1}{2}\\
+			-\dfrac{1}{2} & \dfrac{1}{2}
+		\end{pmatrix}
+	\end{align*}
+\end{solution}
+
+\subsection{Representation of Vectors in a Basis}
+
+Let $V$ be a vector space of dimension $n$. Let $B = \{v_1, \dots, v_n\}$ be a basis of $V$.\\
+Let $z \in V$.\\
+$z$ can be written as a unique linear combination of elements of $B$.
+\begin{equation*}
+	z = \alpha_1 v_1 + \dots + \alpha_n v_n
+\end{equation*}
+The representation of $z$ w.r.t $B$ can be represented as
+\begin{equation*}
+	[z]_B = 
+	\begin{pmatrix}
+		\alpha_1\\
+		\vdots\\
+		\alpha_n\\
+	\end{pmatrix}
+\end{equation*}
+
+\subsubsection{Properties of Representations}
+
+\begin{enumerate}
+	\item $[z_1 + z_2]_B = [z_1]_B + [z_2]_B$
+	\item $[\alpha z]_B = \alpha [z]_B$
+	\item $[z_1]_B = [z_2]_B \iff z_1 = z_2$
+	\item $\forall 
+	\begin{pmatrix}
+		\alpha_1\\
+		\vdots\\
+		\alpha_n\\
+	\end{pmatrix}
+	\in \mathbb{F}^n, \exists z \in V, \suchthat [z]_B = 
+	\begin{pmatrix}
+		\alpha_1\\
+		\vdots\\
+		\alpha_n\\
+	\end{pmatrix}$
+\end{enumerate}
+
+\newpage
+\part{Determinants}
+
+\section{Definition}
+
+\begin{definition}[Determinants]
+	Given an $n \times n$ matrix $A$, $n \geq 1$, $\det (A)$ is defined as follows.
+	\begin{align*}
+		n &= 1 & \det (a) &= a\\
+		n &= 2 & \det 
+		\begin{pmatrix}
+		a_{11} & a_{12}\\
+		a_{21} & a_{22}\\
+		\end{pmatrix}
+		&= a_{11} a_{22} - a_{12} a_{21}\\
+		\vdots\\
+		n &= n
+	\end{align*}
+	The determinant of a $n \times n$ matrix is the summation of $n!$ summands. Each summand is the product of $n$ elements, each from a different row and column.
+\end{definition}
+\begin{tabular}{|c|c|c|c|}
+	\hline
+	Summand & Permutation & Number of Elementary Permutations\footnotemark & Parity\\
+	\hline
+	$a_{11} a_{22} a_{33}$ & 
+	$
+	\begin{pmatrix}
+		1 & 2 & 3\\
+		1 & 2 & 3\\
+	\end{pmatrix}
+	$
+	& 0 & even\\
+	\hline
+	$a_{12} a_{23} a_{31}$ & 
+	$
+	\begin{pmatrix}
+		1 & 2 & 3\\
+		2 & 3 & 1\\
+	\end{pmatrix}
+	$
+	& 2 ($(1,2,3) \to (2,1,3) \to (2,3,1)$) & even\\
+	\hline
+	$a_{13} a_{21} a_{32}$ & 
+	$
+	\begin{pmatrix}
+		1 & 2 & 3\\
+		3 & 1 & 2\\
+	\end{pmatrix}
+	$
+	& 2 ($(1,2,3) \to (1,3,2) \to (3,1,2)$) & even\\
+	\hline
+	$a_{13} a_{22} a_{31}$ & 
+	$
+	\begin{pmatrix}
+		1 & 2 & 3\\
+		3 & 2 & 1\\
+	\end{pmatrix}
+	$
+	& 1 ($(1,2,3) \to (3,2,1)$ & odd\\
+	\hline
+	$a_{12} a_{21} a_{33}$ & 
+	$
+	\begin{pmatrix}
+		1 & 2 & 3\\
+		2 & 1 & 3\\
+	\end{pmatrix}
+	$
+	& 1 ($(1,2,3) \to (2,1,3)$ & odd\\
+	\hline
+	$a_{11} a_{23} a_{32}$ & 
+	$
+	\begin{pmatrix}
+		1 & 2 & 3\\
+		1 & 3 & 2\\
+	\end{pmatrix}
+	$
+	& 1 ($(1,2,3) \to (1,3,2)$ & odd\\
+	\hline
+\end{tabular}
+\footnotetext{Any permutation can be represented as a result of a series of elementary permutations, i.e. permutations of 2 elements only. The parity of a particular permutation depends of the parity of the number of elementary functions required for it.}
+
+\section{Properties}
+
+
+\begin{theorem}
+	If $A$, $A'$ are matrices s.t. all rows except the $i^{\text{th}}$ row are identical, and $A''$ is obtained by addition of $i^{\text{th}}$ row of $A$ and $i^{\text{th}}$ row of $A'$, then
+	\begin{equation*}\label{Property 1}
+		\det (A'') = \det (A) + \det (A')
+	\end{equation*}
+\end{theorem}
+	
+\begin{theorem}
+	If $A'$ is obtained from $A$ by switching two rows, then
+	\begin{equation*}\label{Property 2}
+		\det (A') = - \det (A)
+	\end{equation*}
+\end{theorem}
+	
+\begin{theorem}
+	If $A'$ is obtained from $A$ by multiplication of a row by a scalar $\alpha$, then
+	\begin{equation*}\label{Property 3}
+		\det (A') = \alpha \det (A)
+	\end{equation*}
+\end{theorem}
+	
+\begin{theorem}
+	If $A'$ is obtained from $A$ by adding to the $i^{\text{th}}$ row the $j^{\text{th}}$ row multiplied by a scalar $\alpha$, then
+	\begin{equation*}\label{Property 4}
+		\det (A') = \det (A)
+	\end{equation*}
+\end{theorem}
+
+\begin{corollary}[Corollary of Property 2]
+	If $A$ has two identical rows, then $\det (A) = 0$.
+\end{corollary}
+
+\begin{theorem}
+	The determinant of upper triangular and lower triangular matrices is the product of the elements on the principal diagonal.
+\end{theorem}
+
+\begin{theorem}
+	\begin{equation*}
+		\det (A^t) = \det (A)
+	\end{equation*}
+\end{theorem}
+
+\begin{corollary}
+	In all above theorems, the properties which are applicable to rows, are also applicable to columns.
+\end{corollary}
+
+\begin{theorem}
+	If $A$, $B$, $C$ are some matrices, and $\mathbb{O}$ is the zero matrix,
+	\begin{align*}
+		\begin{pmatrix}
+			A_{m \times m} & B\\
+			\mathbb{O} & C_{n \times n}\\
+		\end{pmatrix}
+		=
+		\det (A) \cdot \det (C)
+	\end{align*}
+\end{theorem}
+
+\begin{theorem}
+	\begin{equation*}
+		\det (A B) = \det (A) \det (B)
+	\end{equation*}
+\end{theorem}
+
+\begin{corollary}
+	If $A$ is invertible, then
+	\begin{equation*}
+		\det (A) \neq 0
+	\end{equation*}
+\end{corollary}
+
+\begin{proof}
+	$A$ is invertible.\\
+	Therefore, $\exists P$, s.t.
+	\begin{align*}
+		P A &= I\\
+		\therefore \det (PA) &= \det (I)\\
+		\therefore \det (P) \det (A) &= 1\\
+		\therefore \det (A) \neq 0
+	\end{align*}
+\end{proof}
+
+\begin{theorem}
+	If
+	\begin{equation*}
+		\det (A) \neq 0
+	\end{equation*}
+	then $A$ is invertible.
+\end{theorem}
+
+\begin{proof}
+	If possible let $A$ be non invertible.\\
+	Let the REF of $A$ be $A_R$.\\
+	As $A$ is non invertible, $A_R$ has a zero row. Therefore,
+	\begin{equation*}
+		\det (A_R) = 0
+	\end{equation*}
+	But
+	\begin{equation*}
+		\det (A) = 0
+	\end{equation*}
+	This is not possible as elementary row operations cannot change a non-zero determinant to zero.\\
+	Therefore, $A$ is invertible.
+\end{proof}
+
+\begin{theorem}
+	\begin{align*}
+		\det (A) \neq 0
+	\end{align*}
+	iff the rows of $A$ are linearly independent iff the columns of $A$ are linearly independent.
+\end{theorem}
+
+\begin{proof}
+	If possible, let the rows of $A$ be linearly dependent.\\
+	Therefore, either all of them are zeros, or one row is the linear combination of the others.
+	
+	\begin{case}[All rows are zeros]
+		\begin{equation*}
+			\therefore \det (A) = 0
+		\end{equation*}
+	\end{case}
+	
+	\begin{case}[One row is a linear combination of the others]
+		Let 
+		\begin{align*}
+			v_n &= \alpha_1 v_1 + \dots + \alpha_{n - 1} v_{n - 1}\\
+			\therefore A &= 
+			\begin{pmatrix}
+				v_1\\
+				\vdots\\
+				v_{n - 1}\\
+				v_n\\
+			\end{pmatrix}
+			\intertext{$v_n \to v_n - \alpha_1 v_1 + \dots + \alpha_{n - 1} v_{n - 1}$}
+			\therefore A' &= 
+			\begin{pmatrix}
+				v_1\\
+				\vdots\\
+				v_{n - 1}\\
+				\mathbb{O}\\
+			\end{pmatrix}\\
+			\therefore \det (A') &= 0\\
+			\therefore \det (A) &= 0
+		\end{align*}
+	\end{case}
+	This contradicts $\det (A) \neq 0$. Therefore, the rows of $A$ must be linearly independent.
+	
+	\vspace{1 in}
+	
+	If $v_1, \dots, v_n$ are linearly independent, 
+	\begin{align*}
+		\dim \R(A) &= n\\
+		\therefore r&= n
+	\end{align*}
+	Therefore, there are no zero rows in REF of $A$. Hence $A$ is invertible.
+	\begin{align*}
+		\therefore \det (A) \neq 0
+	\end{align*}
+\end{proof}
+
+\section{Practical Methods for Computing Determinants}
+
+\subsection{Expansion along a row/ column}
+
+Let $A$ be a $m \times n$ matrix, and let $A_{ij}$ be the matrix obtained by removing the $i^{\text{th}}$ row and $j^{\text{th}}$ column from $A$.
+
+\begin{align*}
+	\det (A) &= \sum_{j = 1}^{n} (-1)^{i + j} a_{ij} \det (A_{ij})
+\end{align*}
+
+\section{Determinant Rank}
+
+\begin{definition}
+	Let $A$ be any $m \times n$ matrix. Consider all square sub-matrices of $A$ and compute their determinants. If there is an $r \times r$ sub-matrix of $A$ s.t. its determinant is non-zero, but the determinants of all $(r + 1) \times (r + 1)$ sub-matrices of $A$ are zero, then, $r$ is called the determinant rank of $A$.
+\end{definition}
+
+\begin{theorem}
+	The determinant rank of $A$ is equal to the rank of $A$.
+\end{theorem}
+
+\section{Linear Maps}
+
+\subsection{Definition}
+
+\begin{definition}
+	Let $V$ and $W$ be vector spaces over the same field $\mathbb{F}$. 
+	\begin{equation*}
+		\varphi : V \to W
+	\end{equation*}
+	is said to be a linear map if
+	\begin{enumerate}
+		\item $\varphi(v_1 + v_2) = \varphi(v_1) + \varphi(v_2) ; \forall v_1, v_2 \in V$
+		\item $\varphi(\alpha v) = \alpha \varphi(v) ; \forall v \in V, \forall \alpha \in \mathbb{F}$
+	\end{enumerate}
+\end{definition}
+
+\subsection{Properties}
+
+\begin{enumerate}
+	\item $\varphi (\mathbb{O}) = \mathbb{O}$
+	\item $\varphi (-v) = - \varphi (v)$
+\end{enumerate}
+
+\subsection{Matrix of a Linear Map}
+
+\begin{definition}
+	Let $\varphi : V \to W$ be a linear map.\\
+	Let
+	\begin{align*}
+		n &= \dim V\\
+		m &= \dim W
+	\end{align*}
+	Let
+	\begin{align*}
+		B &= \{v_1, \dots, v_n\}\\
+		B' &= \{w_1, \dots, w_m\}
+	\end{align*}
+	be bases of $V$ and $W$ respectively.\\
+	Let 
+	\begin{align*}
+		\varphi (v_1) &= \alpha_{11} w_{1} + \dots + \alpha_{m1} w_{m}\\
+		\vdots\\
+		\varphi (v_n) &= \alpha_{1n} w_{1} + \dots + \alpha_{mn} w_{m}
+	\end{align*}
+	The matrix
+	\begin{equation*}
+		A = 
+		\begin{pmatrix}
+			\alpha_{11} & \dots & \alpha_{1n}\\
+			\vdots & & \vdots\\
+			\alpha_{m1} & \dots & \alpha_{mn}
+		\end{pmatrix}
+	\end{equation*}
+	is called the matrix of $\varphi$ with respect to the bases $B$ and $B'$.\\
+	It is denoted as
+	\begin{equation*}
+		A = [\varphi]_{B, B'}
+	\end{equation*}
+\end{definition}
+
+\begin{theorem}
+	Let 
+	\begin{equation*}
+		\varphi : V \to W
+	\end{equation*}
+	be a linear map.\\
+	Let $B$ and $B'$ be bases of $V$ and $W$ respectively, and let 
+	\begin{equation*}
+		A = [\varphi]_{B, B'}
+	\end{equation*}
+	be the matrix of $\varphi$ with respect to $B$ and $B'$. Then, $\forall x \in V$,
+	\begin{equation*}
+		[\varphi(z)]_{B'} = A [z]_B
+	\end{equation*}
+\end{theorem}
+
+\begin{proof}
+	Let
+	\begin{align*}
+		B &= \{v_1, \dots, v_n\}\\
+		B' &= \{w_1, \dots, w_m\}
+	\end{align*}
+	
+	\begin{case}[$z \in B$]
+		WLG, let $z =  v_i$. Then,
+		\begin{equation*}
+			[z]_B = 
+			\begin{pmatrix}
+				0\\
+				\vdots\\
+				1\\
+				\vdots\\
+				0\\
+			\end{pmatrix}
+		\end{equation*}
+		i.e. all rows except the $i^{\text{th}}$ row are 0.\\
+		Let this vector be $e_i$.\\
+		Therefore, 
+		\begin{equation*}
+			A [z]_B = A e_i
+		\end{equation*}
+		is the $i^{\text{th}}$ column of $A$.\\
+		
+		\begin{align*}
+			[\varphi (z)]_{B'} = [\varphi (v_i)]_{B'}
+		\end{align*}
+		is the $i^{\text{th}}$ row in the formulae of $\varphi(v_1), \dots, \varphi(v_n)$.\\
+		Therefore, it is the $i^{\text{th}}$ column of $A$.
+	\end{case}
+	
+	\begin{case}[$z \in V$ is an arbitrary vector]
+		Let 
+		\begin{equation*}
+			z = \alpha_1 v_1 + \dots + \alpha_n v_n
+		\end{equation*}
+		Therefore,
+		\begin{align*}
+			[\varphi(z)]_{B'} &= [\varphi(\alpha_1 v_1 + \dots + \alpha_n v_n)]_{B'}\\
+			&= [\alpha_1 \varphi(v_2) + \dots + \alpha_n \varphi(v_n)]_{B'}\\
+			&= \alpha_1 [\varphi(v_1)]_{B'} + \dots + \alpha_n [\varphi(v_n)]_{B'}\\
+			&= \alpha_1 \cdot (1^{\text{st}} \text{column of } A) + \dots + \alpha_n c_n \cdot (n^{\text{th}} \text{column of } A)\\
+			&= A [z]_B
+		\end{align*}
+	\end{case}
+\end{proof}
+
+\subsection{Change of Bases}
+
+\begin{theorem}
+	Let $V$, $W$ be vector spaces over $\mathbb{F}$, $\dim (V) = n$, $\dim (W) = m$. Let $\varphi : V \to W$ be a linear map. Let $B$, $\tilde{B}$ be bases of $V$ and let $B'$ and $\tilde{B'}$ be bases of $W$. Let $A = [\varphi]_{B, B'}$ and $\tilde{A} = [\varphi]_{\tilde{B}, \tilde{B'}}$ be the matrices of $\varphi$ w.r.t. the pairs $B$, $B'$ and $\tilde{B}$, $\tilde{B'}$. Let $P$ denote the transition matrix from $B$ to $\tilde{B}$, and let $Q$ denote the transition matrix from $B'$ to $\tilde{B'}$. Then,
+	\begin{equation*}
+		\tilde{A}_{m \times n} = Q^{-1}_{m \times m} A_{m \times n} P_{n \times n}
+	\end{equation*}
+\end{theorem}
+
+\begin{proof}
+	$\forall z \in V$,
+	\begin{align}
+		[\varphi(z)]_{B'} &= A [z]_B\label{eq 1}\\
+		[\varphi(z)]_{\tilde{B'}} &= A [z]_{\tilde{B}}\label{eq 2}
+	\end{align}
+	We have
+	\begin{align}
+		[z]_B &= P [z]_{\tilde{B}}\label{eq 3}\\
+		[\varphi(z)]_{B'} &= Q [\varphi(z)]_{\tilde{B'}}\label{eq 4}
+	\end{align}
+	Therefore,
+	\begin{align}
+		\intertext{\eqref{eq 1} in \eqref{eq 4} $\implies$}
+		A [z]_B &= Q [\varphi(z)]_{\tilde{B'}}\label{eq 5}\\
+		\intertext{\eqref{eq 3} in \eqref{eq 5} $\implies$}
+		A P [z]_{\tilde{B}} &= Q [\varphi(z)]_{\tilde{B'}}
+	\end{align}
+	Multiplying on the left by $Q^{-1}$,
+	\begin{align*}
+		Q^{-1} A P [z]_{\tilde{B}} &= [\varphi(z)]_{\tilde{B'}}\\
+		\therefore [\varphi(z)]_{\tilde{B'}} &= Q^{-1} A P [z]_{\tilde{B}}
+		\intertext{Comparing with \eqref{eq 2},}
+		\tilde{A} &= Q^{-1} A P
+	\end{align*}
+\end{proof}
+
+\subsection{Operations on Linear Maps}
+
+\begin{definition}
+	Let
+	\begin{align*}
+		\varphi : V \to W\\
+		\varphi' : V \to W
+	\end{align*}
+	be linear maps.
+	\begin{align*}
+		\varphi + \varphi' &: V \to W\\
+		\intertext{is defined as}
+		(\varphi + \varphi')(v) &= \varphi(v) + \varphi'(v)\\
+		\intertext{and}
+		\alpha \varphi &: V \to W\\
+		\intertext{is defined as}
+		(\alpha \varphi)(v) &= \alpha \varphi(v)
+	\end{align*}
+\end{definition}
+
+\begin{definition}
+	Let
+	\begin{align*}
+		\varphi : V \to W\\
+		\varphi' : W \to U
+	\end{align*}
+	be linear maps.
+	\begin{align*}
+	(\varphi' \circ \varphi) &: V \to U\\
+	\intertext{is defined as}
+	(\varphi' \circ \varphi)(v) &= \varphi'(\varphi(v))
+	\end{align*}
+\end{definition}
+
+\begin{theorem}[Matrix of composed map]
+	Let $\varphi : V \to W$, $\varphi' : W \to U$ be linear maps. Let $(\varphi \circ \varphi') : V \to U$ be the composed map. Let $\dim V = n$, $\dim W = m$, $\dim U = l$. Let $B$, $B'$, $B''$ be bases of $V$, $W$, $U$ respectively. Let $A = [\varphi]_{B, B'}$, $A' = [\varphi']_{B', B''}$ be the matrices of $\varphi$, $\varphi'$. Let $A'' = [\varphi' \circ \varphi]_{B, B''}$ be the matrix of the composed map. Then, 
+	\begin{equation*}
+		A'' = A' A
+	\end{equation*}
+\end{theorem}
+
+\begin{proof}
+	Let $z \in V$.
+	\begin{align*}
+		[(\varphi' \circ \varphi)(z)]_{B''} &= [\varphi' (\varphi (z))]_{B''}\\
+		&= A' [\varphi (z)]_{B'}\\
+		&= A' A [z]_B
+	\end{align*}
+	By definition,
+	\begin{align*}
+		[(\varphi' \circ \varphi) (z)]_{B''} &= A'' [z]_B
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		A'' &= A' A
+	\end{align*}
+\end{proof}
+
+\subsection{Kernel and Image}
+
+\begin{definition}
+	Let $\varphi : V \to W$ be a linear map.
+	\begin{align*}
+		\ker \varphi &\doteq \{v \in V : \varphi (v) = \mathbb{O}\}\\
+		\im \varphi &\doteq \{\phi (v) : v \in V\}
+	\end{align*}
+\end{definition}
+
+\begin{theorem}
+	$\ker \varphi$ is a subspace of $V$ and $\im \varphi$ is a subspace of $W$.
+\end{theorem}
+
+\begin{proof}
+	\begin{align*}
+		\varphi (\mathbb{O}) &= \mathbb{O}\\
+		\therefore \mathbb{O} &\in \ker \varphi
+	\end{align*}
+	If $v_1, v_2 \in \ker \varphi$, then
+	\begin{align*}
+		\varphi (v_1 + v_2) &= \varphi (v_1) + \varphi (v_2)\\
+		&= \mathbb{O} + \mathbb{O}\\
+		&= \mathbb{O}\\
+		\therefore v_1 + v_2 \in \ker V
+	\end{align*}
+	If $v \in \ker \varphi$, $\alpha \in \mathbb{F}$, then
+	\begin{align*}
+		\varphi (\alpha v) &= \alpha \varphi (v)\\
+		&= \alpha \mathbb{O} \\
+		&= \mathbb{O}
+		\therefore \alpha v \in \ker \varphi
+	\end{align*}
+	Therefore, $\ker \varphi$ is a subspace of $W$.\\
+	\begin{align*}
+		\varphi (\mathbb{O}) &= \mathbb{O}\\
+		\therefore \mathbb{O} &\in \im \varphi
+	\end{align*}
+	If $w_1, w_2 \in \im \varphi$, then
+	\begin{align*}
+		w_1 &= \varphi (v_1)\\
+		w_2 &= \varphi (v_2)\\
+		\therefore w_1 + w_2 &= \varphi (v_1) + \varphi (v_2)\\
+		&= \varphi (v_1 + v_2)\\
+		\therefore w_1 + w_2 &\in \im \varphi
+	\end{align*}
+	If $w \in W$, $\alpha \in \mathbb{F}$, then
+	\begin{align*}
+		\alpha w &= \alpha \phi (v)\\
+		&= \varphi (\alpha v)\\
+		\therefore \alpha w &\in \im \varphi
+	\end{align*}
+	Therefore, $\im \varphi$ is a subspace of $W$.
+\end{proof}
+
+\end{document}
