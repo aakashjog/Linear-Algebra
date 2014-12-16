@@ -91,7 +91,7 @@
 
 \section{Contact Information}
 
-\textbf{Boris Kunyavskii}\\
+\textbf{Prof. Boris Kunyavskii}\\
 kunyav@gmail.com\\
 
 \section{Grades}
@@ -1365,7 +1365,7 @@ We define
 Let $\mathbb{F}$ be a field, and $m, n \geq 1 \in \mathbb{Z}$.\\
 Let $V = \mathbb{F}^{mn}$ be the set of all $(m \times n)$ matrices over $\mathbb{F}$, i.e. a set of ordered mn-tuples. For $X, Y \in V$, we use the usual definitions of $X + Y$ and $\alpha X$ from algebra of matrices.
 
-\subsection{Properties}
+\section{Properties}
 
 \begin{enumerate}
 	\item $\alpha \mathbb{O} = \mathbb{O} ; \forall \alpha \in F$ \label{Vector Spaces: Multiplication by 0}
@@ -2072,10 +2072,9 @@ The representation of $z$ w.r.t $B$ can be represented as
 	\end{pmatrix}$
 \end{enumerate}
 
-\newpage
-\part{Determinants}
+\section{Determinants}
 
-\section{Definition}
+\subsection{Definition}
 
 \begin{definition}[Determinants]
 	Given an $n \times n$ matrix $A$, $n \geq 1$, $\det (A)$ is defined as follows.
@@ -2153,7 +2152,7 @@ The representation of $z$ w.r.t $B$ can be represented as
 \end{tabular}
 \footnotetext{Any permutation can be represented as a result of a series of elementary permutations, i.e. permutations of 2 elements only. The parity of a particular permutation depends of the parity of the number of elementary functions required for it.}
 
-\section{Properties}
+\subsection{Properties}
 
 
 \begin{theorem}
@@ -2316,7 +2315,7 @@ The representation of $z$ w.r.t $B$ can be represented as
 	\end{align*}
 \end{proof}
 
-\section{Practical Methods for Computing Determinants}
+\subsection{Practical Methods for Computing Determinants}
 
 \subsection{Expansion along a row/ column}
 
@@ -2326,7 +2325,7 @@ Let $A$ be a $m \times n$ matrix, and let $A_{ij}$ be the matrix obtained by rem
 	\det (A) &= \sum_{j = 1}^{n} (-1)^{i + j} a_{ij} \det (A_{ij})
 \end{align*}
 
-\section{Determinant Rank}
+\subsection{Determinant Rank}
 
 \begin{definition}
 	Let $A$ be any $m \times n$ matrix. Consider all square sub-matrices of $A$ and compute their determinants. If there is an $r \times r$ sub-matrix of $A$ s.t. its determinant is non-zero, but the determinants of all $(r + 1) \times (r + 1)$ sub-matrices of $A$ are zero, then, $r$ is called the determinant rank of $A$.
@@ -2610,5 +2609,174 @@ Let $A$ be a $m \times n$ matrix, and let $A_{ij}$ be the matrix obtained by rem
 	\end{align*}
 	Therefore, $\im \varphi$ is a subspace of $W$.
 \end{proof}
+
+\subsubsection{Dimensions of Kernel and Image}
+
+\begin{theorem}
+	Let $\varphi : V \to W$ be a linear map. Then
+	\begin{equation*}
+		\dim (\ker (\varphi)) + \dim (\im (\varphi))
+	\end{equation*}
+\end{theorem}
+
+\begin{proof}
+	Let $\ker \varphi = U$, $U \subseteq V$.\\
+	Let $B_0 = \{v_1, \dots, v_k\}$ be a basis of $U$.\\
+	Completing $B_0$ to a basis $B$ of $V$, 
+	\begin{equation*}
+		B = \{v_1, \dots, v_k, v_{k+1}, \dots, v_n\}
+	\end{equation*}
+	Let
+	\begin{align*}
+		w_{k+1} &= \varphi(v_{k+1})\\
+		&\vdots\\
+		w_n &= \varphi(v_n)
+	\end{align*}
+	Therefore, we need to prove that $B'$ is a basis of $W' = \im (\varphi)$, by proving that $B'$ is a spanning set and that $B'$ is linearly independent.\\
+	Take $w \in \im(\varphi)$, so that there is $v \in V$ s.t. $\varphi (v) = w$.\\
+	Representing $v$ as a linear combination of elements of $B$,
+	\begin{align*}
+		v &= \alpha_1 v_1 + \dots + \alpha_k v_k + \alpha_{k+1} v_{k+1} + \dots + \alpha_n v_n\\
+		\therefore w &= \varphi(v)\\
+		&= \varphi(\alpha_1 v_1 + \dots + \alpha_k v_k + \alpha_{k+1} v_{k+1} + \dots + \alpha_n v_n)\\
+		&= \alpha_1 \varphi(v_1) + \dots + \alpha_k \varphi(v_k) + \alpha_{k+1} \varphi(v_{k+1}) + \dots + \alpha_n \varphi(v_n)\\
+		&= \alpha_{k+1} \varphi(v_{k+1}) + \dots + \alpha_n \varphi(v_n)\\
+		&= \alpha_{k+1} w_{k+1} + \dots + \alpha_n w_n\\
+		&\in \vspan(B')
+	\end{align*}
+	Therefore, $B'$ is a spanning set for $W'$.\\
+	Let
+	\begin{equation*}
+		\beta_{k+1} w_{k+1} + \dots + \beta_n w_n = \mathbb{O}
+	\end{equation*}
+	Therefore, $B'$ is linearly independent iff 
+	\begin{equation*}
+		\beta_{k+1} = \dots = \beta_n = 0
+	\end{equation*}
+	As $\varphi$ is a linear map, 
+	\begin{align*}
+		\varphi (\beta_{k+1} v_{k+1} + \dots + \beta_n v_n) &= \mathbb{O}\\
+		\therefore \beta_{k+1} v_{k+1} + \dots + \beta_n v_n &\in \ker \varphi
+	\end{align*}
+	Therefore, it can be expressed as a linear combination of vectors of $B_0$, which is a basis of $\ker \varphi$.\\
+	Let 
+	\begin{align*}
+		\beta_{k+1} v_{k+1} + \dots + \beta_n v_n &= \alpha_{k+1} v_{k+1} + \dots + \alpha_n v_n\\
+		\therefore \alpha_{k+1} v_{k+1} + \dots + \alpha_n v_n - \beta_{k+1} v_{k+1} - \dots - \beta_n v_n &= \mathbb{O}
+	\end{align*}
+	As $\{v_1, \dots, v_n\}$ is a basis of $V$, all coefficients must be 0\\
+	Therefore,
+	\begin{equation*}
+		\beta_{k+1} v_{k+1} = \dots = \beta_n v_n = 0
+	\end{equation*}
+	Hence, as $B'$ is a spanning set of $\im \varphi$ and also linearly independent, $B'$ is a basis of $\im \varphi$.\\
+	Therefore,
+	\begin{align*}
+		\dim (\im \varphi) &= \text{ size of $B'$ }\\
+		&= n - k\\
+		&= n - \dim (\ker \varphi)\\
+		\therefore \dim (\im \varphi) + \dim (\ker \varphi) &= \dim V
+	\end{align*}
+\end{proof}
+
+\begin{corollary}
+	\begin{align*}
+		\dim (\im \varphi) &= r
+	\end{align*}
+	where $r$ is the rank of $A$
+\end{corollary}
+
+\begin{corollary}
+	Let $A_{m \times n}$ be a matrix of rank $r$. Let $\C(A)$ be the column space of $A$, and let $\dim \C(A)$ be the column rank of $A$. Then
+	\begin{equation*}
+		\dim \C(A) = r
+	\end{equation*}
+\end{corollary}
+
+\begin{proof}
+	Define
+	\begin{equation*}
+		\varphi : \mathbb{F}^n \to \mathbb{F}^m
+	\end{equation*}
+	s.t. $A = [\varphi]_{B, B'}$, where $B$ is the standard basis of $\mathbb{F}$.
+	\begin{align*}
+		B &= 
+		\left\lbrace
+			\begin{pmatrix}
+				1\\
+				\vdots\\
+				0\\
+			\end{pmatrix}
+			,
+			\dots
+			,
+			\begin{pmatrix}
+				0\\
+				\vdots\\
+				1\\
+			\end{pmatrix}
+		\right\rbrace\\
+		&= \{e_1, \dots, e_n\}
+	\end{align*}
+	$\forall v \in \mathbb{F}^n$, we have
+	\begin{equation*}
+		[\varphi(v)]_{B'} = A [v]_B
+	\end{equation*}
+	If $v = e_i$,
+	\begin{equation*}
+		[\varphi (e_i)] = A e_i
+	\end{equation*}
+	which is the $i^{\text{th}}$ column of $A$.
+	So, the space spanned by $\{\varphi(e_1), \dots, \varphi(e_n)\}$ is equal to $\C(A)$. But it is also in $\im \varphi$.\\
+	Therefore,
+	\begin{align*}
+		\im \varphi &= \C(A)\\
+		\intertext{and}
+		\dim (\im \varphi) &= \dim (\C(A))\\
+		\therefore r &= \dim (\C(A))
+	\end{align*}
+\end{proof}
+
+\begin{remark}
+	Let $\varphi : V \to W$ be a linear map. Let $w \in \im (\varphi)$, so that there is $v \in V$ s.t. $\varphi (v) = w$. Then any $v'$ s.t. $\varphi(v') = w$ can be written down as $v' = v + v_0$ where $v_0 \in \ker \varphi$.
+\end{remark}
+
+\part{Linear Operators}
+
+\section{Definition}
+
+\begin{definition}
+	A linear operator or transformation
+	\begin{equation*}
+		T : V \to V
+	\end{equation*}
+	is a linear map from a vector space $V$ to itself.
+\end{definition}
+
+\section{Similar Matrices}
+
+Let $B$ and $\tilde{B}$ be bases of $V$. Let $A$ and $\tilde{A}$ be the representing matrices
+\begin{align*}
+	A &= [T]_B\\
+	\tilde{A} &= [T]_{\tilde{B}}
+\end{align*}
+Both these are $n \times n$ matrices, where $n = \dim V$. Let $P$ denote the transition matrix from $B$ to $\tilde{B}$. Then,
+\begin{equation*}
+	\tilde{A} = P^{-1} A P
+\end{equation*}
+
+\begin{definition}
+	Let $A$, $\tilde{A}$ be $n \times n$ matrices. $A$ is said to be similar to $\tilde{A}$, denoted as $A \sim \tilde{A}$, if there exists an invertible $n \times n$ matrix $P$, s.t. $\tilde{A} = P^{-1} A P$.
+\end{definition}
+
+\subsection{Properties of Similar Matrices}
+
+\begin{enumerate}
+	\item $A \sim A$ 
+	\item If $A \sim \tilde{A}$, then $\tilde{A} \sim A$
+	\item If $A \sim \tilde{A}$ and $\tilde{A} \sim \tilde{\tilde{A}}$, then $A \sim \tilde{\tilde{A}}$
+	\item If $A \sim \tilde{A}$, then $\det (A) = \det (\tilde{A})$
+	\item If $A \sim I$, then $A = I$
+\end{enumerate}
 
 \end{document}

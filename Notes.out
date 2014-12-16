@@ -1,0 +1,110 @@
+\BOOKMARK [0][-]{part.1}{I General Information}{}% 1
+\BOOKMARK [1][-]{section.1.1}{Contact Information}{part.1}% 2
+\BOOKMARK [1][-]{section.1.2}{Grades}{part.1}% 3
+\BOOKMARK [0][-]{part.2}{II Fields}{}% 4
+\BOOKMARK [1][-]{section.2.1}{Definition}{part.2}% 5
+\BOOKMARK [2][-]{subsection.2.1.1}{Examples of Fields}{section.2.1}% 6
+\BOOKMARK [2][-]{subsection.2.1.2}{Examples of Non-fields \(Rings\)}{section.2.1}% 7
+\BOOKMARK [1][-]{section.2.2}{Examples}{part.2}% 8
+\BOOKMARK [0][-]{part.3}{III Matrices}{}% 9
+\BOOKMARK [1][-]{section.3.1}{Definition}{part.3}% 10
+\BOOKMARK [1][-]{section.3.2}{Addition of Matrices}{part.3}% 11
+\BOOKMARK [2][-]{subsubsection.3.2.0.1}{Properties}{section.3.2}% 12
+\BOOKMARK [1][-]{section.3.3}{Multiplication of a matrix by a scalar}{part.3}% 13
+\BOOKMARK [1][-]{section.3.4}{Multiplication of matrices}{part.3}% 14
+\BOOKMARK [1][-]{section.3.5}{Zero Divisor}{part.3}% 15
+\BOOKMARK [1][-]{section.3.6}{Theorem \('Good properties of matrix multiplication'\)}{part.3}% 16
+\BOOKMARK [1][-]{section.3.7}{Square Matrices}{part.3}% 17
+\BOOKMARK [2][-]{subsection.3.7.1}{Diagonal Matrices}{section.3.7}% 18
+\BOOKMARK [3][-]{subsubsection.3.7.1.1}{Proof}{subsection.3.7.1}% 19
+\BOOKMARK [2][-]{subsection.3.7.2}{Upper-triangular Matrices}{section.3.7}% 20
+\BOOKMARK [2][-]{subsection.3.7.3}{Lower-triangular Matrices}{section.3.7}% 21
+\BOOKMARK [2][-]{subsection.3.7.4}{Theorem}{section.3.7}% 22
+\BOOKMARK [3][-]{subsubsection.3.7.4.1}{Proof}{subsection.3.7.4}% 23
+\BOOKMARK [2][-]{subsection.3.7.5}{Identity Matrix}{section.3.7}% 24
+\BOOKMARK [2][-]{subsection.3.7.6}{Theorem}{section.3.7}% 25
+\BOOKMARK [3][-]{subsubsection.3.7.6.1}{Proof}{subsection.3.7.6}% 26
+\BOOKMARK [2][-]{subsection.3.7.7}{Inverse of Matrix}{section.3.7}% 27
+\BOOKMARK [3][-]{subsubsection.3.7.7.1}{If AB = In and CA = In, then B = C}{subsection.3.7.7}% 28
+\BOOKMARK [3][-]{subsubsection.3.7.7.2}{Inverse of a Matrix}{subsection.3.7.7}% 29
+\BOOKMARK [3][-]{subsubsection.3.7.7.3}{If AB = I, then BA = I.}{subsection.3.7.7}% 30
+\BOOKMARK [3][-]{subsubsection.3.7.7.4}{If A is invertible, then A cannot be a zero divisor.}{subsection.3.7.7}% 31
+\BOOKMARK [3][-]{subsubsection.3.7.7.5}{If A and B are invertible, then A+B may or may not be invertible.}{subsection.3.7.7}% 32
+\BOOKMARK [3][-]{subsubsection.3.7.7.6}{If A and B are invertible, then AB must be invertible.}{subsection.3.7.7}% 33
+\BOOKMARK [1][-]{section.3.8}{Transpose of a Matrix}{part.3}% 34
+\BOOKMARK [2][-]{subsection.3.8.1}{Properties of At}{section.3.8}% 35
+\BOOKMARK [1][-]{section.3.9}{Adjoint Matrix}{part.3}% 36
+\BOOKMARK [2][-]{subsubsection.3.9.0.1}{Properties of Adjoint Matrices}{section.3.9}% 37
+\BOOKMARK [1][-]{section.3.10}{Row Operations on Matrices}{part.3}% 38
+\BOOKMARK [2][-]{subsection.3.10.1}{Elementary Row Operations}{section.3.10}% 39
+\BOOKMARK [2][-]{subsection.3.10.2}{Theorems}{section.3.10}% 40
+\BOOKMARK [3][-]{subsubsection.3.10.2.1}{EI A = \040the matrix obtained from A by an elementary row operation I}{subsection.3.10.2}% 41
+\BOOKMARK [3][-]{subsubsection.3.10.2.2}{EII A = \040the matrix obtained from A by an elementary row operation II}{subsection.3.10.2}% 42
+\BOOKMARK [3][-]{subsubsection.3.10.2.3}{EIII A = \040the matrix obtained from A by an elementary row operation III}{subsection.3.10.2}% 43
+\BOOKMARK [3][-]{subsubsection.3.10.2.4}{All elementary matrices are invertible, moreover, the inverses of EI, EII, EIII are also elementary matrices of the same type.}{subsection.3.10.2}% 44
+\BOOKMARK [2][-]{subsection.3.10.3}{Row-equivalent of a Matrix}{section.3.10}% 45
+\BOOKMARK [1][-]{section.3.11}{Row Echelon Form of a Matrix}{part.3}% 46
+\BOOKMARK [2][-]{subsection.3.11.1}{Definition}{section.3.11}% 47
+\BOOKMARK [2][-]{subsection.3.11.2}{Notation}{section.3.11}% 48
+\BOOKMARK [1][-]{section.3.12}{Row Rank of a Matrix}{part.3}% 49
+\BOOKMARK [1][-]{section.3.13}{Gauss Theorem}{part.3}% 50
+\BOOKMARK [2][-]{subsection.3.13.1}{Elimination Algorithm}{section.3.13}% 51
+\BOOKMARK [3][-]{subsubsection.3.13.1.1}{Example}{subsection.3.13.1}% 52
+\BOOKMARK [2][-]{subsection.3.13.2}{Row Spaces of Matrices}{section.3.13}% 53
+\BOOKMARK [2][-]{subsection.3.13.3}{Column Equivalence}{section.3.13}% 54
+\BOOKMARK [0][-]{part.4}{IV Linear Systems}{}% 55
+\BOOKMARK [1][-]{section.4.1}{Definition}{part.4}% 56
+\BOOKMARK [1][-]{section.4.2}{Equivalent Systems}{part.4}% 57
+\BOOKMARK [1][-]{section.4.3}{Solution of a System of Equations}{part.4}% 58
+\BOOKMARK [1][-]{section.4.4}{Homogeneous Systems}{part.4}% 59
+\BOOKMARK [2][-]{subsection.4.4.1}{Definition}{section.4.4}% 60
+\BOOKMARK [2][-]{subsection.4.4.2}{Solutions of Homogeneous Systems}{section.4.4}% 61
+\BOOKMARK [3][-]{subsubsection.4.4.2.1}{Example}{subsection.4.4.2}% 62
+\BOOKMARK [3][-]{subsubsection.4.4.2.2}{General Solution}{subsection.4.4.2}% 63
+\BOOKMARK [2][-]{subsection.4.4.3}{Properties}{section.4.4}% 64
+\BOOKMARK [3][-]{subsubsection.4.4.3.1}{For a homogeneous system A x = 0, if c and d are solutions, then c + d is also a solution.}{subsection.4.4.3}% 65
+\BOOKMARK [3][-]{subsubsection.4.4.3.2}{For a homogeneous system A x = 0, if c is a solution and F, then, c is a solution too.}{subsection.4.4.3}% 66
+\BOOKMARK [2][-]{subsection.4.4.4}{Fundamental Solutions}{section.4.4}% 67
+\BOOKMARK [3][-]{subsubsection.4.4.4.1}{Theorem: Any solution d of the system A x = O can be obtained from the basic solutions v1, \203, vt as a linear combination of the basic solutions, d = 1 v1 + \203t vt}{subsection.4.4.4}% 68
+\BOOKMARK [2][-]{subsection.4.4.5}{}{section.4.4}% 69
+\BOOKMARK [1][-]{section.4.5}{Non-Homogeneous Systems}{part.4}% 70
+\BOOKMARK [2][-]{subsection.4.5.1}{Definition}{section.4.5}% 71
+\BOOKMARK [2][-]{subsection.4.5.2}{Solutions of Non-Homogeneous Systems}{section.4.5}% 72
+\BOOKMARK [3][-]{subsubsection.4.5.2.1}{Case I: \040= r}{subsection.4.5.2}% 73
+\BOOKMARK [3][-]{subsubsection.4.5.2.2}{Case II: \040> r}{subsection.4.5.2}% 74
+\BOOKMARK [2][-]{subsection.4.5.3}{General Solution}{section.4.5}% 75
+\BOOKMARK [0][-]{part.5}{V Vector Spaces}{}% 76
+\BOOKMARK [1][-]{section.5.1}{Definition}{part.5}% 77
+\BOOKMARK [2][-]{subsection.5.1.1}{Examples}{section.5.1}% 78
+\BOOKMARK [3][-]{subsubsection.5.1.1.1}{Geometric Vectors in Plane}{subsection.5.1.1}% 79
+\BOOKMARK [3][-]{subsubsection.5.1.1.2}{Arithmetic Vector Space}{subsection.5.1.1}% 80
+\BOOKMARK [3][-]{subsubsection.5.1.1.3}{}{subsection.5.1.1}% 81
+\BOOKMARK [1][-]{section.5.2}{Properties}{part.5}% 82
+\BOOKMARK [2][-]{subsubsection.5.2.0.4}{Proof of 1}{section.5.2}% 83
+\BOOKMARK [1][-]{section.5.3}{Subspaces}{part.5}% 84
+\BOOKMARK [2][-]{subsection.5.3.1}{Examples}{section.5.3}% 85
+\BOOKMARK [2][-]{subsection.5.3.2}{Operations on Subspaces}{section.5.3}% 86
+\BOOKMARK [1][-]{section.5.4}{Spans}{part.5}% 87
+\BOOKMARK [1][-]{section.5.5}{Linear Dependence}{part.5}% 88
+\BOOKMARK [2][-]{subsection.5.5.1}{Properties of Linearly Dependent and Independent Sets}{section.5.5}% 89
+\BOOKMARK [2][-]{subsection.5.5.2}{Changing a Basis}{section.5.5}% 90
+\BOOKMARK [2][-]{subsection.5.5.3}{Representation of Vectors in a Basis}{section.5.5}% 91
+\BOOKMARK [3][-]{subsubsection.5.5.3.1}{Properties of Representations}{subsection.5.5.3}% 92
+\BOOKMARK [1][-]{section.5.6}{Determinants}{part.5}% 93
+\BOOKMARK [2][-]{subsection.5.6.1}{Definition}{section.5.6}% 94
+\BOOKMARK [2][-]{subsection.5.6.2}{Properties}{section.5.6}% 95
+\BOOKMARK [2][-]{subsection.5.6.3}{Practical Methods for Computing Determinants}{section.5.6}% 96
+\BOOKMARK [2][-]{subsection.5.6.4}{Expansion along a row/ column}{section.5.6}% 97
+\BOOKMARK [2][-]{subsection.5.6.5}{Determinant Rank}{section.5.6}% 98
+\BOOKMARK [1][-]{section.5.7}{Linear Maps}{part.5}% 99
+\BOOKMARK [2][-]{subsection.5.7.1}{Definition}{section.5.7}% 100
+\BOOKMARK [2][-]{subsection.5.7.2}{Properties}{section.5.7}% 101
+\BOOKMARK [2][-]{subsection.5.7.3}{Matrix of a Linear Map}{section.5.7}% 102
+\BOOKMARK [2][-]{subsection.5.7.4}{Change of Bases}{section.5.7}% 103
+\BOOKMARK [2][-]{subsection.5.7.5}{Operations on Linear Maps}{section.5.7}% 104
+\BOOKMARK [2][-]{subsection.5.7.6}{Kernel and Image}{section.5.7}% 105
+\BOOKMARK [3][-]{subsubsection.5.7.6.1}{Dimensions of Kernel and Image}{subsection.5.7.6}% 106
+\BOOKMARK [0][-]{part.6}{VI Linear Operators}{}% 107
+\BOOKMARK [1][-]{section.6.1}{Definition}{part.6}% 108
+\BOOKMARK [1][-]{section.6.2}{Similar Matrices}{part.6}% 109
+\BOOKMARK [2][-]{subsection.6.2.1}{Properties of Similar Matrices}{section.6.2}% 110

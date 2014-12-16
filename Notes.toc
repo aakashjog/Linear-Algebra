@@ -1,0 +1,114 @@
+\contentsline {part}{I\hspace {1em}General Information}{6}{part.1}
+\contentsline {section}{\numberline {1}Contact Information}{6}{section.1.1}
+\contentsline {section}{\numberline {2}Grades}{6}{section.1.2}
+\contentsline {part}{II\hspace {1em}Fields}{7}{part.2}
+\contentsline {section}{\numberline {1}Definition}{7}{section.2.1}
+\contentsline {subsection}{\numberline {1.1}Examples of Fields}{7}{subsection.2.1.1}
+\contentsline {subsection}{\numberline {1.2}Examples of Non-fields (Rings)}{8}{subsection.2.1.2}
+\contentsline {section}{\numberline {2}Examples}{8}{section.2.2}
+\contentsline {part}{III\hspace {1em}Matrices}{9}{part.3}
+\contentsline {section}{\numberline {1}Definition}{9}{section.3.1}
+\contentsline {section}{\numberline {2}Addition of Matrices}{9}{section.3.2}
+\contentsline {subsubsection}{\numberline {2.0.1}Properties}{9}{subsubsection.3.2.0.1}
+\contentsline {section}{\numberline {3}Multiplication of a matrix by a scalar}{9}{section.3.3}
+\contentsline {section}{\numberline {4}Multiplication of matrices}{10}{section.3.4}
+\contentsline {section}{\numberline {5}Zero Divisor}{10}{section.3.5}
+\contentsline {section}{\numberline {6}Theorem ('Good properties of matrix multiplication')}{11}{section.3.6}
+\contentsline {section}{\numberline {7}Square Matrices}{12}{section.3.7}
+\contentsline {subsection}{\numberline {7.1}Diagonal Matrices}{12}{subsection.3.7.1}
+\contentsline {subsubsection}{\numberline {7.1.1}Proof}{12}{subsubsection.3.7.1.1}
+\contentsline {subsection}{\numberline {7.2}Upper-triangular Matrices}{12}{subsection.3.7.2}
+\contentsline {subsection}{\numberline {7.3}Lower-triangular Matrices}{12}{subsection.3.7.3}
+\contentsline {subsection}{\numberline {7.4}Theorem}{13}{subsection.3.7.4}
+\contentsline {subsubsection}{\numberline {7.4.1}Proof}{13}{subsubsection.3.7.4.1}
+\contentsline {subsection}{\numberline {7.5}Identity Matrix}{13}{subsection.3.7.5}
+\contentsline {subsection}{\numberline {7.6}Theorem}{13}{subsection.3.7.6}
+\contentsline {subsubsection}{\numberline {7.6.1}Proof}{13}{subsubsection.3.7.6.1}
+\contentsline {subsection}{\numberline {7.7}Inverse of Matrix}{14}{subsection.3.7.7}
+\contentsline {subsubsection}{\numberline {7.7.1}If $AB = I_n$ and $CA = I_n$, then $B = C$}{14}{subsubsection.3.7.7.1}
+\contentsline {subsubsection}{\numberline {7.7.2}Inverse of a Matrix}{14}{subsubsection.3.7.7.2}
+\contentsline {subsubsection}{\numberline {7.7.3}If $AB = I$, then $BA = I$.}{15}{subsubsection.3.7.7.3}
+\contentsline {subsubsection}{\numberline {7.7.4}If $A$ is invertible, then $A$ \emph {cannot} be a zero divisor.}{15}{subsubsection.3.7.7.4}
+\contentsline {subsubsection}{\numberline {7.7.5}If $A$ and $B$ are invertible, then $A+B$ may or may not be invertible.}{15}{subsubsection.3.7.7.5}
+\contentsline {subsubsection}{\numberline {7.7.6}If $A$ and $B$ are invertible, then $AB$ must be invertible.}{16}{subsubsection.3.7.7.6}
+\contentsline {section}{\numberline {8}Transpose of a Matrix}{16}{section.3.8}
+\contentsline {subsection}{\numberline {8.1}Properties of $A^{t}$}{16}{subsection.3.8.1}
+\contentsline {section}{\numberline {9}Adjoint Matrix}{16}{section.3.9}
+\contentsline {subsubsection}{\numberline {9.0.1}Properties of Adjoint Matrices}{17}{subsubsection.3.9.0.1}
+\contentsline {section}{\numberline {10}Row Operations on Matrices}{17}{section.3.10}
+\contentsline {subsection}{\numberline {10.1}Elementary Row Operations}{17}{subsection.3.10.1}
+\contentsline {subsection}{\numberline {10.2}Theorems}{17}{subsection.3.10.2}
+\contentsline {subsubsection}{\numberline {10.2.1}$E_\text {I} A = $ the matrix obtained from $A$ by an elementary row operation \ref {elementary row operation 1}}{17}{subsubsection.3.10.2.1}
+\contentsline {subsubsection}{\numberline {10.2.2}$E_\text {II} A = $ the matrix obtained from $A$ by an elementary row operation \ref {elementary row operation 2}}{18}{subsubsection.3.10.2.2}
+\contentsline {subsubsection}{\numberline {10.2.3}$E_\text {III} A = $ the matrix obtained from $A$ by an elementary row operation \ref {elementary row operation 3}}{18}{subsubsection.3.10.2.3}
+\contentsline {subsubsection}{\numberline {10.2.4}All elementary matrices are invertible, moreover, the inverses of $E_{\text {I}}, E_{\text {II}}, E_{\text {III}}$ are also elementary matrices of the same type.}{19}{subsubsection.3.10.2.4}
+\contentsline {subsection}{\numberline {10.3}Row-equivalent of a Matrix}{21}{subsection.3.10.3}
+\contentsline {section}{\numberline {11}Row Echelon Form of a Matrix}{21}{section.3.11}
+\contentsline {subsection}{\numberline {11.1}Definition}{21}{subsection.3.11.1}
+\contentsline {subsection}{\numberline {11.2}Notation}{22}{subsection.3.11.2}
+\contentsline {section}{\numberline {12}Row Rank of a Matrix}{22}{section.3.12}
+\contentsline {section}{\numberline {13}Gauss Theorem}{22}{section.3.13}
+\contentsline {subsection}{\numberline {13.1}Elimination Algorithm}{22}{subsection.3.13.1}
+\contentsline {subsubsection}{\numberline {13.1.1}Example}{23}{subsubsection.3.13.1.1}
+\contentsline {subsection}{\numberline {13.2}Row Spaces of Matrices}{23}{subsection.3.13.2}
+\contentsline {subsection}{\numberline {13.3}Column Equivalence}{24}{subsection.3.13.3}
+\contentsline {part}{IV\hspace {1em}Linear Systems}{26}{part.4}
+\contentsline {section}{\numberline {1}Definition}{26}{section.4.1}
+\contentsline {section}{\numberline {2}Equivalent Systems}{26}{section.4.2}
+\contentsline {section}{\numberline {3}Solution of a System of Equations}{27}{section.4.3}
+\contentsline {section}{\numberline {4}Homogeneous Systems}{28}{section.4.4}
+\contentsline {subsection}{\numberline {4.1}Definition}{28}{subsection.4.4.1}
+\contentsline {subsection}{\numberline {4.2}Solutions of Homogeneous Systems}{28}{subsection.4.4.2}
+\contentsline {subsubsection}{\numberline {4.2.1}Example}{29}{subsubsection.4.4.2.1}
+\contentsline {subsubsection}{\numberline {4.2.2}General Solution}{30}{subsubsection.4.4.2.2}
+\contentsline {paragraph}{\numberline {4.2.2.1}Case I: $t = 0$\\}{30}{paragraph.4.4.2.2.1}
+\contentsline {paragraph}{\numberline {4.2.2.2}Case II: $t > 0$}{30}{paragraph.4.4.2.2.2}
+\contentsline {subsection}{\numberline {4.3}Properties}{30}{subsection.4.4.3}
+\contentsline {subsubsection}{\numberline {4.3.1}For a homogeneous system $A x = 0$, if $c$ and $d$ are solutions, then $c + d$ is also a solution.}{30}{subsubsection.4.4.3.1}
+\contentsline {subsubsection}{\numberline {4.3.2}For a homogeneous system $A x = 0$, if $c$ is a solution and $\alpha \in \mathbb {F}$, then, $\alpha c$ is a solution too.}{30}{subsubsection.4.4.3.2}
+\contentsline {subsection}{\numberline {4.4}Fundamental Solutions}{31}{subsection.4.4.4}
+\contentsline {subsubsection}{\numberline {4.4.1}Theorem: Any solution $d$ of the system $A x = \mathbb {O}$ can be obtained from the basic solutions $v_1, \dots , v_t$ as a linear combination of the basic solutions, $d = \alpha _1 v_1 + \dots \alpha _t v_t$}{31}{subsubsection.4.4.4.1}
+\contentsline {subsection}{\numberline {4.5}}{31}{subsection.4.4.5}
+\contentsline {section}{\numberline {5}Non-Homogeneous Systems}{32}{section.4.5}
+\contentsline {subsection}{\numberline {5.1}Definition}{32}{subsection.4.5.1}
+\contentsline {subsection}{\numberline {5.2}Solutions of Non-Homogeneous Systems}{32}{subsection.4.5.2}
+\contentsline {subsubsection}{\numberline {5.2.1}Case I: $\mathaccentV {tilde}07E{r} = r$}{32}{subsubsection.4.5.2.1}
+\contentsline {paragraph}{\numberline {5.2.1.1}Case a: $r = n$, i.e. $t=0$\\}{32}{paragraph.4.5.2.1.1}
+\contentsline {paragraph}{\numberline {5.2.1.2}Case b: $r < n$, i.e. $t > 0$\\}{32}{paragraph.4.5.2.1.2}
+\contentsline {subsubsection}{\numberline {5.2.2}Case II: $\mathaccentV {tilde}07E{r} > r$}{32}{subsubsection.4.5.2.2}
+\contentsline {subsection}{\numberline {5.3}General Solution}{33}{subsection.4.5.3}
+\contentsline {part}{V\hspace {1em}Vector Spaces}{34}{part.5}
+\contentsline {section}{\numberline {1}Definition}{34}{section.5.1}
+\contentsline {subsection}{\numberline {1.1}Examples}{34}{subsection.5.1.1}
+\contentsline {subsubsection}{\numberline {1.1.1}Geometric Vectors in Plane}{34}{subsubsection.5.1.1.1}
+\contentsline {subsubsection}{\numberline {1.1.2}Arithmetic Vector Space}{34}{subsubsection.5.1.1.2}
+\contentsline {subsubsection}{\numberline {1.1.3}}{35}{subsubsection.5.1.1.3}
+\contentsline {section}{\numberline {2}Properties}{35}{section.5.2}
+\contentsline {subsubsection}{\numberline {2.0.4}Proof of \ref {Vector Spaces: Multiplication by 0}}{35}{subsubsection.5.2.0.4}
+\contentsline {section}{\numberline {3}Subspaces}{35}{section.5.3}
+\contentsline {subsection}{\numberline {3.1}Examples}{36}{subsection.5.3.1}
+\contentsline {subsection}{\numberline {3.2}Operations on Subspaces}{37}{subsection.5.3.2}
+\contentsline {section}{\numberline {4}Spans}{37}{section.5.4}
+\contentsline {section}{\numberline {5}Linear Dependence}{40}{section.5.5}
+\contentsline {subsection}{\numberline {5.1}Properties of Linearly Dependent and Independent Sets}{41}{subsection.5.5.1}
+\contentsline {subsection}{\numberline {5.2}Changing a Basis}{45}{subsection.5.5.2}
+\contentsline {subsection}{\numberline {5.3}Representation of Vectors in a Basis}{48}{subsection.5.5.3}
+\contentsline {subsubsection}{\numberline {5.3.1}Properties of Representations}{48}{subsubsection.5.5.3.1}
+\contentsline {section}{\numberline {6}Determinants}{49}{section.5.6}
+\contentsline {subsection}{\numberline {6.1}Definition}{49}{subsection.5.6.1}
+\contentsline {subsection}{\numberline {6.2}Properties}{49}{subsection.5.6.2}
+\contentsline {subsection}{\numberline {6.3}Practical Methods for Computing Determinants}{52}{subsection.5.6.3}
+\contentsline {subsection}{\numberline {6.4}Expansion along a row/ column}{52}{subsection.5.6.4}
+\contentsline {subsection}{\numberline {6.5}Determinant Rank}{52}{subsection.5.6.5}
+\contentsline {section}{\numberline {7}Linear Maps}{53}{section.5.7}
+\contentsline {subsection}{\numberline {7.1}Definition}{53}{subsection.5.7.1}
+\contentsline {subsection}{\numberline {7.2}Properties}{53}{subsection.5.7.2}
+\contentsline {subsection}{\numberline {7.3}Matrix of a Linear Map}{53}{subsection.5.7.3}
+\contentsline {subsection}{\numberline {7.4}Change of Bases}{55}{subsection.5.7.4}
+\contentsline {subsection}{\numberline {7.5}Operations on Linear Maps}{56}{subsection.5.7.5}
+\contentsline {subsection}{\numberline {7.6}Kernel and Image}{57}{subsection.5.7.6}
+\contentsline {subsubsection}{\numberline {7.6.1}Dimensions of Kernel and Image}{59}{subsubsection.5.7.6.1}
+\contentsline {part}{VI\hspace {1em}Linear Operators}{61}{part.6}
+\contentsline {section}{\numberline {1}Definition}{61}{section.6.1}
+\contentsline {section}{\numberline {2}Similar Matrices}{61}{section.6.2}
+\contentsline {subsection}{\numberline {2.1}Properties of Similar Matrices}{62}{subsection.6.2.1}
