@@ -61,6 +61,8 @@
 \@addtoreset{corollary}{theorem} %resets corollary numbers after a theorem
 \makeatother
 
+\numberwithin{corollary}{theorem}
+
 \numberwithin{equation}{theorem}
 
 \makeatletter %changes spacing between rows of matrices to fit fractions
@@ -2778,5 +2780,75 @@ Both these are $n \times n$ matrices, where $n = \dim V$. Let $P$ denote the tra
 	\item If $A \sim \tilde{A}$, then $\det (A) = \det (\tilde{A})$
 	\item If $A \sim I$, then $A = I$
 \end{enumerate}
+
+\section{Diagonalization}
+
+Given a square matrix $A_{n \times n}$, decide whether or not $A$ is similar to some diagonal matrix $D$. If it is, find $D$, and $P$ s.t. $P^{-1} A P = D$.\\
+Alternatively,\\
+Given an operator $T : V \to V$, decide whether or not there exists a basis $B$ of $V$, s.t. $[T]_B$ is a diagonal matrix D. If it exists, find $D$, and $B$, s.t. $[T]_B = D$.
+
+\begin{definition}[Diagonalizability]
+	If $A$ is similar to a diagonal matrix, $A$ is said to be diagonalizable. $P$, s.t. $P^{-1} A P = D$ is called a diagonalizing matrix for $A$. $D$ is called a diagonal form of $A$.
+\end{definition}
+
+\section{Eigenvalues and Eigenvectors}
+
+\begin{definition}[Eigenvalue and eigenvector]
+	Let $A$ be a $n \times n$ matrix over $\mathbb{F}$. $\lambda \in \mathbb{F}$ is said to be an eigenvalue of $A$, if $\exists v \in \mathbb{F}, v\neq 0$, such that
+	\begin{equation*}
+		A v = \lambda v
+	\end{equation*}
+	$v$ is called an eigenvector corresponding to $\lambda$.
+\end{definition}
+
+\begin{definition}[Alternate definition of eigenvalue and eigenvector]
+	Let $T : V \to V$ be a linear operator, where $V$ is a vector space over $\mathbb{F}$. $\lambda \in \mathbb{F}$ is said to be an eigenvalue of $A$, if $\exists v \in V, v\neq 0$, such that
+	\begin{equation*}
+		T(v) = \lambda v
+	\end{equation*}
+	$v$ is called an eigenvector corresponding to $\lambda$.
+\end{definition}
+
+\begin{definition}[Spectrum]
+	The collection of all eigenvalues of a matrix, or a linear operator is called the spectrum.
+\end{definition}
+
+\begin{theorem}
+	Let $A$ be a $n \times n$ matrix. $\lambda \in \mathbb{F}$ is an eigenvalue of $A$ iff
+	\begin{equation*}
+		\det (\lambda I_n - A) = 0
+	\end{equation*}
+\end{theorem}
+
+\begin{proof}
+	$\lambda$ is an eigenvalue of $A$
+	\begin{align*}
+		&\iff \exists v \in \mathbb{F}^n, v \neq 0, \suchthat Av = \lambda v\\
+		&\iff \exists v \in \mathbb{F}^n, v \neq 0, \suchthat (\lambda I - A) v = \mathbb{O}\\
+		&\iff v = 
+		\begin{pmatrix}
+			x_1\\
+			\vdots\\
+			x_n\\
+		\end{pmatrix}\\
+		&\iff (\lambda I - A) 
+		\begin{pmatrix}
+			x_1\\
+			\vdots\\
+			x_n\\
+		\end{pmatrix}
+		= 0 \text{ has a non-zero solution }\\
+		&\iff \text{there are free variables }\\
+		&\iff \det (\lambda I - A) = 0
+	\end{align*}
+\end{proof}
+
+\begin{theorem}[General criterion for diagonalization]
+	Let $A$ be a $n \times n$ matrix. $A$ is diagonalizable if and only if there exists a basis $B = \{v_1, \dots, v_n\}$ of $\mathbb{F}^n$ consisting of eigenvectors of $A$. In such a case, the diagonal entries of $D$ are eigenvalues of $A$, and $B$ can be chosen as consisting of the columns of $P$, where $P^{-1} A P = D$.
+\end{theorem}
+
+\begin{corollary}
+	If $A$ has no eigenvalues, then it is not diagonalizable.
+\end{corollary}
 
 \end{document}
