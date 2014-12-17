@@ -1,0 +1,142 @@
+\documentclass[fleqn]{article}
+\setcounter{secnumdepth}{4}
+\usepackage{amsmath, amssymb}
+\usepackage{datetime}
+\usepackage{ulem}
+\usepackage{enumerate}
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+
+\setlength{\mathindent}{0pt}
+
+%opening
+\title{Recitation 1}
+\author{}
+\date{\formatdate{29}{10}{2014}}
+
+\begin{document}
+
+\maketitle
+\setlength{\mathindent}{0pt}
+
+\tableofcontents
+
+\newpage
+\section{General Information}
+
+\textbf{Zahi(Tzahi) Hazan}\\
+zahihaza@post.tau.ac.il\\
+Reception Hour: Sunday, \formattime{11}{00}{10} - \formattime{11}{00}{00}\\
+
+\newpage
+\section{Complex Numbers}
+
+Let us set $i = \sqrt{-1}$. \\
+A complex number is a number of the form $z = a + ib$, where $a, b \in \mathbb{R}$.\\
+$\Re(z) = Re(z) = a$\\
+$\Im(z) = Im(z) = b$\\
+
+\subsection{Addition}
+
+\[(a + ib) + (c + id) = (a + c) + i(b + d)\]
+
+\subsection{Multiplication}
+
+\[(a + ib)(c + id) = ac + ibc + iad - bd = (ac - bd) + i(bc + ad)\]
+
+\subsection{Complex Conjugate}
+
+For $z = a + ib$, its conjugate is $\overline{z} = a - ib$\\
+$z + \overline{z} = (a + ib) + (a - ib) = 2a = 2\Re(z)$\\
+$z - \overline{z} = (a + ib) - (a - ib) = 2ib = 2\Im(z)$\\
+$z \cdot \overline{z} = (a + ib) (a - ib) = a^2 + b^2$\\
+
+\subsection{Absolute Value}
+
+$\lvert z \rvert = \sqrt{z \overline{z}} = \sqrt{\Re^2(z) + \Im^2(z)}$
+
+\subsection{Complex Division}
+
+$\dfrac{z}{w} = \dfrac{z}{w} \cdot \dfrac{\overline{z}}{\overline{w}} = \dfrac{z \cdot \overline{w}}{\lvert w \rvert ^2}$
+
+\subsection{Examples}
+
+\subsubsection{Example 1}
+
+\paragraph{Express $\dfrac{(2+i)(4+i)}{(1+i)}$ as a complex number.\\}
+$(2 + i)(4 + i) = 8 + 6i -1 = 7 + 6i$\\
+$\therefore \dfrac{(2+i)(4+i)}{(1+i)} = \dfrac{7 + 6i}{1 + i} = \dfrac{7 + 6i}{1 + i} \cdot \dfrac{1 - i}{1 + i} = \dfrac{7 + 6 - i}{2} = \dfrac{13}{2} - \dfrac{i}{2}$
+
+\paragraph{Show that $i^{77} = i$\\}
+$i^1 = i, i^2 = -1, i^3 = -i, i^4 = 1$\\
+$n = 4m + k$\\
+$\therefore i^n = i^{4m+k} = (i^{4m}) i^k = (i^4)^m i^k = i^k$\\
+$\therefore i^{77} = i^{4 \cdot 19 + 1} = i$
+
+\subsection{Complex Plane}
+
+For every complex number, there is a corresponding point in the complex plane. This plane is called \emph{Complex plane} or \emph{Gauss plane}.\\
+The $x$-axis represents the real part and the $y$-axis represents the imaginary part.\\
+
+\begin{align*}
+\lvert z \rvert = \sqrt{a^2 + b^2} =  \text{the distance from} O(0,0) \nonumber \\
+z = r \cos \theta + r \sin \theta = r(\cos \theta + i \sin \theta)\\
+\\r = \lvert z \rvert = \sqrt{a^2 + b^2}\\
+\theta = \arctan \dfrac{b}{a}\\
+z = r(\cos \theta + i \sin \theta) = r \text{cis} \theta = r e^{i \theta}\\
+z_1 z_2 = (r_1 e^{i \theta_1})(r_2 e^{i \theta_2}) = r_1 r_2 e^{i(\theta_1 + \theta_2)}
+\end{align*}
+
+\subsection{De Moivre's Formula}
+
+\begin{equation*}
+	(r e^{i \theta})^n = r^n e^{i n \theta}
+\end{equation*}
+
+\newpage
+\section{Matrices}
+
+A matrix of order $m \times n$, over a field $\mathbb{F}$ is a table with $n$ rows and $m$ columns.
+
+\begin{equation*}
+A =
+\begin{matrix}
+
+a_{11} & a_{12} & \dots & a_{1n}\\	
+a_{21} & a_{22} & \dots & a_{2n}\\
+\vdots & \vdots & & \vdots\\
+a_{m1} & a_{m2} & \dots & a_{mn}\\
+\end{matrix}
+= (a_{ij})
+\end{equation*}
+
+\subsection{Row Vector}
+
+\emph{Row vector} is a matrix of order $1 \times m$\\
+
+\subsection{Column Vector}
+
+\emph{Column vector} is a matrix of order $n \times 1$\\
+
+\subsection{Multiplying a Matrix by a Scalar}
+
+\begin{align*}
+	\alpha A = (\alpha a_{ij})_{ij}
+\end{align*}
+
+\subsection{Addition of Matrices}
+
+Addition of matrices is defined only if the matrices are of same order.
+\begin{align*}
+	A + B = (a_{ij} + b_{ij})
+\end{align*}
+
+\subsection{Multiplication of Matrices}
+
+Multiplication of matrices is defined for only matrices of the type $A_{n \times m}$ and $B_{m \times p}$.\\
+\begin{align*}
+	C_{n \times p} = A_{n \times m} \cdot B_{m \times p}\\
+	c_{ik} = \sum_{j = 1}^{n} a_{ij} b_{jk}
+\end{align*}
+
+\end{document}

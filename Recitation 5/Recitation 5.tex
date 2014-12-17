@@ -1,0 +1,89 @@
+\documentclass[fleqn, a4paper, 12pt]{article}
+\setcounter{secnumdepth}{4}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathtools}
+\usepackage{datetime}
+\usepackage{ulem}
+\usepackage{enumerate}
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+\newcommand{\rank}{\mathrm{rk\,}}
+
+\newenvironment{amatrix}[1]{%
+	\left(\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+	\end{array}\right)
+}
+
+%\setlength{\mathindent}{0pt}
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}
+
+\newenvironment{solution}
+{\begin{proof}[Solution]\let\qed\relax}
+	{\end{proof}}
+
+%opening
+\title{Recitation 5}
+\author{}
+\date{\formatdate{26}{11}{2014}}
+
+\begin{document}
+
+\maketitle
+%\setlength{\mathindent}{0pt}
+
+\tableofcontents
+
+\newpage
+\section{}
+
+\begin{example}
+	Let $B = \{v_1, v_2, v_3, v_4\}$ be a base of a vector space $V$. If $C = \{v_1 + v_2, v_2 + v_3, v_3 + v_4, v_4 + v_1\}$ a base of $V$?
+	\begin{solution}
+		Let
+		\begin{align*}
+			\alpha (v_1 + v_2) + \beta (v_2 + v_3) + \gamma (v_3 + v_4) + \delta (v_4 + v_1) &= 0\\
+			\therefore v_1 (\delta + \alpha) + v_2 (\alpha + \beta) + v_3 (\beta + \gamma) + v_4 (\gamma + \delta) &= 0
+		\end{align*}
+		As $B = \{v_1, v_2, v_3, v_4\}$ is a basis of $V$,
+		\begin{align*}
+			\delta + \alpha &= 0\\
+			\alpha + \beta &= 0\\
+			\beta + \gamma &= 0\\
+			\gamma + \delta &= 0
+		\end{align*}
+		If 
+		\begin{align*}
+			\alpha &= -1 & \beta &= 1 & \gamma &= -1 & \delta &= 1
+		\end{align*}
+		the above system of equations hold.\\
+		Therefore, $C$ is linearly dependent. Therefore, it is not a base of $V$.	\end{solution}
+\end{example}
+
+
+\begin{definition}[Row space]
+	The row space of $A \in M_{n \times m}(\mathbb{F})$ is a subspace of $\mathbb{F}^m$ spanned by the rows of $A$. The row space of $A$ is denoted by $R(A)$.
+\end{definition}
+
+\begin{definition}[Column space]
+	The column space of $A \in M_{n \times m}(\mathbb{F})$ is a subspace of $\mathbb{F}^n$ spanned by the columns of $A$. The column space of $A$ is denoted by $C(A)$.
+\end{definition}
+
+\begin{definition}
+	The rank of $A \in M_{n \times m}(\mathbb{F})$ is defined as
+	\begin{enumerate}
+		\item the number of dependent variables in the REF of $A$
+		\item the number of non-zero rows on the REF of $A$
+	\end{enumerate}
+	\begin{equation*}
+		\rank(A) = \dim (C(A)) = \dim (R(A))
+	\end{equation*}
+\end{definition}
+\end{document}

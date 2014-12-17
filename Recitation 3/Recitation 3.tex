@@ -1,0 +1,97 @@
+\documentclass[fleqn]{article}
+\setcounter{secnumdepth}{4}
+\usepackage{amsmath, amssymb}
+\usepackage{mathtools}
+\usepackage{datetime}
+\usepackage{ulem}
+\usepackage{enumerate}
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+\newenvironment{amatrix}[1]{%
+	\left(\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+	\end{array}\right)
+}
+
+%\setlength{\mathindent}{0pt}
+
+%opening
+\title{Recitation 3}
+\author{}
+\date{\formatdate{12}{11}{2014}}
+
+\begin{document}
+
+\maketitle
+%\setlength{\mathindent}{0pt}
+
+\tableofcontents
+
+\newpage
+\section{Matrix Determinant}
+
+The determinant function maps each square matrix $A \in M_n (\mathbb{F})$ to a scalar $|A| = \det(A) \in \mathbb{F}$.\\ 
+For $n = 1$, we define $\det((a)) = a$.\\
+Let $A$ be a square matrix of dimensions $n \times n$. \\
+The $(i, j)$ minor of $A$, $M_{ij}$, is the determinant of the $(n-1) \times (n-1)$ matrix obtained by removing the $i^{\text{th}}$ row and $j^{\text{th}}$ column of $A$.\\
+The determinant can be developed using the $i^{\text{th}}$ row as
+\begin{equation*}
+	\det (A) = \sum_{k = 1}^{n} (-1)^{i+k} a_{ik} M_{ik}
+\end{equation*}
+The determinant can also be developed using the $j^{\text{th}}$ column as
+\begin{equation*}
+\det (A) = \sum_{k = 1}^{n} (-1)^{k+j} a_{kj} M_{kj}
+\end{equation*}
+
+\subsection{Properties}
+
+\subsubsection{If $B$ is formed by multiplying one row (or column) of $A$ by a scalar $c$, then, $\det (B) = c \cdot \det (A)$}
+
+\subsubsection{If $B$ is formed by replacing two rows (or columns) of $A$ by each other, then, $\det (B) = - \det (A)$}
+
+\subsubsection{If $B$ is formed by adding one row (or column), multiplied by a scalar, to another row (or column), then, $\det (B) = \det (A)$}
+
+\subsubsection{If $A$ has atleast one row or column having all elements equal to zero, then, $\det (A) = 0$.}
+
+\subsubsection{The determinant of an upper-triangular or lower-triangular matrix is equal to the product of the elements on the principal diagonal.}
+
+\subsubsection{$\det (A^T) = \det (A)$}
+
+\subsubsection{$\det (A \cdot B) = \det (A) \cdot \det (B)$}
+
+\subsubsection{Matrix $A$ is invertible iff $\det (A) \neq 0$. If so, $\det(A^{-1}) = \dfrac{1}{\det (A)}$}
+
+\subsection{Examples}
+
+\subsubsection{Let $A, B, P$ be invertible matrices, satisfying $B = P^{-1} A P$. Show that $|A^{-1} B| = 1$.}
+
+Multiplying the given equation by $A^{-1}$ from the left, 
+\begin{align*}
+	A^{-1} B &= A^{-1} P^{-1} A P \\
+	\therefore |A^{-1} B| &= |A^{-1} P^{-1} A P|\\
+	&= |A^{-1}| |P^{-1}| |A| |P| \\
+	&= \dfrac{|A| |P|}{|A| |P|} \\
+	&= 1
+\end{align*}
+
+\subsection{Cramer's Rule}
+
+Let $A \in M_n(\mathbb{F})$ and $b \in \mathbb{F}^n$. If $|A| \neq 0$, the system $A x = b$ has a unique solution, whose individual values are given by
+\begin{equation*}
+	x_j = \dfrac{|A_j|}{|A|}
+\end{equation*}
+where $A_j$ is the matrix formed by replacing the $j^{\text{th}}$ column of $A$ by the vector $b$.
+
+\section{Adjoint Matrix}
+
+A square matrix of dimensions $n \times n$ is said to be adjoint to $A \in M_n(\mathbb{F})$ if $(\text{adj}(A))_{ij} = (-1)^{i + j} M_{ji}$.
+\begin{equation*}
+	A \cdot \text{adj}(A) = |A| \cdot I
+\end{equation*}
+If $|A| \neq 0$
+\begin{equation*}
+	A^{-1} = \dfrac{\text{adj}(A)}{|A|}
+\end{equation*}
+
+\end{document}

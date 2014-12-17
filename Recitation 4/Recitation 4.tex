@@ -1,0 +1,166 @@
+\documentclass[fleqn, a4paper, 12pt]{article}
+\setcounter{secnumdepth}{4}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathtools}
+\usepackage{datetime}
+\usepackage{ulem}
+\usepackage{enumerate}
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+\newenvironment{amatrix}[1]{%
+	\left(\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+	\end{array}\right)
+}
+
+%\setlength{\mathindent}{0pt}
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}
+
+\newenvironment{solution}
+{\begin{proof}[Solution]\let\qed\relax}
+	{\end{proof}}
+
+%opening
+\title{Recitation 4}
+\author{}
+\date{\formatdate{19}{11}{2014}}
+
+\begin{document}
+
+\maketitle
+%\setlength{\mathindent}{0pt}
+
+\tableofcontents
+
+\newpage
+\section{Linear Vector Spaces}
+
+\subsection{Examples}
+
+\begin{enumerate}
+	\item $\mathbb{R}^n = \{(x_1, \dots, x_n) ; x_1, \dots, x_n \in \mathbb{R}\}$
+	\item $\mathbb{C}^n = \{(x_1, \dots, x_n) ; x_1, \dots, x_n \in \mathbb{C}\}$
+	\item $C([0, 1]) = \{f:[0,1] \rightarrow \mathbb{R} ; f \text{ is continuous}\}$\\
+	where $(f+g)(x) = f(x) + g(x), (\alpha f)(x) = \alpha f(x) ; \alpha \in \mathbb{R}, f \in C([0, 1])$
+	\item Matrices over $\mathbb{F}$ with matrix addition and scalar multiplication as per standard definitions.
+	\item $\mathbb{R}_n[x] = \{p(x) = p_0 + p_1 x + \dots + p_n x^n ; p_0, \dots, p_n \in \mathbb{R}\}$\\
+	where $(p+q)(x) = (p_0 + q_0) + \dots + (p_n + q_n) x^n, (\alpha p)(x) = \alpha (p(x)) = (\alpha p_0) + \dots + (\alpha p_n) x^n$
+\end{enumerate}
+
+\subsection{Exercises}
+
+\begin{example}
+	Is
+	\begin{equation*}
+		W_1 = \{(a, b, c) \in \mathbb{R}^3 ; a + b + c = 0\}
+	\end{equation*}
+	a subspace of $\mathbb{R}^3$?
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		0 + 0 + 0 = 0 &\Rightarrow (0, 0, 0) \in W_1
+	\end{align*}
+	\begin{align*}
+		v, u &\in W_1\\
+		\therefore v_1 + v_2 + v_3 = u_1 + u_2 + u_3 &= 0 \\
+		\therefore v_1 + u_1 + v_2 + u_2 + v_3 + u_2 &= 0 \\
+		\therefore v+u = (v_1 + u_1, v_2 + u_2, v_3 + u_3) &\in W_1
+	\end{align*}
+	\begin{align*}
+		\alpha &\in \mathbb{R} \\
+		v = (v_1, v_2, v_3) &\in W_1 \\
+		\therefore v_1 + v_2 + v_3 &= 0 \\
+		\therefore \alpha v &= (\alpha v_1, \alpha v_2, \alpha v_3) \\
+		\alpha v_1 + \alpha v_2 + \alpha v_3 &= 0 \\
+		\therefore \alpha v &\in \mathbb{R}
+	\end{align*}
+	\end{solution}
+
+	\begin{example}
+		Is
+		\begin{equation*}
+		W_2 = \{(a, b, c) \in \mathbb{R}^3 ; a \geq 0\}
+		\end{equation*}
+		a subspace of $\mathbb{R}^3$?
+	\end{example}
+
+	\begin{solution}
+		$W_2$ is not a linear subspace of $\mathbb{R}^3$, as for $\alpha = -1, v = (1, 0, 0)$, $\alpha v = (-1, 0, 0) \notin W_2$
+	\end{solution}
+	
+	\begin{example}
+		Is
+		\begin{equation*}
+		W_3 = \{p(x) \in \mathbb{R}_3[x] ; p(0) = 1\}
+		\end{equation*}
+		a subspace of $\mathbb{R}^3$?
+	\end{example}
+	
+	\begin{solution}
+		\begin{align*}
+			0(0) = 0 &\neq 1 \\
+			\therefore 0 &\notin W_3
+		\end{align*}
+		Hence, $W_3$ is not a linear subspace of $R_3[x]$.
+	\end{solution}
+	
+	\begin{example}
+		Show that the solutions space of homogeneous linear system is a linear subspace.
+	\end{example}
+
+	\begin{solution}
+		Let $A$ be the matrix representing the homogeneous matrix, with $n$ variables over $\mathbb{F}$. 
+		\begin{equation*}
+			N(A) = \{x ; x \in \mathbb{F}^n, Ax = 0\}
+		\end{equation*}
+		\begin{align*}
+			x = 0 &\in N(A) \\
+			\therefore A \cdot 0 &= 0	\\
+			\therefore 0 &\in N(A)
+		\end{align*}
+		\begin{align*}
+			x, y &\in N(A) \\
+			A x = A y &= 0 \\
+			\therefore A(x + y) &= A x + A y = 0 \\
+			\therefore x + y &\in N(A)
+		\end{align*}
+			\begin{align*}
+			\lambda &\in \mathbb{F} \\
+			x &\in N(A) \\
+			\therefore A x = 0\\
+			\therefore A(\lambda x) &= \lambda (A x) \\
+			&= \lambda \cdot 0 \\
+			&= 0 \\
+			\therefore \lambda x &\in N(A)
+			\end{align*}
+			Therefore, $N(A)$ is a linear subspace.
+	\end{solution}
+
+\subsection{Linear Combinations}
+
+Let $V$ be a linear vector space over $\mathbb{F}$ and $K \subset V$ be a finite set of vectors from $V$.
+\begin{equation*}
+	k = \{v_1, \dots, v_n\}
+\end{equation*}
+Every expression of the form 
+\begin{equation*}
+	\sum_{i=1}^{n} \alpha_i v_i = 0 ; \alpha_1, \dots, \alpha_n \in \mathbb{F}
+\end{equation*}
+is called a linear combination of $K$.\\
+$K$ is said to be linearly dependant if $\exists \alpha_1, \dots, \alpha_n$, not all zeros, s.t. 
+\begin{equation*}
+	\sum_{i=1}^{n} \alpha_i v_i = 0
+\end{equation*}
+otherwise, $K$ is said to be linearly dependant, i.e.
+\begin{equation*}
+	\alpha_1 = \dots = \alpha_n = 0
+\end{equation*}
+\end{document}

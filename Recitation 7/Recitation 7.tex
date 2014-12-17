@@ -1,0 +1,164 @@
+\documentclass[fleqn, a4paper, 12pt]{article}
+\setcounter{secnumdepth}{4}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathtools, xfrac}
+\usepackage{datetime}
+\usepackage{ulem}
+\usepackage{enumerate}
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+\newcommand{\rank}{\mathrm{rk\,}}
+
+\newenvironment{amatrix}[1]{%
+	\left(\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+	\end{array}\right)
+}
+
+%\setlength{\mathindent}{0pt}
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}
+
+\newenvironment{solution}
+{\begin{proof}[Solution]\let\qed\relax}
+	{\end{proof}}
+
+\DeclareMathOperator{\vspan}{\mathrm{span}} %declares span operator for matrices
+
+%opening
+\title{Recitation 7}
+\author{}
+\date{\formatdate{10}{12}{2014}}
+
+\begin{document}
+
+\maketitle
+%\setlength{\mathindent}{0pt}
+
+\tableofcontents
+
+\newpage
+\section{Transformation matrices}
+
+\begin{example}
+	$B$ and $E$ are bases of $V$, which is the set of all $2 \times 2$ matrices.
+	\begin{align*}
+		B &=
+		\left\lbrace
+		\begin{pmatrix}
+			1 & 0\\
+			0 & 1\\
+		\end{pmatrix}
+		,
+		\begin{pmatrix}
+			0 & 1\\
+			0 & 0\\
+		\end{pmatrix}
+		,
+		\begin{pmatrix}
+			1 & 0\\
+			0 & -1\\
+		\end{pmatrix}
+		,
+		\begin{pmatrix}
+			0 & 0\\
+			1 & 0\\
+		\end{pmatrix}
+		\right\rbrace\\
+		E &=
+		\left\lbrace
+		\begin{pmatrix}
+		1 & 0\\
+		0 & 0\\
+		\end{pmatrix}
+		,
+		\begin{pmatrix}
+		0 & 1\\
+		0 & 0\\
+		\end{pmatrix}
+		,
+		\begin{pmatrix}
+		0 & 0\\
+		1 & 0\\
+		\end{pmatrix}
+		,
+		\begin{pmatrix}
+		0 & 0\\
+		0 & 1\\
+		\end{pmatrix}
+		\right\rbrace
+	\end{align*}
+	Find $[E]_B$ which holds $[m]_B = [E]_B [m]_E$, $\forall m \in V$.
+\end{example}
+
+\begin{solution}
+	For ease of calculation, $[E]_B$ can be written as $[B]_E^{-1}$.
+	\begin{align*}
+		[E]_B &= [B]_E^{-1}\\
+		&= 
+		\begin{pmatrix}
+			\left[
+				\begin{pmatrix}
+					1 & 0\\
+					0 & 1\\
+				\end{pmatrix}
+			\right]_E
+			&
+			\left[
+				\begin{pmatrix}
+					0 & 1\\
+					0 & 0\\
+				\end{pmatrix}
+			\right]_E
+			&
+			\left[
+				\begin{pmatrix}
+					1 & 0\\
+					0 & -1\\
+				\end{pmatrix}
+			\right]_E
+			&
+			\left[
+				\begin{pmatrix}
+					0 & 0\\
+					1 & 0\\
+				\end{pmatrix}
+			\right]_E
+			\\
+		\end{pmatrix}^{-1}\\
+		&=
+		\begin{pmatrix}
+			1 & 0 & 1 & 0\\
+			0 & 1 & 0 & 0\\
+			0 & 0 & 0 & 1\\
+			1 & 0 & -1 & 0\\
+		\end{pmatrix}^{-1}\\
+		&= 
+		\begin{pmatrix}
+			\sfrac{1}{2} & 0 & 0 & \sfrac{1}{2}\\
+			0 & 1 & 0 & 0\\
+			\sfrac{1}{2} & 0 & 0 & - \sfrac{1}{2}\\
+			0 & 0 & 1 & 0\\
+		\end{pmatrix}
+	\end{align*}
+\end{solution}
+
+\section{Completing to a Basis}
+
+\begin{definition}
+	Let $V$ be a $n$ dimensional vector space. Let $W \subset V$ be a subset of $V$ and let its basis $B$ have $m < n$ vectors.\\
+	We can find a set $D$ having $n - m$ vectors, s.t. $B \cup D$ will be a basis of $V$.
+\end{definition}
+The vectors in $D$ will be linearly independent, and $\vspan(B) \cap \vspan(D) = \{0\}$.
+
+\subsection{Method}
+
+In order to find the set $D$, we will write a matrix that has the vectors of $B$ as its rows, and will add row vectors having all zeroes except in the positions corresponding to the free variables, which have 1.
+
+\end{document}

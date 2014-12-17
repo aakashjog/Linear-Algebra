@@ -1,0 +1,231 @@
+\documentclass[fleqn, a4paper, 12pt]{article}
+\setcounter{secnumdepth}{4}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathtools, xfrac}
+\usepackage{datetime}
+\usepackage{ulem}
+\usepackage{enumerate}
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+\newcommand{\rank}{\mathrm{rk\,}}
+
+\newcommand{\R}{\mathrm{R}}
+
+\newcommand{\C}{\mathrm{C}}
+
+\newenvironment{amatrix}[1]{%
+	\left(\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+	\end{array}\right)
+}
+
+%\setlength{\mathindent}{0pt}
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}
+
+\newenvironment{solution}
+{\begin{proof}[Solution]\let\qed\relax}
+	{\end{proof}}
+
+\DeclareMathOperator{\vspan}{\mathrm{span}} %declares span operator for matrices
+
+%opening
+\title{Recitation 8}
+\author{}
+\date{\formatdate{17}{12}{2014}}
+
+\begin{document}
+
+\maketitle
+%\setlength{\mathindent}{0pt}
+
+\tableofcontents
+
+\newpage
+\section{Linear Maps}
+
+\begin{example}
+	Is the following map linear?
+	\begin{align*}
+		T &: \mathbb{R}^3 \to \mathbb{R}^2 &;\quad T((x, y, z)) = (x+2y, 2x+z)
+	\end{align*}
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		T((x_1, y_1, z_1) + (x_2, y_2, z_2)) &= T((x_1 + x_2, y_1 + y_2, z_1 + z_2))\\
+		&= (x_1 + x_2 + 2y_1 + 2y_2, 2x_1 + 2x_2, z_1, z_2)\\
+		&= (x_1 + 2y_1, 2x_1 + z_1) + (x_2 + 2y_2, 2x_2 + z_2)\\
+		&= T((x_1, y_1, z_1)) + T((x_2, y_2, z_2))
+	\end{align*}
+	\begin{align*}
+		T(\alpha (x, y, z)) &= T((\alpha x, \alpha y, \alpha z))\\
+		&= (\alpha x + 2 \alpha y, 2 \alpha x + \alpha z)\\
+		&= \alpha T((x, y, z))
+	\end{align*}
+\end{solution}
+
+\begin{example}
+	Is the following map linear?
+	\begin{align*}
+		T : \mathbb{R}^3 \to \mathbb{R}^2 \quad; T((x, y, z)) = (xy, x^2)
+	\end{align*}
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		T(-1(0, 0, 1)) &= (0,1)\\
+		-1 \cdot T((0, 0, 1)) &= (0, -1)\\
+		\therefore T(-1(0, 0, 1)) &\neq -1 \cdot T((0, 0, 1))
+	\end{align*}
+	Hence the map is not linear.
+\end{solution}
+
+\begin{theorem}
+	If $\{u_1, \dots, u_n\}$ is a basis of $U$, we can define a linear map $T : U \to V$ using the images of the elements of the basis, i.e. $\{T(u_1), \dots, T(u_n)\}$.
+\end{theorem}
+
+\begin{example}
+	Find, a linear map $T$, if it exists, such that is satisfies the given conditions.
+	\begin{align*}
+		T &: \mathbb{R}^3 \to \mathbb{R}^3\\
+		T
+		\left(
+			\begin{pmatrix}
+				1\\
+				1\\
+				1\\
+			\end{pmatrix}
+		\right)
+		&=
+		\begin{pmatrix}
+			3\\
+			0\\
+			0\\
+		\end{pmatrix}\\
+		T
+		\left(
+			\begin{pmatrix}
+			2\\
+			-1\\
+			2\\
+			\end{pmatrix}
+		\right)
+		&=
+		\begin{pmatrix}
+			0\\
+			0\\
+			0\\
+		\end{pmatrix}\\
+		T
+		\left(
+			\begin{pmatrix}
+				1\\
+				0\\
+				0\\
+			\end{pmatrix}
+		\right)
+		&=
+		\begin{pmatrix}
+			1\\
+			0\\
+			0\\
+		\end{pmatrix}\\
+	\end{align*}
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		\left\lbrace
+			u_1 =
+			\begin{pmatrix}
+				1\\
+				1\\
+				1\\
+			\end{pmatrix}
+			,
+			u_2 =
+			\begin{pmatrix}
+				2\\
+				-1\\
+				2\\
+			\end{pmatrix}
+			,
+			u_3 =
+			\begin{pmatrix}
+				1\\
+				0\\
+				0\\
+			\end{pmatrix}
+		\right\rbrace
+	\end{align*}
+	is linearly independent, and $\dim \mathbb{R}^3 = 3$. Therefore, the above set is a basis of $\mathbb{R}^3$.\\
+	Therefore, $T$ exists.
+	\begin{align*}
+		T
+		\left(
+			\begin{pmatrix}
+				1\\
+				0\\
+				0\\
+			\end{pmatrix}
+		\right)
+		&= 
+		\begin{pmatrix}
+			1\\
+			0\\
+			0\\
+		\end{pmatrix}\\
+		T
+		\left(
+			\begin{pmatrix}
+				0\\
+				1\\
+				0\\
+			\end{pmatrix}
+		\right)
+		&= 
+		\begin{pmatrix}
+			2\\
+			0\\
+			0\\
+		\end{pmatrix}\\
+		T
+		\left(
+			\begin{pmatrix}
+				0\\
+				1\\
+				0\\
+			\end{pmatrix}
+		\right)
+		&= 
+		\begin{pmatrix}
+			0\\
+			0\\
+			0\\
+		\end{pmatrix}\\
+		\therefore T
+		\left(
+			\begin{pmatrix}
+				x\\
+				y\\
+				z\\
+			\end{pmatrix}
+		\right)
+		&= T(x e_1 + y e_2 + z e_3)\\
+		&= 
+		\begin{pmatrix}
+			x + 2y\\
+			0\\
+			0\\
+		\end{pmatrix}
+	\end{align*}
+\end{solution}
+
+\end{document}

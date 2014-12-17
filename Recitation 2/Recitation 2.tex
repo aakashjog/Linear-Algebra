@@ -1,0 +1,243 @@
+\documentclass[fleqn]{article}
+\setcounter{secnumdepth}{4}
+\usepackage{amsmath, amssymb}
+\usepackage{mathtools}
+\usepackage{datetime}
+\usepackage{ulem}
+\usepackage{enumerate}
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+\newenvironment{amatrix}[1]{%
+	\left(\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+	\end{array}\right)
+}
+
+\setlength{\mathindent}{0pt}
+
+%opening
+\title{Recitation 2}
+\author{}
+\date{\formatdate{5}{11}{2014}}
+
+\begin{document}
+
+\maketitle
+\setlength{\mathindent}{0pt}
+
+\tableofcontents
+
+\newpage
+\section{Row Echelon Form and Soving Systems of Linear Equations}
+
+\subsection{Solve the following system of linear equations}
+
+\begin{align*}
+	x + 2y - 3z &= 4\\
+	x + 3y + x &= 11\\
+	2x + 5y - 4z &= 12
+\end{align*}
+
+\paragraph*{Solution:\\}
+
+\begin{align*}
+	A &= 
+	\begin{pmatrix}
+		1 & 2 & -3 \\
+		1 & 3 & 1 \\
+		2 & 5 & -4 \\
+	\end{pmatrix}\\
+	x &= 
+	\begin{pmatrix}
+		x\\
+		y\\
+		z\\
+	\end{pmatrix}\\
+	b &= 
+	\begin{pmatrix}
+		4\\
+		11\\
+		13\\
+	\end{pmatrix}
+\end{align*}
+
+$Ax = b$ is the matrix form of the system.\\
+The augmented matrix is $(A|b)$.
+\begin{equation*}
+	(A|b) = 
+	\begin{amatrix}{3}
+	1 & 2 & -3 & 4\\
+	1 & 3 & 1 & 11\\
+	2 & 5 & -4 & 13\\
+	\end{amatrix}
+\end{equation*}
+We will try to bring the augmented matrix into reduced REF, i.e. of the form 
+$\begin{amatrix}{3}
+	1 & 0 & 0 & b_1\\
+	0 & 1 & 0 & b_2\\
+	0 & 0 & 1 & b_3\\
+\end{amatrix}$
+In order to transform the matrix to \emph{Reduced REF}. \\
+We can do \emph{one} of the following operations at each time.
+\begin{enumerate}
+	\item $R_i \rightarrow c R_i$ \label{row }
+	\item $R_i \leftrightarrow R_j$
+	\item $R_i \rightarrow R_i + c R_j$
+\end{enumerate}
+These elementary operations preserve the set of elements.
+
+\subsection{Gaussian Eliminiation}
+
+\begin{enumerate}
+	\item We will make sure that in the upper left corner we have an element different from $0$. If we don't, we will switch the $1^{\text{st}}$ row with another row. \\
+	If all elements in column 1 are zeros, we will ignore this column and consider the next one.
+	\item We will multiply the first row with a constant such that the first element will be $1$
+	\item We will cancel all other elements in the first column, except the one in the first row, by elementary row operation $R_i \rightarrow R_i + c R_j$
+	\item We will repeat the above steps, ignoring the last row and last column, until we get an upper-triangular matrix.
+\end{enumerate}
+
+\subsection{Find the solutions of }
+
+\subsubsection{}
+
+\begin{align*}
+	x + 2y - 3z &= -1\\
+	3x - y + 2z &= 7\\
+	5x + 3y - 4z &= 2\\
+\end{align*}
+
+\paragraph*{Solution:\\}
+$
+	\begin{amatrix}{3}
+		1 & 2 & -3 & -1\\
+		3 & -1 & 2 & 7\\
+		5 & 3 & -4 & 2\\
+	\end{amatrix}
+	\xrightarrow [R_3 \rightarrow R_3 - 5 R_1] {R_2 \rightarrow R_1 - 3 R_1}
+	\begin{amatrix}{3}
+		1 & 2 & -3 & -1\\
+		0 & -7 & 11 & 10\\
+		0 & -7 & 11 & 7\\
+	\end{amatrix}
+	\xrightarrow{R_2 \rightarrow -\frac{1}{7} R_2}
+	\begin{amatrix}{3}
+		1 & 2 & -3 & -1\\
+		0 & 1 & -\dfrac{11}{7} & -\dfrac{10}{7}\\
+		0 & -7 & 11 & 7\\
+	\end{amatrix}
+	\xrightarrow{R_3 \rightarrow R_3 + 7 R_2}
+	\begin{amatrix}{3}
+		1 & 2 & -3 & -1\\
+		0 & 1 & -\dfrac{11}{7} & -\dfrac{10}{7}\\
+		0 & 0 & 0 & -3\\
+	\end{amatrix}
+$
+\begin{equation*}
+	0 \neq -3 \Rightarrow \text{No solution}
+\end{equation*}
+
+\subsubsection{}
+
+\begin{align*}
+x + 2y - 3z &= 6\\
+2x - y + 4z &= 2\\
+4x + 3y - 2z &= 14
+\end{align*}
+
+\paragraph*{Solution:\\}
+
+$
+\begin{amatrix}{3}
+	1 & 2 & -3 & 6 \\
+	2 & -1 & 4 & 2\\
+	4 & 3 & -2 & 14\\
+\end{amatrix}
+\xrightarrow[R_3 \rightarrow R_3 - 4 R_1]{R_2 \rightarrow R_2 - 2 R_1}
+\begin{amatrix}{3}
+	1 & 2 & -3 & 6\\
+	0 & -5 & 10 & -10\\
+	0 & -5 & 10 & -10\\
+\end{amatrix}
+\xrightarrow{R_2 \rightarrow -\frac{1}{5} R_2}
+\begin{amatrix}{3}
+	1 & 2 & -3 & 6\\
+	0 & 1 & -2 & 2\\
+	0 & -5 & 10 & -10\\
+\end{amatrix}
+\xrightarrow{R_3 \rightarrow R_3 + 5 R_2}
+\begin{amatrix}{3}
+	1 & 2 & -3 & 6\\
+	0 & 1 & -2 & 2\\
+	0 & 0 & 0 & 0 \\
+\end{amatrix}
+\xrightarrow{R_1 \rightarrow R_1 - 2 R_2}
+\begin{amatrix}{3}
+	1 & 0 & 1 & 2\\
+	0 & 1 & -2 & 2\\
+	0 & 0 & 0 & 0\\
+\end{amatrix}
+$
+\begin{align*}
+x + z &= 2\\
+y - 2z &=2\\
+\end{align*}
+$z$ is a free variable and $x,y$ are dependant variables.
+\begin{equation*}
+\therefore x = 
+\begin{pmatrix}
+	2 - t\\
+	2t + 2\\
+	t\\
+\end{pmatrix}
+\end{equation*}
+Therefore, the system of equations has infinite number of solutions.
+
+\subsection{Check if the following matrices are invertible and find the inverse if it exists.}
+
+\subsubsection{}
+
+\begin{equation*}
+	\begin{pmatrix*}
+		1 & 0 & 2\\
+		2 & -1 & 3\\
+		4 & 1 & 8\\
+	\end{pmatrix*}
+\end{equation*}
+
+\paragraph{Solution:\\}
+
+$
+\begin{pmatrix}
+	1 & 0 & 2 & 1 & 0 & 0\\
+	2 & -1 & 3 & 0 & 1 & 0\\
+	4 & 1 & 8 & 0 & 0 & 1\\
+\end{pmatrix}
+\xrightarrow[R_3 \rightarrow R_3 - 4 R_1]{R_2 \rightarrow R_2 - 2 R_1}
+\begin{pmatrix}
+	1 & 0 & 2 & 1 & 0 & 0\\
+	0 & 1 & 1 & 2 & 1 & 0\\
+	0 & 1 & 0 & -4 & 0 & 1\\
+\end{pmatrix}
+\xrightarrow{R_3 \rightarrow R_3 - R_2}
+\begin{pmatrix}
+	1 & 0 & 2 & 1 & 0 & 0\\
+	0 & 1 & 1 & 2 & -1 & 0\\
+	0 & 0 & 0 & 6 & -1 & -1\\
+\end{pmatrix}
+\xrightarrow[R_2 \rightarrow R_2 - R_3]{R_1 \rightarrow R_1 - 2 R_3}
+\begin{pmatrix}
+	1 & 0 & 0 & -11 & 2 & 2\\
+	0 & 1 & 0 & -4 & 0 & 1\\
+	0 & 0 & 1 & 6 & -1 & -1\\
+\end{pmatrix}
+$
+
+\subsection{Invertible Matrices}
+
+A square matrix is invertible iff its reduced REF is $I$.\\
+\begin{align*}
+	(A|I) &\xrightarrow{\text{Gaussian Elimination}} (I|B)\\
+	\therefore B \cdot A &= I \\
+	\therefore B & = A^{-1}
+\end{align*}
+
+\end{document}
