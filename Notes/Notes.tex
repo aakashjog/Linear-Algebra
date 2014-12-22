@@ -10,6 +10,7 @@
 \usepackage{ulem}
 \usepackage{tikz}
 \usepackage{enumerate, enumitem}
+\usepackage{cancel}
 %\usepackage{background}
 \setcounter{secnumdepth}{4}
 
@@ -921,7 +922,7 @@ $
 
 \subsection{Column Equivalence}
 
-\begin{definition}
+\begin{definition}[Elementary column operations, column equivalence, column echelon form, column space and column rank]
 	If $A$ is a $m \times n$ matrix, we can define elementary column operations, column equivalence ($A \stackrel{C}{\sim}$) and column echelon form (CEF), the column space of $A$ ($\C(A)$), and the column rank of $A$ ($\mathrm{cr}(A)$).
 \end{definition}
 
@@ -2329,7 +2330,7 @@ Let $A$ be a $m \times n$ matrix, and let $A_{ij}$ be the matrix obtained by rem
 
 \subsection{Determinant Rank}
 
-\begin{definition}
+\begin{definition}[Determinant rank]
 	Let $A$ be any $m \times n$ matrix. Consider all square sub-matrices of $A$ and compute their determinants. If there is an $r \times r$ sub-matrix of $A$ s.t. its determinant is non-zero, but the determinants of all $(r + 1) \times (r + 1)$ sub-matrices of $A$ are zero, then, $r$ is called the determinant rank of $A$.
 \end{definition}
 
@@ -2341,7 +2342,7 @@ Let $A$ be a $m \times n$ matrix, and let $A_{ij}$ be the matrix obtained by rem
 
 \subsection{Definition}
 
-\begin{definition}
+\begin{definition}[Linear map]
 	Let $V$ and $W$ be vector spaces over the same field $\mathbb{F}$. 
 	\begin{equation*}
 		\varphi : V \to W
@@ -2362,7 +2363,7 @@ Let $A$ be a $m \times n$ matrix, and let $A_{ij}$ be the matrix obtained by rem
 
 \subsection{Matrix of a Linear Map}
 
-\begin{definition}
+\begin{definition}[Matrix of a linear map]
 	Let $\varphi : V \to W$ be a linear map.\\
 	Let
 	\begin{align*}
@@ -2501,7 +2502,7 @@ Let $A$ be a $m \times n$ matrix, and let $A_{ij}$ be the matrix obtained by rem
 
 \subsection{Operations on Linear Maps}
 
-\begin{definition}
+\begin{definition}[Operations on linear maps]
 	Let
 	\begin{align*}
 		\varphi : V \to W\\
@@ -2519,7 +2520,7 @@ Let $A$ be a $m \times n$ matrix, and let $A_{ij}$ be the matrix obtained by rem
 	\end{align*}
 \end{definition}
 
-\begin{definition}
+\begin{definition}[Composed map]
 	Let
 	\begin{align*}
 		\varphi : V \to W\\
@@ -2559,7 +2560,7 @@ Let $A$ be a $m \times n$ matrix, and let $A_{ij}$ be the matrix obtained by rem
 
 \subsection{Kernel and Image}
 
-\begin{definition}
+\begin{definition}[Kernel and image]
 	Let $\varphi : V \to W$ be a linear map.
 	\begin{align*}
 		\ker \varphi &\doteq \{v \in V : \varphi (v) = \mathbb{O}\}\\
@@ -2747,7 +2748,7 @@ Let $A$ be a $m \times n$ matrix, and let $A_{ij}$ be the matrix obtained by rem
 
 \section{Definition}
 
-\begin{definition}
+\begin{definition}[Linear operator]
 	A linear operator or transformation
 	\begin{equation*}
 		T : V \to V
@@ -2767,7 +2768,7 @@ Both these are $n \times n$ matrices, where $n = \dim V$. Let $P$ denote the tra
 	\tilde{A} = P^{-1} A P
 \end{equation*}
 
-\begin{definition}
+\begin{definition}[Similarity of matrices]
 	Let $A$, $\tilde{A}$ be $n \times n$ matrices. $A$ is said to be similar to $\tilde{A}$, denoted as $A \sim \tilde{A}$, if there exists an invertible $n \times n$ matrix $P$, s.t. $\tilde{A} = P^{-1} A P$.
 \end{definition}
 
@@ -2843,12 +2844,124 @@ Given an operator $T : V \to V$, decide whether or not there exists a basis $B$ 
 	\end{align*}
 \end{proof}
 
-\begin{theorem}[General criterion for diagonalization]
-	Let $A$ be a $n \times n$ matrix. $A$ is diagonalizable if and only if there exists a basis $B = \{v_1, \dots, v_n\}$ of $\mathbb{F}^n$ consisting of eigenvectors of $A$. In such a case, the diagonal entries of $D$ are eigenvalues of $A$, and $B$ can be chosen as consisting of the columns of $P$, where $P^{-1} A P = D$.
+\begin{theorem}[General criterion for diagonalization]\label{general criterion for diagonalization}
+	Let $A$ be a $n \times n$ matrix. $A$ is diagonalizable if and only if there exists a basis $B = \{v_1, \dots, v_n\}$ of $\mathbb{F}^n$ consisting of eigenvectors of $A$. In such a case, the diagonal entries of $D$ are eigenvalues of $A$, and $B$ can be chosen as consisting of the columns of $P$, where $P^{-1} A P = D$. 
 \end{theorem}
 
 \begin{corollary}
 	If $A$ has no eigenvalues, then it is not diagonalizable.
 \end{corollary}
+
+\begin{theorem}
+	Let $\lambda_1, \dots, \lambda_s$ be pairwise distinct eigenvalues of an $n \times n$ matrix $A$, i.e. $\forall i \neq j, \lambda_i \neq \lambda_j$. Let $v_1, \dots, v_s$ be eigenvalues of $A$ corresponding to $\lambda_1, \dots, \lambda_s$. Then the set $S = \{v_1, \dots, v_s\}$ is linearly independent.
+\end{theorem}
+
+\begin{proof}
+	If possible, let $S$ be linearly dependent. Let $S'$ denote a linearly dependent subset of $S$ of smallest possible size, say $l$. WLG, let $S' = \{v_1, \dots, v_l\}$.\\
+	Hence, $\exists \alpha_1, \dots, \alpha_l \in \mathbb{F}$, s.t.
+	\begin{align}
+		\alpha_1 v_1 + \dots + \alpha_l v_l &= \mathbb{O}\label{equation 1}\\
+		\intertext{Multiplying \eqref{equation 1} on both sides by $A$,}
+		\alpha_1 A v_1 + \dots + \alpha_l A v_l &= \mathbb{O}\\
+		\alpha_1 \lambda_1 v_1 + \dots + \alpha_l \lambda_l v_l &= \mathbb{O}\label{equation 2}\\
+		\intertext{Multiplying \eqref{equation 1} on both sides by $\lambda_l$}
+		\alpha_1 \lambda_1 v_1 + \dots + \alpha_l A v_l &= \mathbb{O}\label{equation 3}
+		\intertext{Subtracting \eqref{equation 3} from \eqref{equation 2}}
+		\alpha_1 (\lambda_1 - \lambda_l) v_1 + \dots + \alpha_{l - 1} (\lambda_{l - 1} - \lambda_l) v_{l - 1}  &= \mathbb{O}
+	\end{align}
+	Solving, 
+	\begin{equation*}
+		\alpha_1 = \alpha_l = 0
+	\end{equation*}
+	This is a contradiction.
+\end{proof}
+
+\begin{corollary}
+	Let $A_{n \times n}$ have $n$ distinct eigenvalues. Then, $A$ is diagonalizable.
+\end{corollary}
+
+\begin{proof}
+	Let $v_1, \dots, v_n$ be eigenvectors of $A$, corresponding to $\lambda_1, \dots, \lambda_n$. As they are distinct, by the above theorem, they are linearly independent. The number of elements in the set $\{v_1, \dots, v_n\}$ is $n$. Therefore, the set is a basis. Hence, according to \nameref{general criterion for diagonalization}, $A$ is diagonalizable.
+\end{proof}
+
+\section{Characteristic Polynomial}
+
+\begin{definition}[Characteristic Polynomial]
+	Let $A$ be any $n \times n$ matrix.
+	\begin{equation*}
+		p_A (x) = \det (x I_n - A)
+	\end{equation*}
+	is called the characteristic polynomial.
+\end{definition}
+
+\subsection{Properties}
+
+\begin{enumerate}
+	\item The roots of $p_A (x)$ are the eigenvalues of $A$.
+	\item $\deg p_A (x) = n$
+	\item The coefficient of $x^n$ is 1.
+	\item The constant term is $\alpha_0 = (-1)^n \det (A)$.
+	\item The coefficient of $x^{n - 1}$ is $\alpha_{n - 1} = -(a_{11} + \dots + a_{nn})$.
+\end{enumerate}
+
+\begin{theorem}
+	If $A \sim A'$, then $p_A (x) = p_{A'} (x)$.
+\end{theorem}
+
+\begin{proof}
+	\begin{align*}
+		A' &= P^{-1} A P\\
+		\therefore p_{A'} (x) &= \det (xI - A')\\
+		&= \det (xI - P^{-1} A P)\\
+		&= \det (P^{-1} (xI) P - P^{-1} A P)\\
+		&= \det (P^{-1}(xI - A) P)\\
+		&= \cancel{\det(P^{-1})} \det(xI - A) \cancel{\det(P)}\\
+		&= \det(xI - A)\\
+		&= p_A (x)
+	\end{align*}
+\end{proof}
+
+\begin{definition}[Alternative definition of characteristic polynomial]
+	Let $T : V \to V$ be a linear operator. The characteristic polynomial of $T$ is defined as the characteristic polynomial of any representing matrix of $T$.
+\end{definition}
+
+\begin{theorem}
+	Let $f(x)$, $g(x)$ be polynomials. Then $\exists q(x), r(x)$, s.t.
+	\begin{equation*}
+		f(x) = g(x) q(x) + r(x)
+	\end{equation*}
+	and $\deg r(x) < \deg g(x)$.
+\end{theorem}
+
+\begin{definition}[Remainder]
+	If
+	\begin{equation*}
+		f(x) = g(x) q(x) + r(x)
+	\end{equation*}
+	$r(x)$ is called the remainder after division of $f(x)$ by $g(x)$. If $r(x) = \mathbb{O}$, $f(x)$ is said to be divisible by $g(x)$.
+\end{definition}
+
+\begin{corollary}
+	Let $f(x)$ be a polynomial and let $\alpha$ be a root of $f$. Then $f(x)$ is divisible by $(x - \alpha)$.
+\end{corollary}
+
+\begin{definition}[Algebraic multiplicity of eigenvalue]
+	Let $A$ be a $n \times n$ matrix, and let $p_A (x)$ be the characteristic polynomial of $A$, and let $\lambda$ be an eigenvalue of $A$. The algebraic multiplicity of $\lambda$ is defined as the largest possible integer value of $k$ such that $p_A(x)$ is divisible by $(x - \lambda)^k$.
+\end{definition}
+
+\begin{definition}[Eigenspace]
+	Let $A$ be a $n \times n$ matrix, and let $\lambda$ be an eigenvalue of $A$. The eigenspace of $A$ corresponding to $\lambda$ is defined as
+	\begin{equation*}
+		V_{\lambda} = \{v \in \mathbb{F}^n ; A v = \lambda v \}
+	\end{equation*} 
+\end{definition}
+
+\begin{theorem}
+	An eigenspace of a matrix is a subspace of the field over which the matrix is defined.
+\end{theorem}
+
+\begin{definition}[Geometric multiplicity of eigenvalue]
+	$m = \dim V_{\lambda}$ is called the geometric multiplicity of $\lambda$.
+\end{definition}
 
 \end{document}
