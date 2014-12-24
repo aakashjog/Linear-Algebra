@@ -3,7 +3,7 @@
 %correct overfull hboxes
 
 \date{}
-\documentclass[fleqn, a4paper, 12pt]{article}
+\documentclass[fleqn, a4paper, 12pt, draft]{article}
 \usepackage{amsmath, amssymb, amsthm, thmtools, amsfonts}
 \usepackage{datetime}
 \usepackage{hyperref}
@@ -2945,7 +2945,7 @@ Given an operator $T : V \to V$, decide whether or not there exists a basis $B$ 
 	Let $f(x)$ be a polynomial and let $\alpha$ be a root of $f$. Then $f(x)$ is divisible by $(x - \alpha)$.
 \end{corollary}
 
-\begin{definition}[Algebraic multiplicity of eigenvalue]
+\begin{definition}[Algebraic multiplicity of eigenvalue]\label{algebraic multiplicity}
 	Let $A$ be a $n \times n$ matrix, and let $p_A (x)$ be the characteristic polynomial of $A$, and let $\lambda$ be an eigenvalue of $A$. The algebraic multiplicity of $\lambda$ is defined as the largest possible integer value of $k$ such that $p_A(x)$ is divisible by $(x - \lambda)^k$.
 \end{definition}
 
@@ -2963,5 +2963,184 @@ Given an operator $T : V \to V$, decide whether or not there exists a basis $B$ 
 \begin{definition}[Geometric multiplicity of eigenvalue]
 	$m = \dim V_{\lambda}$ is called the geometric multiplicity of $\lambda$.
 \end{definition}
+
+\begin{theorem}
+	Let $\lambda$ be an eigenvalue of $A_{n \times n}$. Let $k$ be the algebraic multiplicity of $\lambda$ and let $m$ be the geometric multiplicity of $\lambda$. Then
+	\begin{equation*}
+		m \leq k
+	\end{equation*}
+\end{theorem}
+
+\begin{proof}
+	\begin{equation*}
+		m = \dim V_\lambda
+	\end{equation*}
+	Therefore, let $B_0 = \{v_1, \dots, v_m\}$ be a basis of $V_\lambda$.\\
+	Completing $B_0$ to $B = \{v_1, \dots, v_m, v_{m+1}, \dots, v_n\}$, a basis of $\mathbb{F}^n$. \\
+	Let $P_{n \times n}$ be a matrix with columns $v_1, \dots, v_n$.
+	\begin{align*}
+		P &=
+		\begin{pmatrix}
+			v_1 & \dots & v_m & v_{m+1} & \dots & v_n\\
+		\end{pmatrix}
+	\end{align*}
+	$P$ is invertible as $v_1, \dots, v_n$ are linearly independent.\\
+	Consider $A' = P^{-1} A P$.
+	\begin{align*}
+		\therefore P^{-1} A P &= P^{-1} A 
+			\begin{pmatrix}
+				v_1 & \dots & v_m & v_{m+1} & \dots & v_n\\
+			\end{pmatrix}\\
+			&= P^{-1}
+				\begin{pmatrix}
+					A v_1 & \dots & A v_m & A v_{m+1} & \dots & A v_n\\
+				\end{pmatrix}\\
+			&= P^{-1} 
+				\begin{pmatrix}
+					\lambda v_1 & \dots & \lambda v_m & \star & \dots & \star\\
+				\end{pmatrix}\\
+			&= 
+				\begin{pmatrix}
+					P^{-1} (\lambda v_1) & \dots & P^{-1} (\lambda v_m) & \star & \dots & \star\\
+				\end{pmatrix}\\
+			&= 
+				\begin{pmatrix}
+					\lambda e_1 & \dots & \lambda e_m) & \star & \dots & \star\\
+				\end{pmatrix}\\
+			&=
+				\begin{pmatrix}
+					\lambda I_m & \star\\
+					0 & \tilde{A}\\
+				\end{pmatrix}
+	\end{align*}
+	\begin{align*}
+		p_{A'} (x) &= \det (x I_n + A')\\
+		&= \det 
+			\left( 
+				\begin{pmatrix}
+					x I_m & 0\\
+					0 & x I_{n - m}\\
+				\end{pmatrix}
+				-
+				\begin{pmatrix}
+					\lambda I_m & \star\\
+					0 & \tilde{A}\\
+				\end{pmatrix}
+			 \right)\\
+		 &= \det
+		 	\begin{pmatrix}
+			 	(x - \lambda) I_m & \star\\
+			 	0 & x I_{n - m} - \tilde{A}\\
+		 	\end{pmatrix}\\
+	 	&= \det ((x - \lambda) I_m) \cdot \det (x I_{n - m} - \tilde{A})\\
+	 	&= (x - \lambda)^m \cdot p_{\tilde{A}} (x)
+	\end{align*}
+	As $A \sim \tilde{A}$,
+	\begin{equation*}
+		p_A (x) = p_{A'} = (x - \lambda)^m p_{\tilde{A}} (x)
+	\end{equation*}
+	By the definition of \nameref{algebraic multiplicity}, $k \geq m$.
+\end{proof}
+
+\begin{theorem}
+	If a matrix $A_{n \times n}$ is diagonalizable, then its characteristic polynomial $p_A (x)$ can be represented as a product of linear factors.
+	\begin{equation*}
+		p_A (x) = (x - \lambda_1)^{k_1} \dots (x - \lambda_s)^{k_s}
+	\end{equation*}
+	where $k_i$ is the algebraic multiplicity of $\lambda_i$ and $\lambda_1, \dots, \lambda_s$ are pairwise distinct.
+\end{theorem}
+
+\begin{proof}
+	As $A$ is diagonalizable, let $A \sim D$, 
+	\begin{equation*}
+		\begin{pmatrix}
+			\lambda_1 & 0 & 0 & 0 & 0 & 0 & 0\\
+			0 & \ddots & 0 & 0 & 0 & 0 & 0\\
+			0 & 0 & \lambda_1 & 0 & 0 & 0 & 0\\
+			0 & 0 & 0 & \ddots & 0 & 0 & 0 \\
+			0 & 0 & 0 & 0 & \lambda_s & 0 & 0\\		
+			0 & 0 & 0 & 0 & 0 & \ddots & 0\\
+			0 & 0 & 0 & 0 & 0 & 0 & \lambda_s\\			
+		\end{pmatrix}
+	\end{equation*}
+	Then, 
+	\begin{align*}
+		p_A (x) &= p_D (x)\\
+		&= \det 
+			\begin{pmatrix}
+				x - \lambda_1 & 0 & 0 & 0 & 0 & 0 & 0\\
+				0 & \ddots & 0 & 0 & 0 & 0 & 0\\
+				0 & 0 & x - \lambda_1 & 0 & 0 & 0 & 0\\
+				0 & 0 & 0 & \ddots & 0 & 0 & 0 \\
+				0 & 0 & 0 & 0 & x - \lambda_s & 0 & 0\\		
+				0 & 0 & 0 & 0 & 0 & \ddots & 0\\
+				0 & 0 & 0 & 0 & 0 & 0 & x - \lambda_s\\	
+			\end{pmatrix}\\
+		&= (x - \lambda_1)^{k_1} \dots (x - \lambda_s)^{k_s}
+	\end{align*}
+\end{proof}
+
+\begin{theorem}[Explicit criterion for diagonalization]
+	Let $A$ be an $n \times n$ matrix, s.t. $p_A (x)$ splits completely. Then $A$ is diagonalizable if and only if $\forall \lambda_i$ of $A$, the algebraic multiplicity coincides with the geometric multiplicity.
+\end{theorem}
+
+\begin{proof}[Proof of statement]
+	If $p_A$ splits completely, then $k_1 + \dots + k_n = n$.\\
+	If $A$ is diagonalizable, then by the \nameref{general criterion for diagonalization}, there is $B = \{v_1, \dots, v_n\}$, a basis of $\mathbb{F}^n$, s.t. each $v_i$ is an eigenvector of $A$.\\
+	Dividing $v_1, \dots ,v_n$ into $s$ groups corresponding to $\lambda_1, \dots, \lambda_s$, to each $\lambda_i$, there correspond at most $m_i = \dim V_{\lambda_i}$ eigenvectors, as they are a part of a basis and hence linearly independent.\\
+	Therefore,
+	\begin{align*}
+		n &\leq m_1 + \dots + m_s\\
+		\intertext{	As $p_A$ splits completely,}
+		n &= k_1 + \dots + k_s\\
+		\intertext{Also, $k_i \geq m_i$}
+		\therefore k_1 + \dots + k_s &= m_1 + \dots + m_s\\
+		\intertext{moreover, $\forall i, \suchthat 1 \leq i \leq s$,}
+		k_i &= m_i
+	\end{align*}
+\end{proof}
+
+\begin{proof}[Proof of converse]
+	\begin{align*}
+	\intertext{$\forall i, \suchthat 1 \leq 1 \leq s$}
+	\therefore k_i &= m_i\\
+	\intertext{As $k_1 + \dots + k_s = n$,}
+	m_1 + \dots + m_s &= n
+	\end{align*}
+	Let the bases of the eigenspaces $V_{\lambda_1}, \dots, V_{\lambda_s}$ be $B_1, \dots, B_s$.
+	\begin{align*}
+		|B_1| &= m_1\\
+		&\vdots\\
+		|B_s| &= m_s
+	\end{align*}
+	Let $B = B_1 \cup \dots \cup B_s$. $|B| = n$.\\
+	It is enough to prove that $B$ is linearly independent.\\
+	Let 
+	\begin{equation*}
+		B = \{v_1, v_2, \dots, w_1, w_2, \dots, u_1, u_2, \dots\}
+	\end{equation*}
+	Suppose
+	\begin{align*}
+		\alpha_1 v_1 + \alpha_2 v_2 + \dots + \beta_1 w_1 + \beta_2 w_2 + \dots + \gamma_1 u_1 + \gamma_2 u_2 + \dots &= \mathbb{O}
+	\end{align*}
+	If possible, let at least one coefficient be non-zero. WLG, let $\alpha_1 \neq 0$.\\
+	Hence, as $v_1, v_2, \dots$ form $B_1$ which is a basis of $v_{\lambda_1}$,
+	\begin{equation*}
+		v = \alpha_1 v_1 + \alpha_2 v_2 + \dots \neq \mathbb{O}
+	\end{equation*}
+	Let
+	\begin{align*}
+		w &= \beta_1 w_1 + \beta_2 w_2 + \dots\\
+		&\dots\\
+		u &= \gamma_1 u_1 + \gamma_2 u_2 + \dots
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		v + w + \dots + u &= \mathbb{O}
+	\end{align*}
+		where $v \neq \mathbb{O}$ and $v \in V_{\lambda_1}, w \in V_{\lambda_2}, \dots, u \in V_{\lambda_s}$.\\
+		But as $\lambda_1, \dots, \lambda_s$ are pairwise distinct, $v, w, \dots, u$ are linearly independent.\\
+		This is a contradiction. Therefore, $B$ is a basis. Hence, as $B$ consists of eigenvectors of $A$, by the \nameref{general criterion for diagonalization}, $A$ is diagonalizable.
+\end{proof}
 
 \end{document}
