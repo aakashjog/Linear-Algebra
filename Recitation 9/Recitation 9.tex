@@ -1,0 +1,236 @@
+\documentclass[fleqn, a4paper, 12pt]{article}
+\setcounter{secnumdepth}{4}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathtools, xfrac}
+\usepackage{datetime}
+\usepackage{ulem}
+\usepackage{enumerate}
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+\newcommand{\rank}{\mathrm{rk\,}}
+
+\newcommand{\R}{\mathrm{R}}
+
+\newcommand{\C}{\mathrm{C}}
+
+\newcommand{\im}{\mathrm{im}\,}
+
+\newenvironment{amatrix}[1]{%
+	\left(\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+	\end{array}\right)
+}
+
+%\setlength{\mathindent}{0pt}
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}
+
+\newenvironment{solution}
+{\begin{proof}[Solution]\let\qed\relax}
+	{\end{proof}}
+
+\DeclareMathOperator{\vspan}{\mathrm{span}} %declares span operator for matrices
+
+%opening
+\title{Recitation 9}
+\author{}
+\date{\formatdate{24}{12}{2014}}
+
+\begin{document}
+
+\maketitle
+%\setlength{\mathindent}{0pt}
+
+\tableofcontents
+
+\newpage
+\section{Kernel and Image}
+
+If $\{u_1, \dots, u_n\}$ is a basis of $U$, then $\im (T) = \vspan\{T(u_1), \dots, T(u_n)\} $
+
+\begin{example}
+	Find a basis for $\im (T)$.
+	\begin{align*}
+		T &: \mathbb{R}^2 \to \mathbb{R}^2 & T(x, y) &= (x-y, y-x)
+	\end{align*}
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		\im (T) &= \vspan \{T(e_1), T(e_2)\}\\
+		&= \vspan\{T(1,0), T(0,1)\}\\
+		&= \vspan\{(1, -1), (-1, 1)\}\\
+		&= \vspan\{(1, -1)\}
+	\end{align*}
+\end{solution}
+
+\begin{example}
+	Find a basis for $\im (T)$.
+	\begin{align*}
+	T &: \mathbb{R}_2 [x] \to M_2 (\mathbb{R}) & T(ax^2 + bx + c) &= 
+		\begin{pmatrix}
+			b & c\\
+			-c & a\\
+		\end{pmatrix}
+	\end{align*}
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		\im (T) &= \vspan \{T(e_1), T(e_2), T(e_3)\}\\
+		&= \vspan\{T(1), T(x), T(x^2)\}\\
+		&= \vspan
+			\{
+				\begin{pmatrix}
+					0 & 1\\
+					-1 & 0\\
+				\end{pmatrix}
+				,
+				\begin{pmatrix}
+					1 & 0\\
+					0 & 0\\
+				\end{pmatrix}
+				,
+				\begin{pmatrix}
+					0 & 0\\
+					0 & 1\\
+				\end{pmatrix}
+			\}
+	\end{align*}
+\end{solution}
+
+\begin{example}
+	Let
+	\begin{equation*}
+		T : \mathbb{R}^5 \to \mathbb{R}^5
+	\end{equation*}
+	Is it possible that $\dim (\im(T)) = \dim (\ker(T))$?
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		\dim (\im(T)) + \dim (\ker(T)) &= \dim(V)
+	\end{align*}
+	Therefore, if $\dim (\im(T)) = \dim (\ker(T))$, $\dim (\im(T)) = \dim (\ker(T)) = \dfrac{5}{2}$. Therefore such a case is not possible.
+\end{solution}
+
+\section{Linear Maps}
+
+\begin{definition}[Isomorphism]
+	A linear map $T$ is called an isomorphism, if it is one-to-one and onto.
+\end{definition}
+
+The representation matrix is invertible if and only if the map is an isomorphism.
+
+\begin{example}
+	\begin{align*}
+		T &: \mathbb{R}^3 \to M_{2 \times 2} (\mathbb{R}) & T((x,y,x)) &= 
+		\begin{pmatrix}
+			y & z\\
+			-z & x\\
+		\end{pmatrix}
+	\end{align*}
+	Find the representation matrix of $T$ corresponding to the bases
+	\begin{align*}
+		B &= 
+			\left\lbrace
+				u_1 = 
+					\begin{pmatrix}
+						1\\
+						1\\
+						1\\
+					\end{pmatrix}
+				,
+				u_2 = 
+					\begin{pmatrix}
+						1\\
+						1\\
+						0\\
+					\end{pmatrix}
+				,
+				u_3 = 
+					\begin{pmatrix}
+						1\\
+						1\\
+						0\\
+					\end{pmatrix}
+			\right\rbrace\\
+		C &= 
+			\left\lbrace
+				v_1 = 
+					\begin{pmatrix}
+						1 & 0\\
+						0 & 1\\
+					\end{pmatrix}
+				,
+				u_2 = 
+					\begin{pmatrix}
+						1 & 0\\
+						0 & -1\\
+					\end{pmatrix}
+				,
+				u_3 = 
+					\begin{pmatrix}
+						0 & 1\\
+						1 & 0\\
+					\end{pmatrix}
+				,
+				u_4 = 
+					\begin{pmatrix}
+						0 & 1\\
+						-1 & 0\\
+					\end{pmatrix}
+			\right\rbrace
+	\end{align*}
+	Further, find $T(1, -2, 1)$.
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		[T]_{B,C} &= 
+			\begin{pmatrix}
+				[T(u_1)]_C & [T(u_2)]_C & [T(u_3)]_C\\
+			\end{pmatrix}\\
+		&= 
+		\begin{pmatrix}
+			\left[
+				\begin{pmatrix}
+					1 & 1\\
+					-1 & 1\\
+				\end{pmatrix}
+			\right]_C 
+			& 
+			\left[
+				\begin{pmatrix}
+					1 & 0\\
+					0 & 1\\
+				\end{pmatrix}
+			\right]_C 
+			&
+			\left[
+				\begin{pmatrix}
+					0 & 0\\
+					0 & 1\\
+				\end{pmatrix}
+			\right]_C 
+		\end{pmatrix}\\
+		&= 
+			\begin{pmatrix}
+				1 & 1 & \sfrac{1}{2}\\
+				0 & 0 & -\sfrac{1}{2}\\
+				0 & 0 & 0\\
+				1 & 0 & 0\\
+			\end{pmatrix}
+	\end{align*}
+	\begin{align*}
+		[T(1, -2, 1)] = [T]_{B, C} [(1, -2, 1)]_{B}
+	\end{align*}
+\end{solution}
+
+\end{document}
