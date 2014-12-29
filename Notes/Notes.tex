@@ -3,7 +3,7 @@
 %correct overfull hboxes
 
 \date{}
-\documentclass[fleqn, a4paper, 12pt, draft]{article}
+\documentclass[fleqn, a4paper, 12pt]{article}
 \usepackage{amsmath, amssymb, amsthm, thmtools, amsfonts}
 \usepackage{datetime}
 \usepackage{hyperref}
@@ -3142,5 +3142,76 @@ Given an operator $T : V \to V$, decide whether or not there exists a basis $B$ 
 		But as $\lambda_1, \dots, \lambda_s$ are pairwise distinct, $v, w, \dots, u$ are linearly independent.\\
 		This is a contradiction. Therefore, $B$ is a basis. Hence, as $B$ consists of eigenvectors of $A$, by the \nameref{general criterion for diagonalization}, $A$ is diagonalizable.
 \end{proof}
+
+\begin{theorem}[Criterion for triangularization]
+	An operator $T : V \to V$ is triangularizable, i.e. there is a basis $B$ of $V$ such that $[T]_B$ is upper triangular, if and only if $p_T (x)$ splits completely.
+\end{theorem}
+
+\begin{theorem}[Jordan Theorem]
+	Let $T : V \to V$ be a linear operator such that $p_T (x)$ splits completely. Then there exists a basis $B$ of $V$ such that $[T]_B$ is of the form
+	\begin{equation*}
+		[T]_B = 
+		\begin{pmatrix}
+			J_1 & 0 & 0\\
+			0 & \ddots & 0\\
+			0 & 0 & J_l\\
+		\end{pmatrix}
+	\end{equation*}
+	where each $J_i$ is of the form
+	\[
+		\begin{pmatrix}
+			\lambda & 1 & 0 & 0 & 0 & 0\\
+			0 & \lambda & 1 & 0 & 0 & 0\\
+			0 & 0 & \ddots & \ddots & 0 & 0\\
+			0 & 0 & 0 & \ddots & 1 & 0\\
+			0 & 0 & 0 & 0 &\lambda & 1\\
+			0 & 0 & 0 & 0 & 0 & \lambda\\
+		\end{pmatrix}
+	\]
+	where $\lambda$ is some eigenvalue of $T$.
+\end{theorem}
+
+\part{Inner Product Spaces}
+
+\section{Definition}
+
+\begin{definition}[Inner product]
+	Let $\mathbb{F}$ be $\mathbb{R}$ or $\mathbb{C}$. Let $V$ be a vector space over $\mathbb{F}$. An inner product on $V$ is a function in two vector arguments with scalar values which associates to two given vectors $v, w \in V$ their product $<v, w> \in \mathbb{F}$ so that the following properties are satisfied.
+	\begin{enumerate}
+		\item $\langle \alpha_1 v_1 + \alpha_2 v_2, w \rangle = \alpha_1 \langle v_1, w \rangle + \alpha_2 \langle v_2, w \rangle$, $\forall v_1, v_2, w \in V$, $\forall \alpha_1, \alpha_2 \in \mathbb{F}$
+		\item $\langle v, w \rangle = \overline{\langle w, v \rangle}$, $\forall v, w \in V$
+		\item $\langle v, v \rangle$ is a real non-negative number, $\forall v \in V$
+	\end{enumerate}
+\end{definition}
+
+\begin{example}
+	\begin{equation*}
+		V = \mathbb{F}^n
+	\end{equation*}
+	\begin{align*}
+		\left\langle
+			\begin{pmatrix}
+				\alpha_1\\
+				\vdots\\
+				\alpha_n\\
+			\end{pmatrix}
+			,
+			\begin{pmatrix}
+				\beta_1\\
+				\vdots\\
+				\beta_n\\
+			\end{pmatrix}
+		\right\rangle
+		&= \alpha_1 \overline{\beta_1} + \dots + \alpha_n \overline{\beta_n}
+	\end{align*}
+	All three properties are valid for this product. Hence, it is an inner product.
+\end{example}
+
+\begin{theorem}[Sesquilinearity]
+	\begin{align*}
+		\langle v, \beta_1 w_1 + \beta_2 w_2 \rangle &= \overline{\beta_1} \langle v, w_1 \rangle + \overline{\beta_2} \langle v, w_2 \rangle
+	\end{align*}
+	$\forall v, w_1, w_2 \in V, \beta_1, \beta_2 \in \mathbb{F}$
+\end{theorem}
 
 \end{document}
