@@ -4,7 +4,7 @@
 
 \date{}
 \documentclass[fleqn, a4paper, 12pt]{article}
-\usepackage{amsmath, amssymb, amsthm, thmtools, amsfonts}
+\usepackage{amsmath, amssymb, amsthm, thmtools, amsfonts, commath}
 \usepackage{datetime}
 \usepackage{hyperref}
 \usepackage{ulem}
@@ -1277,7 +1277,7 @@ If $m < n$, then $r < n$. Therefore, the system has more than one solution.
 
 Consider a system $A x = b ; b \neq \mathbb{O}$. The extended matrix is defined as
 \begin{equation*}
-	\tilde{A} = (A|b) = 
+	\widetilde{A} = (A|b) = 
 	\begin{pmatrix}
 		a_{11} & \dots & a_{1n} & b_1 \\
 		\vdots & & \vdots & \vdots \\
@@ -1287,9 +1287,9 @@ Consider a system $A x = b ; b \neq \mathbb{O}$. The extended matrix is defined 
 
 \subsection{Solutions of Non-Homogeneous Systems}
 
-Let $\tilde{r}$ be the number of non-zero rows in the REF of $\tilde{A}$, i.e. $\tilde{A_R}$.
+Let $\widetilde{r}$ be the number of non-zero rows in the REF of $\widetilde{A}$, i.e. $\widetilde{A_R}$.
 
-\subsubsection{Case I: $\tilde{r} = r$}
+\subsubsection{Case I: $\widetilde{r} = r$}
 
 \begin{equation*}
 	b'_{r+1} = \dots = b'_{m} = 0
@@ -1314,7 +1314,7 @@ Therefore,
 	x_l(r) &= b'_1 + c_{r1} x_{z(1)} + \dots + c_{rt} x_{z(t)}
 \end{align*}
 
-\subsubsection{Case II: $\tilde{r} > r$}
+\subsubsection{Case II: $\widetilde{r} > r$}
 
 In this case, the $(r+1)^{\text{th}}$ row represents an equation of the form $0 = 1$. Therefore, the system is inconsistent.
 
@@ -2467,9 +2467,9 @@ Let $A$ be a $m \times n$ matrix, and let $A_{ij}$ be the matrix obtained by rem
 \subsection{Change of Bases}
 
 \begin{theorem}
-	Let $V$, $W$ be vector spaces over $\mathbb{F}$, $\dim (V) = n$, $\dim (W) = m$. Let $\varphi : V \to W$ be a linear map. Let $B$, $\tilde{B}$ be bases of $V$ and let $B'$ and $\tilde{B'}$ be bases of $W$. Let $A = [\varphi]_{B, B'}$ and $\tilde{A} = [\varphi]_{\tilde{B}, \tilde{B'}}$ be the matrices of $\varphi$ w.r.t. the pairs $B$, $B'$ and $\tilde{B}$, $\tilde{B'}$. Let $P$ denote the transition matrix from $B$ to $\tilde{B}$, and let $Q$ denote the transition matrix from $B'$ to $\tilde{B'}$. Then,
+	Let $V$, $W$ be vector spaces over $\mathbb{F}$, $\dim (V) = n$, $\dim (W) = m$. Let $\varphi : V \to W$ be a linear map. Let $B$, $\widetilde{B}$ be bases of $V$ and let $B'$ and $\widetilde{B'}$ be bases of $W$. Let $A = [\varphi]_{B, B'}$ and $\widetilde{A} = [\varphi]_{\widetilde{B}, \widetilde{B'}}$ be the matrices of $\varphi$ w.r.t. the pairs $B$, $B'$ and $\widetilde{B}$, $\widetilde{B'}$. Let $P$ denote the transition matrix from $B$ to $\widetilde{B}$, and let $Q$ denote the transition matrix from $B'$ to $\widetilde{B'}$. Then,
 	\begin{equation*}
-		\tilde{A}_{m \times n} = Q^{-1}_{m \times m} A_{m \times n} P_{n \times n}
+		\widetilde{A}_{m \times n} = Q^{-1}_{m \times m} A_{m \times n} P_{n \times n}
 	\end{equation*}
 \end{theorem}
 
@@ -2477,26 +2477,26 @@ Let $A$ be a $m \times n$ matrix, and let $A_{ij}$ be the matrix obtained by rem
 	$\forall z \in V$,
 	\begin{align}
 		[\varphi(z)]_{B'} &= A [z]_B\label{eq 1}\\
-		[\varphi(z)]_{\tilde{B'}} &= A [z]_{\tilde{B}}\label{eq 2}
+		[\varphi(z)]_{\widetilde{B'}} &= A [z]_{\widetilde{B}}\label{eq 2}
 	\end{align}
 	We have
 	\begin{align}
-		[z]_B &= P [z]_{\tilde{B}}\label{eq 3}\\
-		[\varphi(z)]_{B'} &= Q [\varphi(z)]_{\tilde{B'}}\label{eq 4}
+		[z]_B &= P [z]_{\widetilde{B}}\label{eq 3}\\
+		[\varphi(z)]_{B'} &= Q [\varphi(z)]_{\widetilde{B'}}\label{eq 4}
 	\end{align}
 	Therefore,
 	\begin{align}
 		\intertext{\eqref{eq 1} in \eqref{eq 4} $\implies$}
-		A [z]_B &= Q [\varphi(z)]_{\tilde{B'}}\label{eq 5}\\
+		A [z]_B &= Q [\varphi(z)]_{\widetilde{B'}}\label{eq 5}\\
 		\intertext{\eqref{eq 3} in \eqref{eq 5} $\implies$}
-		A P [z]_{\tilde{B}} &= Q [\varphi(z)]_{\tilde{B'}}
+		A P [z]_{\widetilde{B}} &= Q [\varphi(z)]_{\widetilde{B'}}
 	\end{align}
 	Multiplying on the left by $Q^{-1}$,
 	\begin{align*}
-		Q^{-1} A P [z]_{\tilde{B}} &= [\varphi(z)]_{\tilde{B'}}\\
-		\therefore [\varphi(z)]_{\tilde{B'}} &= Q^{-1} A P [z]_{\tilde{B}}
+		Q^{-1} A P [z]_{\widetilde{B}} &= [\varphi(z)]_{\widetilde{B'}}\\
+		\therefore [\varphi(z)]_{\widetilde{B'}} &= Q^{-1} A P [z]_{\widetilde{B}}
 		\intertext{Comparing with \eqref{eq 2},}
-		\tilde{A} &= Q^{-1} A P
+		\widetilde{A} &= Q^{-1} A P
 	\end{align*}
 \end{proof}
 
@@ -2758,27 +2758,27 @@ Let $A$ be a $m \times n$ matrix, and let $A_{ij}$ be the matrix obtained by rem
 
 \section{Similar Matrices}
 
-Let $B$ and $\tilde{B}$ be bases of $V$. Let $A$ and $\tilde{A}$ be the representing matrices
+Let $B$ and $\widetilde{B}$ be bases of $V$. Let $A$ and $\widetilde{A}$ be the representing matrices
 \begin{align*}
 	A &= [T]_B\\
-	\tilde{A} &= [T]_{\tilde{B}}
+	\widetilde{A} &= [T]_{\widetilde{B}}
 \end{align*}
-Both these are $n \times n$ matrices, where $n = \dim V$. Let $P$ denote the transition matrix from $B$ to $\tilde{B}$. Then,
+Both these are $n \times n$ matrices, where $n = \dim V$. Let $P$ denote the transition matrix from $B$ to $\widetilde{B}$. Then,
 \begin{equation*}
-	\tilde{A} = P^{-1} A P
+	\widetilde{A} = P^{-1} A P
 \end{equation*}
 
 \begin{definition}[Similarity of matrices]
-	Let $A$, $\tilde{A}$ be $n \times n$ matrices. $A$ is said to be similar to $\tilde{A}$, denoted as $A \sim \tilde{A}$, if there exists an invertible $n \times n$ matrix $P$, s.t. $\tilde{A} = P^{-1} A P$.
+	Let $A$, $\widetilde{A}$ be $n \times n$ matrices. $A$ is said to be similar to $\widetilde{A}$, denoted as $A \sim \widetilde{A}$, if there exists an invertible $n \times n$ matrix $P$, s.t. $\widetilde{A} = P^{-1} A P$.
 \end{definition}
 
 \subsection{Properties of Similar Matrices}
 
 \begin{enumerate}
 	\item $A \sim A$ 
-	\item If $A \sim \tilde{A}$, then $\tilde{A} \sim A$
-	\item If $A \sim \tilde{A}$ and $\tilde{A} \sim \tilde{\tilde{A}}$, then $A \sim \tilde{\tilde{A}}$
-	\item If $A \sim \tilde{A}$, then $\det (A) = \det (\tilde{A})$
+	\item If $A \sim \widetilde{A}$, then $\widetilde{A} \sim A$
+	\item If $A \sim \widetilde{A}$ and $\widetilde{A} \sim \widetilde{\widetilde{A}}$, then $A \sim \widetilde{\widetilde{A}}$
+	\item If $A \sim \widetilde{A}$, then $\det (A) = \det (\widetilde{A})$
 	\item If $A \sim I$, then $A = I$
 \end{enumerate}
 
@@ -3010,7 +3010,7 @@ Given an operator $T : V \to V$, decide whether or not there exists a basis $B$ 
 			&=
 				\begin{pmatrix}
 					\lambda I_m & \star\\
-					0 & \tilde{A}\\
+					0 & \widetilde{A}\\
 				\end{pmatrix}
 	\end{align*}
 	\begin{align*}
@@ -3024,20 +3024,20 @@ Given an operator $T : V \to V$, decide whether or not there exists a basis $B$ 
 				-
 				\begin{pmatrix}
 					\lambda I_m & \star\\
-					0 & \tilde{A}\\
+					0 & \widetilde{A}\\
 				\end{pmatrix}
 			 \right)\\
 		 &= \det
 		 	\begin{pmatrix}
 			 	(x - \lambda) I_m & \star\\
-			 	0 & x I_{n - m} - \tilde{A}\\
+			 	0 & x I_{n - m} - \widetilde{A}\\
 		 	\end{pmatrix}\\
-	 	&= \det ((x - \lambda) I_m) \cdot \det (x I_{n - m} - \tilde{A})\\
-	 	&= (x - \lambda)^m \cdot p_{\tilde{A}} (x)
+	 	&= \det ((x - \lambda) I_m) \cdot \det (x I_{n - m} - \widetilde{A})\\
+	 	&= (x - \lambda)^m \cdot p_{\widetilde{A}} (x)
 	\end{align*}
-	As $A \sim \tilde{A}$,
+	As $A \sim \widetilde{A}$,
 	\begin{equation*}
-		p_A (x) = p_{A'} = (x - \lambda)^m p_{\tilde{A}} (x)
+		p_A (x) = p_{A'} = (x - \lambda)^m p_{\widetilde{A}} (x)
 	\end{equation*}
 	By the definition of \nameref{algebraic multiplicity}, $k \geq m$.
 \end{proof}
@@ -3185,6 +3185,7 @@ Given an operator $T : V \to V$, decide whether or not there exists a basis $B$ 
 \end{definition}
 
 \begin{example}
+	The dot product of two vectors is defined as follows. Is it an inner product?
 	\begin{equation*}
 		V = \mathbb{F}^n
 	\end{equation*}
@@ -3204,8 +3205,11 @@ Given an operator $T : V \to V$, decide whether or not there exists a basis $B$ 
 		\right\rangle
 		&= \alpha_1 \overline{\beta_1} + \dots + \alpha_n \overline{\beta_n}
 	\end{align*}
-	All three properties are valid for this product. Hence, it is an inner product.
 \end{example}
+
+\begin{solution}
+	All three axioms are satisfied by this product. Hence, it is an inner product.
+\end{solution}
 
 \begin{theorem}[Sesquilinearity]
 	\begin{align*}
@@ -3213,5 +3217,205 @@ Given an operator $T : V \to V$, decide whether or not there exists a basis $B$ 
 	\end{align*}
 	$\forall v, w_1, w_2 \in V, \beta_1, \beta_2 \in \mathbb{F}$
 \end{theorem}
+
+\begin{definition}[Length]
+	The length of a vector 
+	\begin{equation*}
+		v = 
+			\begin{pmatrix}
+				\alpha_1\\
+				\vdots\\
+				\alpha_n\\
+			\end{pmatrix}
+	\end{equation*}
+	is defined to be 
+	\begin{equation*}
+		\| v \| = \sqrt{\alpha_1 ^2 + \dots + \alpha_n ^2}
+	\end{equation*}
+\end{definition}
+
+\begin{example}
+	Let $V$ be the vector space consisting of all continuous functions $f : [a , b] \to \mathbb{R}$.
+	\begin{align*}
+		\langle f, g \rangle &= \int\limits_{a}^{b} f(x) g(x) \dif x
+	\end{align*}
+\end{example}
+
+\begin{solution}
+	All three axioms are satisfied by this product. Hence, it is an inner product.
+\end{solution}
+
+\section{Computation of Inner Products}
+
+\begin{definition}[Gram matrix]
+	Let $V$ be an inner product space. Let 
+	\begin{equation*}
+		B = \{v_1, \dots, v_n\}
+	\end{equation*}
+	be a basis of $V$.
+	\begin{equation*}
+		G_B = 
+			\begin{pmatrix}
+				\langle v_1, v_1 \rangle & \dots & \langle v_1, v_n \rangle\\
+				\vdots & & \vdots\\
+				\langle v_n, v_1 \rangle & \dots & \langle v_n, v_n \rangle\\
+			\end{pmatrix}
+	\end{equation*}
+	is called the Gram matrix of the inner product with respect to $B$.
+\end{definition}
+
+\begin{example}
+	Find the Gram matrix of $V = \mathbb{F}^n$ with standard dot product with respect to 
+	\begin{equation*}
+		B = 
+			\left\lbrace
+				\begin{pmatrix}
+					1\\
+					\vdots\\
+					0\\
+				\end{pmatrix}
+				,
+				\dots
+				,
+				\begin{pmatrix}
+					0\\
+					\vdots\\
+					1\\
+				\end{pmatrix}
+			\right\rbrace
+	\end{equation*}
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		G_B &= 
+			\begin{pmatrix}
+				\langle e_1, e_1 \rangle & \dots & \langle e_1, e_n \rangle\\
+				\vdots & & \vdots\\
+				\langle e_n, e_1 \rangle & \dots & \langle e_n, e_n \rangle\\
+			\end{pmatrix}\\
+		&= 
+			\begin{pmatrix}
+				1 & \dots & 0\\
+				\vdots & & \vdots\\
+				0 & \dots & 1\\
+			\end{pmatrix}
+	\end{align*}
+\end{solution}
+
+\begin{example}
+	Find the Gram matrix of $V = \mathbb{F}^n$ with standard dot product with respect to 
+	\begin{equation*}
+		B = 
+			\left\lbrace
+				\begin{pmatrix}
+					3\\
+					4\\
+				\end{pmatrix}
+				,
+				\begin{pmatrix}
+					6\\
+					7\\
+				\end{pmatrix}
+			\right\rbrace
+	\end{equation*}
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		G_B &= 
+			\begin{pmatrix}
+				\langle v_1, v_1 \rangle & \langle v_1, v_2 \rangle\\
+				\langle v_2, v_1 \rangle & \langle v_2, v_2 \rangle\\
+			\end{pmatrix}\\
+		&= 
+			\begin{pmatrix}
+				25 & 46\\
+				46 & 85\\
+			\end{pmatrix}
+	\end{align*}
+\end{solution}
+
+\begin{theorem}
+	\begin{equation*}
+		\langle v, w \rangle = [v]_B^t G_B \overline{[w]}_B
+	\end{equation*}
+\end{theorem}
+
+\begin{proof}
+	Let
+	\begin{equation*}
+		B = \{v_1, \dots, v_n\}
+	\end{equation*}
+	be a basis of $V$.\\
+	The Gram matrix is
+	\begin{equation*}
+		G_B = 
+			\begin{pmatrix}
+				\langle v_i, v_j \rangle\\
+			\end{pmatrix}
+			=
+			\begin{pmatrix}
+				g_{ij}\\
+			\end{pmatrix}
+	\end{equation*}
+	To compute $\langle v, w \rangle$, find 
+	\begin{align*}
+		[v]_B &= 
+			\begin{pmatrix}
+				\alpha_1\\
+				\vdots\\
+				\alpha_n\\
+			\end{pmatrix}\\
+		[w]_B &= 
+			\begin{pmatrix}
+				\beta_1\\
+				\vdots\\
+				\beta_n\\
+			\end{pmatrix}
+	\end{align*}
+	
+	\begin{align*}
+		\langle v, w \rangle &= \langle \alpha_1 v_1 + \dots + \alpha_n v_n, \beta_1 v_1 + \dots + \beta_n v_n \rangle\\
+		&= \alpha_1 \overline{\beta_1} \langle v_1, v_1 \rangle + \dots + \alpha_1 \overline{\beta_n} \langle v_1, v_n \rangle\\
+			&\quad + \alpha_2 \overline{\beta_1} \langle v_2, v_1 \rangle + \dots + \alpha_2 \overline{\beta_n} \langle v_2, v_n \rangle\\
+			&\quad +\dots\\
+			&\quad +\alpha_n \overline{\beta_1} \langle v_n, v_1 \rangle + \dots + \alpha_n \overline{\beta_n} \langle v_n, v_n \rangle\\
+		&= \alpha_1 g_{11} \overline{\beta_1} + \dots + \alpha_1 g_{1n} \overline{\beta_n}\\
+			&\quad + \alpha_2 g_{21} \overline{\beta_1}\rangle + \dots + \alpha_2 g_{2n} \overline{\beta_n}\\
+			&\quad +\dots\\
+			&\quad +\alpha_n g_{n1} \overline{\beta_1}+ \dots + \alpha_n g_{nn} \overline{\beta_n}\\
+		&= [v]_B^t G_B \overline{[w]_B}
+	\end{align*}
+\end{proof}
+
+\subsection{Change of Basis}
+
+\begin{theorem}
+	Let $B$, $\widetilde{B}$ be bases of $V$. Let $P$ be the transition matrix from $B$ to $\widetilde{B}$. Then 
+	\begin{equation*}
+		G_{\widetilde{B}} = P^t G_B \overline{P}
+	\end{equation*}
+	where $\overline{P}$ is the matrix obtained by replacing all elements of $P$ by their complex conjugates.
+\end{theorem}
+
+\begin{proof}
+	\begin{align*}
+		[v]_B &= P [v]_{\widetilde{B}}
+	\end{align*}
+	\begin{align*}
+		\langle v, w \rangle &= [v]_B^t G_B \overline{[w]_B}\\
+		&= (P [v]_{\widetilde{B}})^t G_B \overline{(P [w]_{\widetilde{B}})}\\
+		&= [v]_{\widetilde{B}}^t (P^t G_B \overline{P}) \overline{[w]_{\widetilde{B}}}
+	\end{align*}
+	Also,
+	\begin{align*}
+		\langle v, w \rangle = [v]_{\widetilde{B}}^t G_{\widetilde{B}} \overline{[w]_{\widetilde{B}}}
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		G_{\widetilde{B}} &= P^t G_B \overline{P}
+	\end{align*}
+\end{proof}
 
 \end{document}
