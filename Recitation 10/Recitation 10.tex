@@ -1,0 +1,292 @@
+\documentclass[fleqn, a4paper, 12pt]{article}
+\setcounter{secnumdepth}{4}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathtools, xfrac}
+\usepackage{datetime}
+\usepackage{ulem}
+\usepackage{enumerate}
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+\newcommand{\rank}{\mathrm{rk\,}}
+
+\newcommand{\R}{\mathrm{R}}
+
+\newcommand{\C}{\mathrm{C}}
+
+\newcommand{\N}{\mathrm{N}}
+
+\newcommand{\im}{\mathrm{im}\,}
+
+\newenvironment{amatrix}[1]{%
+	\left(\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+	\end{array}\right)
+}
+
+%\setlength{\mathindent}{0pt}
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}
+
+\newenvironment{solution}
+{\begin{proof}[Solution]\let\qed\relax}
+	{\end{proof}}
+
+\DeclareMathOperator{\vspan}{\mathrm{span}} %declares span operator for matrices
+
+%opening
+\title{Recitation 10}
+\author{}
+\date{\formatdate{31}{12}{2014}}
+
+\begin{document}
+
+\maketitle
+%\setlength{\mathindent}{0pt}
+
+\tableofcontents
+
+\newpage
+\section{Eigenvalues, Eigenvectors and Eigenspaces}
+
+\begin{enumerate}
+	\item Eigenvectors corresponding to different eigenvlues are linearly independent.
+	\item If $v$ is an eigenvector of $A$ corresponding to $\lambda$, then $v$ is also an eigenvector of $A^k$ corresponding to $\lambda^k$.
+	\item If $v$ is an eigenvector of $A$ corresponding to eigenvalue $\lambda$ and $p(x) = \sum_{j = 0}^{k} a_j x^j$, then $v$ is also an eigenvector of $p(A)$ corresponding to the eigenvalue $p(\lambda)$.
+	\item If $A$ is invertible, then 0 is not an eigenvalue of $A$.
+	\item For all eigenvectors $v$ corresponding to the eigenvalue $\lambda$ of $A$, $v$ is also an eigenvector of $A$, corresponding to the eigenvalue $\lambda^{-1}$.
+\end{enumerate}
+
+\begin{example}
+	Find eigenvalues and eigenspaces of 
+	\begin{align*}
+		A &=
+			\begin{pmatrix}
+				2 & -1\\
+				-1 & 2\\
+			\end{pmatrix}
+	\end{align*}
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		P_A (\lambda) &= \det 
+			\begin{pmatrix}
+				2 - \lambda & -1\\
+				-1 & 2 - \lambda\\
+			\end{pmatrix}\\
+		&= (2 - \lambda)^2 - 1\\
+		&= \lambda^2 - 4 \lambda + 3\\
+		&= (\lambda - 1) (\lambda - 3)
+	\end{align*}
+	Therefore, 1 and 4 are the eigenvalues of $A$.
+	\begin{align*}
+		V_1 &= \N (A - 1 \cdot I)\\
+		&= \N 
+			\begin{pmatrix}
+				1 & -1\\
+				-1 & 1\\
+			\end{pmatrix}\\
+		\therefore V_1 &=
+			\left\lbrace
+				\begin{pmatrix}
+					x\\
+					x\\
+				\end{pmatrix}
+			\right\rbrace\\
+		&= \vspan
+			\left\lbrace
+				\begin{pmatrix}
+					1\\
+					1\\
+				\end{pmatrix}
+			\right\rbrace
+	\end{align*}
+	\begin{align*}
+		V_3 &= \N (A - 3 \cdot I)\\
+		&= \N
+			\begin{pmatrix}
+				-1 & -1\\
+				-1 & -1\\
+			\end{pmatrix}\\
+		\therefore V_3 &= 
+			\left\lbrace
+				\begin{pmatrix}
+					x\\
+					-x\\
+				\end{pmatrix}
+			\right\rbrace\\
+		&= \vspan
+			\left\lbrace
+				\begin{pmatrix}
+					1\\
+					-1\\
+				\end{pmatrix}
+			\right\rbrace
+	\end{align*}
+\end{solution}
+
+\begin{example}
+	Find eigenvalues and eigenspaces of 
+	\begin{align*}
+		B &=
+			\begin{pmatrix}
+				0 & 0 & 0\\
+				0 & 0 & -2\\
+				0 & 1 & 3\\
+			\end{pmatrix}
+	\end{align*}
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		P_B (\lambda) &= \det (A - \lambda I)\\
+		&= 
+			\begin{vmatrix}
+				\lambda & 0 & 0\\
+				0 & -\lambda & -2\\
+				0 & 1 & 3 - \lambda\\
+			\end{vmatrix}\\
+		&= \lambda(\lambda^2 - 3 \lambda + 2)\\
+		&= \lambda^3 - 3 \lambda^2 + 2\lambda\\
+		&= \lambda (\lambda - 1) (\lambda - 2)
+	\end{align*}
+	Therefore, 0, 1, 2 are eigenvalues of $B$.
+	\begin{align*}
+		V_0 &= \N (B - 0 \cdot I)\\
+		&= \N 
+			\begin{pmatrix}
+				0 & 0 & 0\\
+				0 & 0 & -2\\
+				0 & 1 & 3\\
+			\end{pmatrix}\\
+		&= 
+			\left\lbrace
+				\begin{pmatrix}
+					x\\
+					0\\
+					0\\
+				\end{pmatrix}
+			\right\rbrace\\
+		&= 
+			\left\lbrace
+				\begin{pmatrix}
+					1\\
+					0\\
+					0\\
+				\end{pmatrix}
+			\right\rbrace
+	\end{align*}
+	\begin{align*}
+		V_1 &= \N (B - 1 \cdot I)\\
+		&= \N 
+			\begin{pmatrix}
+				-1 & 0 & 0\\
+				0 & -1 & -2\\
+				0 & 1 & 2\\
+			\end{pmatrix}\\
+		&= \N
+			\begin{pmatrix}
+				-1 & 0 & 0\\
+				0 & 1 & 2\\
+				0 & 0 & 0\\
+			\end{pmatrix}\\
+		&= 
+			\left\lbrace
+				\begin{pmatrix}
+					0\\
+					-2z\\
+					z\\
+				\end{pmatrix}
+			\right\rbrace\\
+		&= \vspan
+			\left\lbrace
+				\begin{pmatrix}
+					0\\
+					-2\\
+					1\\
+				\end{pmatrix}
+			\right\rbrace
+	\end{align*}
+	\begin{align*}
+		V_2 &= \N (B - 2 \cdot I)\\
+		&= \N
+			\begin{pmatrix}
+				-2 & 0 & 0\\
+				0 & -2 & -2\\
+				0 & 1 & 1\\
+			\end{pmatrix}\\
+		&= 
+			\left\lbrace
+				\begin{pmatrix}
+					0\\
+					-z\\
+					z\\
+				\end{pmatrix}
+			\right\rbrace\\
+		&= \vspan
+			\left\lbrace
+				\begin{pmatrix}
+					0\\
+					-1\\
+					1\\
+				\end{pmatrix}
+			\right\rbrace
+	\end{align*}
+\end{solution}
+
+\begin{example}
+	Let $A$ be a square matrix of order 3 with the eigenvalues 
+	\begin{align*}
+		\lambda_1 &= 0\\
+		\lambda_2 &= 1\\
+		\lambda_3 &= 2
+	\end{align*}
+	Let $v_1$, $v_2$, $v_3$ be the corresponding eigenvectors.
+	\begin{enumerate}
+		\item Find a basis for $N(A)$.
+		\item Find a solution for $A v = v_2 + v_3$.
+	\end{enumerate}
+\end{example}
+
+\begin{solution}
+	As $v_1$, $v_2$, $v_3$ are eigenvectors corresponding to different eigenvalues, they are linearly independent. Hence they form a basis of $\mathbb{R}^3.$\\
+	Let $v \in \N (A)$.\\
+	Therefore,
+	\begin{align*}
+		v &= \alpha v_1 + \beta v_2 + \gamma v_3\\
+		\therefore A v &= A(\alpha v_1 + \beta v_2 + \gamma v_3)\\
+		\intertext{As $v \in \N (A)$, $ A v = 0$}
+		\therefore 0 &= A(\alpha v_1 + \beta v_2 + \gamma v_3)\\
+		&= \alpha A v_1 + \beta A v_2 + \gamma A v_3\\
+		\intertext{As $A v_1 = \lambda_1 v_1$,}
+		0 &= \alpha \lambda_1 v_1 + \beta \lambda_2 v_2 + \gamma \lambda_3 v_3\\
+		&= \beta v_2 + 2 \gamma v_3\\
+		\intertext{As $v_2$ and $v_3$ are linearly independent, $\beta = \gamma = 0$}
+		\therefore v &= \alpha v_1\\
+		\therefore \N (A) &= \vspan \{v_1\}
+	\end{align*}
+	
+	\begin{align*}
+		v &= \alpha v_1 + \beta v_2 + \gamma v_3\\
+		A v &= v_2 + v_3\\
+		\therefore \alpha A v_1 + \beta A v_2 + \gamma A v_3 &= v_2 + v_3\\
+		\therefore (\beta - 1) v_2 + (2 \gamma - 1) v_3 &= 0
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\beta &= 1\\
+		\gamma &= \dfrac{1}{2}
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		v &= v_2 + \dfrac{1}{2} v_3
+	\end{align*}
+\end{solution}
+
+\end{document}
