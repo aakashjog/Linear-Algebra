@@ -1,20 +1,29 @@
-%change section to theorem environments
-%correct references
-%correct overfull hboxes
-
 \date{}
-\documentclass[fleqn, a4paper, twocolumn, draft]{article}
+\documentclass[fleqn, a4paper]{amsart}
 \usepackage[top=1in, left=1in, right=1in, bottom=1in]{geometry}
-\usepackage{amsmath, amssymb, amsthm, thmtools, amsfonts}
+\usepackage{amsmath, amssymb, amsthm, thmtools, amsfonts, commath}
 \usepackage{datetime}
 \usepackage{hyperref}
 \usepackage{ulem}
 \usepackage{tikz}
 \usepackage{enumerate, enumitem}
 \usepackage{cancel}
+\usepackage{multicol}
 \usepackage{xfrac}
 %\usepackage{background}
 \setcounter{secnumdepth}{4}
+
+%section headings on left
+\makeatletter
+\def\specialsection{\@startsection{section}{1}%
+	\z@{\linespacing\@plus\linespacing}{.5\linespacing}%
+	%  {\normalfont\centering}}% DELETED
+	{\normalfont}}% NEW
+\def\section{\@startsection{section}{1}%
+	\z@{.7\linespacing\@plus\linespacing}{.5\linespacing}%
+	%  {\normalfont\scshape\centering}}% DELETED
+	{\normalfont\scshape}}% NEW
+\makeatother
 
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
 
@@ -93,6 +102,75 @@
 \begin{document}
 
 \maketitle
+
+\begin{multicols}{1}
+
+\section{}
+
+\subsection{}
+
+\begin{align*}
+	T(f_1(x) + f_2(x)) &= \dod{}{x}(f_1(x) + f_2(x))\\
+	&= \dod{}{x} (f_1(x)) + \dod{}{x} (f_2(x))\\
+	&= T(f_1(x)) + T(f_2(x))
+\end{align*}
+
+\begin{align*}
+	T(\alpha f(x)) &= \dod{}{x} (\alpha f(x))\\
+	&= \alpha \dod{}{x} f(x)\\
+	&= \alpha T(f(x))
+\end{align*}
+Therefore, $T$ is linear.
+
+\subsection{}
+
+$\{1, x, x^2, x^3\}$ is a basis for $V$.
+
+\subsection{}
+
+$\{1, x, x^2\}$ is a basis for the range of $T$ with input $V$.
+
+\subsection{}
+
+\begin{align*}
+	T(1, x, x^2, x^3) &= A (1, x, x^2, x^3)\\
+	&= (0, 1, 2x, 3x^2)\\
+	\therefore A 
+		\begin{pmatrix}
+		1 & 0 & 0 & 0\\
+		0 & 1 & 0 & 1\\
+		0 & 0 & 1 & 0\\
+		0 & 0 & 0 & 1\\
+		\end{pmatrix}
+		&=
+		\begin{pmatrix}
+			0 & 1 & 0 & 0\\
+			0 & 0 & 2 & 0\\
+			0 & 0 & 0 & 3\\
+			0 & 0 & 0 & 0\\
+		\end{pmatrix}\\
+	\therefore A &=
+		\begin{pmatrix}
+			0 & 1 & 0 & 0\\
+			0 & 0 & 2 & 0\\
+			0 & 0 & 0 & 3\\
+			0 & 0 & 0 & 0\\
+		\end{pmatrix}
+\end{align*}
+
+\subsection{}
+
+\begin{align*}
+	T(k) &= 0\\
+	\therefore \ker T &= \mathbb{R}
+\end{align*}
+
+\subsection{}
+
+\begin{equation*}
+	\dim(\text{range}) + \dim(\text{kernel}) = \dim V
+\end{equation*}
+is valid for all vector spaces $V$ and all linear transformations.
 
 \section{}
 
@@ -612,4 +690,7 @@ Therefore,
 \begin{align*}
 	\dim (\ker T) &= 1
 \end{align*}
+
+\end{multicols}
+
 \end{document}
