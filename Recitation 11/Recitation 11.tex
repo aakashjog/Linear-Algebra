@@ -1,0 +1,332 @@
+\documentclass[fleqn, a4paper, 12pt]{article}
+\setcounter{secnumdepth}{4}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathtools, xfrac}
+\usepackage{datetime}
+\usepackage{ulem}
+\usepackage{enumerate}
+\usepackage[table]{xcolor}
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+\newcommand{\rank}{\mathrm{rk\,}}
+
+\newcommand{\R}{\mathrm{R}}
+
+\newcommand{\C}{\mathrm{C}}
+
+\newcommand{\N}{\mathrm{N}}
+
+\newcommand{\im}{\mathrm{im}\,}
+
+\newenvironment{amatrix}[1]{%
+	\left(\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+	\end{array}\right)
+}
+
+%\setlength{\mathindent}{0pt}
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}
+
+\newenvironment{solution}
+{\begin{proof}[Solution]\let\qed\relax}
+	{\end{proof}}
+
+\DeclareMathOperator{\vspan}{\mathrm{span}} %declares span operator for matrices
+
+%opening
+\title{Recitation 11}
+\author{}
+\date{\formatdate{4}{1}{2015}}
+
+\begin{document}
+
+\maketitle
+%\setlength{\mathindent}{0pt}
+
+\tableofcontents
+
+\newpage
+\section{Algebraic and Geometric Multiplicity}
+
+\begin{example}
+	\begin{align*}
+		A &=
+			\begin{pmatrix}
+				-1 & 2 & 0\\
+				0 & 1 & 2\\
+				0 & 2 & 1\\
+			\end{pmatrix}
+	\end{align*}
+	Find the eigenvalues and algebraic multiplicity and eigenspaces with geometric multiplicity.
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		\det(A - \lambda I) &= 
+			\begin{vmatrix}
+				-1 - \lambda & 2 & 0\\
+				0 & 1 - \lambda & 2\\
+				0 & 2 & 1 - \lambda\\
+			\end{vmatrix}
+		&= (-1 - \lambda)((1 - \lambda)^2 - 4)\\
+		&= - (\lambda + 1)^2 (\lambda - 3)
+	\end{align*}
+	Therefore,\\
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		Eigenvalue & Algebraic Multiplicity & Eigenspace & Geometric Multiplicity\\
+		\hline
+		-1 & 2 & $\vspan
+			\left\lbrace
+				\begin{pmatrix}
+					1\\
+					0\\
+					0\\
+				\end{pmatrix}
+			\right\rbrace
+			$
+		& 1\\
+		\hline
+		3 & 1 & $\vspan
+			\left\lbrace
+				\begin{pmatrix}
+				1\\
+				2\\
+				2\\
+				\end{pmatrix}
+			\right\rbrace
+			$
+		& 1\\ 
+		\hline
+	\end{tabular}
+\end{solution}
+
+\begin{example}
+	Check if the following matrix is diagonalizable, and if it is, diagonalize it.
+	\begin{equation*}
+		A =
+			\begin{pmatrix}
+				4 & 0 & -3\\
+				-3 & 1 & 3\\
+				6 & 0 & -5\\
+			\end{pmatrix}
+	\end{equation*}
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		A &=
+		\begin{pmatrix}
+			4 & 0 & -3\\
+			-3 & 1 & 3\\
+			6 & 0 & -5\\
+		\end{pmatrix}\\
+		\therefore p_A(x) &= |A - \lambda I|\\
+		&= 
+			\begin{vmatrix}
+				4 - \lambda & 0 & -3\\
+				-3 & 1 - \lambda & 3\\
+				6 & 0 & -5 - \lambda\\
+			\end{vmatrix}\\
+		&= (4 - \lambda) (1 - \lambda) (-5 - \lambda) + 3 (1 - \lambda) 6\\
+		&= (1 - \lambda) ((4 - \lambda)(-5 - \lambda) + 18)\\
+		&= -(\lambda - 1)^2 (\lambda + 2)\\
+		\therefore \lambda &= 1, -2
+	\end{align*}
+	\begin{align*}
+		V_1 &= \N 
+			\begin{pmatrix}
+				3 & 0 & -3\\
+				-3 & 0 & 3\\
+				6 & 0 & -6\\
+			\end{pmatrix}\\
+		&= \N
+			\begin{pmatrix}
+				1 & 0 & -1\\
+				0 & 0 & 0\\
+				0 & 0 & 0\\
+			\end{pmatrix}\\
+		&= \vspan
+			\left\lbrace
+				\begin{pmatrix}
+					0\\
+					1\\
+					0\\
+				\end{pmatrix}
+				,
+				\begin{pmatrix}
+					1\\
+					0\\
+					1\\
+				\end{pmatrix}
+			\right\rbrace
+	\end{align*}
+	Therefore,\\
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		Eigenvalue & Algebraic Multiplicity & Eigenspace & Geometric Multiplicity\\
+		\hline
+		1 & 2 & $\vspan
+			\left\lbrace
+				\begin{pmatrix}
+					0\\
+					1\\
+					0\\
+				\end{pmatrix}
+				,
+				\begin{pmatrix}
+					1\\
+					0\\
+					1\\
+				\end{pmatrix}
+			\right\rbrace
+			$
+		& 2\\
+		\hline
+		-1 & 1 & $\vspan
+			\left\lbrace
+				\begin{pmatrix}
+					-1\\
+					1\\
+					-2\\
+				\end{pmatrix}
+			\right\rbrace
+			$
+		& 1\\ 
+		\hline
+	\end{tabular}
+	Therefore, the geometric multiplicity is 3. Hence, $A$ is diagonalizable.\\
+	Therefore,
+	\begin{align*}
+		P &=
+			\begin{pmatrix}
+				0 & 1 & -1\\
+				1 & 0 & 1\\
+				0 & 1 & -2\\
+		\end{pmatrix}\\
+		D &= 
+			\begin{pmatrix}
+				1 & 0 & 0\\
+				0 & 1 & 0\\
+				0 & 0 & -2\\
+			\end{pmatrix}
+	\end{align*}
+\end{solution}
+
+\begin{example}
+	Check if the following matrix is diagonalizable, and if it is, diagonalize it.
+	\begin{equation*}
+	A =
+		\begin{pmatrix}
+			4 & 0 & -3\\
+			1 & 1 & 1\\
+			6 & 0 & 5-\\
+		\end{pmatrix}
+	\end{equation*}
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		A &=
+			\begin{pmatrix}
+				4 & 0 & -3\\
+				1 & 1 & 1\\
+				6 & 0 & 5-\\
+			\end{pmatrix}\\
+			\therefore p_A(x) &= |A - \lambda I|\\
+		&= 
+		\begin{vmatrix}
+			4 - \lambda & 0 & -3\\
+			1 & 1 - \lambda & 1\\
+			6 & 0 & -5 - \lambda\\
+		\end{vmatrix}\\
+		&= (4 - \lambda) (1 - \lambda) (-5 - \lambda) + 3 (1 - \lambda) 6\\
+		&= (1 - \lambda) ((4 - \lambda)(-5 - \lambda) + 18)\\
+		&= -(\lambda - 1)^2 (\lambda + 2)\\
+	\end{align*}
+		Therefore,\\
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		Eigenvalue & Algebraic Multiplicity & Eigenspace & Geometric Multiplicity\\
+		\hline
+		1 & 2 & $\vspan
+			\left\lbrace
+				\begin{pmatrix}
+					0\\
+					1\\
+					0\\
+				\end{pmatrix}
+			\right\rbrace
+			$
+		& 1\\
+		\hline
+		-1 & 1 & & 1\\ 
+		\hline
+	\end{tabular}
+	Hence, by the explicit criterion for diagonalization, $B$ cannot be diagonalized.
+\end{solution}
+
+\begin{example}
+	Let $V = M_{2 \times 2} (\mathbb{R})$ and $T : V \to V$.
+	\begin{equation*}
+		T 
+			\begin{pmatrix}
+				a & b\\
+				c & d\\
+			\end{pmatrix}
+		=
+			\begin{pmatrix}
+				d & a - 2b\\
+				c & a\\
+			\end{pmatrix}
+	\end{equation*}
+	Find $[T]_E$, all eigenvalues, the eigenspace of the maximal eigenvalue. Determine whether $T$ is diagonalizable. 
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		[T]_E &= 
+			\begin{pmatrix}
+				[T(e_1)]_E & [T(e_2)]_E & [T(e_3)]_E & [T(e_4)]_E\\
+			\end{pmatrix}\\
+		&= 
+			\begin{pmatrix}
+				\left[
+					\begin{pmatrix}
+						0 & 1\\
+						0 & 1\\
+					\end{pmatrix}
+				\right]_E
+				&
+				\left[
+					\begin{pmatrix}
+						0 & -2\\
+						0 & 0\\
+					\end{pmatrix}
+				\right]_E
+				&
+				\left[
+					\begin{pmatrix}
+						0 & 0\\
+						1 & 0\\
+					\end{pmatrix}
+				\right]_E
+				&
+				\left[
+					\begin{pmatrix}
+						1 & 1\\
+						0 & 0\\
+					\end{pmatrix}
+				\right]_E
+			\end{pmatrix}
+	\end{align*}
+\end{solution}
+
+\end{document}
