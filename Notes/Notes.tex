@@ -3418,4 +3418,239 @@ Given an operator $T : V \to V$, decide whether or not there exists a basis $B$ 
 	\end{align*}
 \end{proof}
 
+\section{Norms}
+
+\subsection{Definition}
+
+\begin{definition}[Norm]
+	Let $V$ be a vector space over $\mathbb{F}$ with inner product. $\forall v \in V$,
+	\begin{equation*}
+		\| v \| \doteq \sqrt{\langle v, v \rangle}
+	\end{equation*}
+	$\| v \|$ is called the norm of $v$.
+\end{definition}
+
+\subsection{Properties}
+
+\begin{enumerate}
+	\item Positivity\\
+		$\| v \| \geq 0$, $\forall v \in V$\\
+		$\| v \| = 0 \iff v = \mathbb{O}$
+	\item Homogeneity\\
+		$\| \alpha v \| = |\alpha| \| v \|$, $\forall v \in V, \forall \alpha \in \mathbb{F}$
+	\item Triangle Inequality\\
+		$\| u+v \| \leq \| u \| + \| v \|$, $\forall u, v \in V$
+\end{enumerate}
+
+\section{Orthogonality}
+
+\subsection{Definition}
+
+\begin{definition}[Orthogonality]
+	A vector $u \in V$ is said to be orthogonal to $v \in V$ if
+	\begin{equation*}
+		\langle u, v \rangle = 0
+	\end{equation*}
+	It is denoted as $u \perp v$.
+\end{definition}
+
+\subsection{Properties}
+
+\begin{enumerate}
+	\item If $u \perp v$, then $v \perp u$.
+	\item If $u \perp v$, $\alpha, \beta \in \mathbb{F}$, then $\alpha u \perp \beta v$.
+	\item $\mathbb{O} \perp v$, $\forall v \in V$.
+\end{enumerate}
+
+\section{Orthogonal and Orthonormal Bases}
+
+Let $V$ be a vector space over $\mathbb{F}$ with an inner product. Let $S \subset V$.
+
+\begin{definition}[Orthogonal set]
+	$S$ is said to be orthogonal if any two distinct vectors from $S$ are orthogonal.
+\end{definition}
+
+\begin{definition}[Orthonormal set]
+	$S$ is said to be orthonormal if it is orthogonal and the norm of every vector is 1.
+\end{definition}
+
+\begin{definition}[Orthogonal basis]
+	$S$ is said to be an orthogonal basis of $V$ if it is orthogonal and a basis of $V$.
+\end{definition}
+
+\begin{definition}[Orthonormal basis]
+	$S$ is said to be an orthonormal basis of $V$ if it is orthonormal and a basis of $V$.
+\end{definition}
+
+\begin{theorem}
+	Let $S$ be an orthogonal set such that $\mathbb{O} \notin S$. Then $S$ is linearly independent.
+\end{theorem}
+
+\begin{proof}
+	Let
+	\begin{align*}
+		\alpha_1, \dots, \alpha_m &\in \mathbb{F}\\
+		v_1, \dots v_m &\in S
+	\end{align*}
+	Let
+	\begin{align*}
+		\alpha_1 v_1 + \dots + \alpha_m v_m &= \mathbb{O}
+	\end{align*}
+	$S$ is linearly independent if and only if
+	\begin{equation*}
+		\alpha_1 = \dots = \alpha_m = 0
+	\end{equation*}
+	\begin{align*}
+		\alpha_1 v_1 + \dots + \alpha_m v_m &= \mathbb{O}\\
+		\intertext{Multiplying both sides by $v_1$,}
+		\langle \alpha_1 v_1 + \dots + \alpha_m v_m, v_1 \rangle &= \langle \mathbb{O}, v_1 \rangle\\
+		\therefore \alpha_1 \langle v_1, v_1 \rangle + \dots + \alpha_m \langle v_m, v_1 \rangle &= 0
+	\end{align*}
+	As $v_1, \dots, v_m$ are orthogonal, 
+	\begin{equation*}
+		\langle v_2, v_1 \rangle = \dots = \langle v_m, v_1 \rangle
+	\end{equation*}
+	\begin{align*}
+		\therefore \alpha_1 \langle v_1, v_1 \rangle &= 0
+	\end{align*}
+	As $v_1 \neq \mathbb{O}$
+	\begin{align*}
+		\langle v_1, v_1 \rangle &\neq 0\\
+		\therefore \alpha_1 &= 0
+	\end{align*}
+	Similarly,
+	\begin{equation*}
+		\alpha_2 = \dots = \alpha_m = 0
+	\end{equation*}
+\end{proof}
+
+\begin{corollary}
+	Any orthonormal set is linearly independent.
+\end{corollary}
+
+\begin{corollary}
+	Any orthonormal set consisting of $n = \dim V$ vectors is an orthonormal basis of $V$.
+\end{corollary}
+
+\begin{example}
+	Is the set
+	\begin{equation*}
+		S = 
+			\left\lbrace
+				\begin{pmatrix}
+					1\\
+					1\\
+				\end{pmatrix}
+				,
+				\begin{pmatrix}
+					-1\\
+					1\\
+				\end{pmatrix}
+			\right\rbrace
+	\end{equation*}
+	orthonormal?
+\end{example}
+
+\begin{solution}
+	The norm of the elements of $S$ is not 1. Hence $S$ is not orthonormal.
+\end{solution}
+
+\begin{theorem}
+	Let $B = \{v_1, \dots, v_n\}$ be an orthonormal basis of $V$. Let $v \in V$. Let $[v]_B = 
+		\begin{pmatrix}
+			\alpha_1\\
+			\vdots\\
+			\alpha_n\\
+		\end{pmatrix}
+		$.
+	Then,
+	\begin{align*}
+		\alpha_1 &= \langle v, v_1 \rangle\\
+		&\vdots\\
+		\alpha_n &= \langle v, v_n \rangle
+	\end{align*}
+\end{theorem}
+
+\begin{proof}
+	\begin{align*}
+		v &= \alpha_1 v_1 + \dots + \alpha_n v_n\\
+		\therefore \langle v, v_1 \rangle &= \langle \alpha_1 v_1 + \dots + \alpha_n v_n, v_1 \rangle\\
+		&= \alpha_1 \langle v_1, v_1 \rangle + \dots + \alpha_n \langle v_n, v_1 \rangle\\
+		&= \alpha_1
+	\end{align*}
+	Similarly, in general, $\forall 1 \leq i \leq n$,
+	\begin{equation*}
+		\langle v, v_i \rangle = \alpha_i
+	\end{equation*}
+\end{proof}
+
+\begin{theorem}[Pythagoras Theorem]
+	Let $B = \{v_1, \dots, v_n\}$ be an orthonormal basis of $V$. Let $v \in V$. Let $[v]_B = 
+		\begin{pmatrix}
+			\alpha_1\\
+			\vdots\\
+			\alpha_n\\
+		\end{pmatrix}
+		$.
+	Then,
+	\begin{equation*}
+		{\| v \|}^2 = |\alpha_1|^2 + \dots + |\alpha_n|^2
+	\end{equation*}
+\end{theorem}
+
+\begin{proof}
+	\begin{align*}
+		{\| v \|}^2 &= \langle v, v \rangle\\
+		&= \langle \alpha_1 v_1 + \dots + \alpha_n v_n, \alpha_1 v_1 + \dots + \alpha_n v_n \rangle\\
+		&= \alpha_1 \overline{\alpha_1} + \dots + \alpha_n \overline{\alpha_n}\\
+		&= |\alpha_1|^2 + \dots |\alpha_n|^2
+	\end{align*}
+\end{proof}
+
+\section{Unitary Matrices}
+
+\begin{definition}
+	Let $\mathbb{F} = \mathbb{R}$ or $\mathbb{F} = \mathbb{C}$. Let $A$ be an $n \times n$ matrix. $A$ is said to be a unitary matrix if
+	\begin{equation*}
+		A^* = \overline{A}^t = \overline{A^t} = A^{-1}
+	\end{equation*}
+	If $\mathbb{F} = \mathbb{R}$, unitary matrices are called orthogonal matrices.
+\end{definition}
+
+\begin{enumerate}
+	\item $I$ is a unitary matrix.
+	\item If $A_1$ and $A_2$ are unitary matrices, then $(A_1 A_2)^* = A_2^* A_1^*$.
+	\item If $A$ is unitary, $A^{-1}$ is also unitary.
+\end{enumerate}
+
+\begin{theorem}
+	Let $A$ be an $n \times n$ matrix. Let $v_1, \dots, v_n$ be the columns of $A$. Let $A$ be an $n \times n$ matrix. Let $r_1, \dots, r_n$ be the columns of $A$.
+	Then the following are equivalent.
+	\begin{enumerate}
+		\item $A$ is unitary.
+		\item $\{v_1, \dots, v_n\}$ is an orthonormal basis of $\mathbb{F}^n$, with respect to standard dot product.
+		\item $\{r_1, \dots, r_n\}$ is an orthonormal basis of $\mathbb{F}^n$, with respect to standard dot product.
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	As $A$ is unitary, $A^t$ is also unitary.
+	\begin{align*}
+		(A^t)^* &= (\overline{A^t})^t\\
+		&= (A^*)^t\\
+		&= (A^{-1})^t\\
+		&= (A^t)^{-1}
+	\end{align*}
+	\begin{align*}
+		A &\text{ is unitary}\\
+		\iff A^* &= A^{-1}\\
+		\iff A A^* &= I\\
+		\iff A \overline{A}^t &= I\\
+		\iff (A \overline{A}^t)_{ik} &= I_{ik}\\
+		&= \sum_{j = 1}^{n} a_{ij} \overline{a_{ik}}\\
+		&= r_i \cdot \overline{r_k}
+		\iff \{r_1, \dots, r_n\} \text{ is an orthonormal basis}
+	\end{align*}
+\end{proof}
+
 \end{document}
