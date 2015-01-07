@@ -1,0 +1,361 @@
+\documentclass[fleqn, a4paper, 12pt]{article}
+\setcounter{secnumdepth}{4}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathtools, xfrac}
+\usepackage{datetime}
+\usepackage{ulem}
+\usepackage{enumerate}
+\usepackage[table]{xcolor}
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+\newcommand{\rank}{\mathrm{rk\,}}
+
+\newcommand{\R}{\mathrm{R}}
+
+\newcommand{\C}{\mathrm{C}}
+
+\newcommand{\N}{\mathrm{N}}
+
+\newcommand{\im}{\mathrm{im}\,}
+
+\newenvironment{amatrix}[1]{%
+	\left(\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+	\end{array}\right)
+}
+
+%\setlength{\mathindent}{0pt}
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}
+
+\newenvironment{solution}
+{\begin{proof}[Solution]\let\qed\relax}
+	{\end{proof}}
+
+\DeclareMathOperator{\vspan}{\mathrm{span}} %declares span operator for matrices
+
+%opening
+\title{Recitation 12}
+\author{}
+\date{\formatdate{7}{1}{2015}}
+
+\begin{document}
+
+\maketitle
+%\setlength{\mathindent}{0pt}
+
+\tableofcontents
+
+\newpage
+\section{Linear Transformation Diagonalization}
+
+\begin{example}
+	Let $V = M_{2 \times 2} (\mathbb{R})$ and $T : V \to V$.
+	\begin{equation*}
+	T 
+		\begin{pmatrix}
+			a & b\\
+			c & d\\
+		\end{pmatrix}
+	=
+		\begin{pmatrix}
+			d & a - 2b\\
+			c & a\\
+		\end{pmatrix}
+	\end{equation*}
+	Find $[T]_E$, all eigenvalues, the eigenspace of the maximal eigenvalue. Determine whether $T$ is diagonalizable. 
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		[T]_E &= 
+			\begin{pmatrix}
+				[T(e_1)]_E & [T(e_2)]_E & [T(e_3)]_E & [T(e_4)]_E\\
+			\end{pmatrix}\\
+		&= 
+			\begin{pmatrix}
+				\left[
+					\begin{pmatrix}
+						0 & 1\\
+						0 & 1\\
+					\end{pmatrix}
+				\right]_E
+			&
+				\left[
+					\begin{pmatrix}
+						0 & -2\\
+						0 & 0\\
+					\end{pmatrix}
+				\right]_E
+			&
+				\left[
+					\begin{pmatrix}
+						0 & 0\\
+						1 & 0\\
+					\end{pmatrix}
+				\right]_E
+			&
+				\left[
+					\begin{pmatrix}
+						1 & 1\\
+						0 & 0\\
+					\end{pmatrix}
+				\right]_E
+			\end{pmatrix}\\
+		&=
+			\begin{pmatrix}
+				0 & 0 & 0 & 1\\
+				1 & -2 & 0 & 0\\
+				0 & 0 & 1 & 0\\
+				1 & 0 & 0 & 0\\
+			\end{pmatrix}
+	\end{align*}
+	\begin{align*}
+		P_T (\lambda) = \left\lvert [T]_E - \lambda I \right\rvert\\
+		&= 
+			\begin{vmatrix}
+				-\lambda & 0 & 0 & 1\\
+				1 & -2 - \lambda & 0 & 0\\
+				0 & 0 & 1 - \lambda & 0\\
+				1 & 0 & 0 & -\lambda\\
+			\end{vmatrix}\\
+		&= (1 - \lambda) 
+			\begin{pmatrix}
+				-\lambda & 0 & 1\\
+				1 & -2 -\lambda & 0\\
+				1 & 0 & \lambda\\
+			\end{pmatrix}\\
+		&= - (1 - \lambda) (2 + \lambda) (\lambda^2 - 1)\\
+		\therefore \lambda &= 1, -1, -2
+	\end{align*}
+	\begin{align*}
+		V_1 &= \N 
+			\begin{pmatrix}
+				-1 & 0 & 0 & 1\\
+				1 & -3 & 0 & 0\\
+				0 & 0 & 0 & 0\\
+				1 & 0 & 0 & -1\\
+			\end{pmatrix}\\
+		&= \N
+			\begin{pmatrix}
+				-1 & 0 & 0 & 1\\
+				0 & -3 & 0 & 1\\
+				0 & 0 & 0 & 0\\
+				0 & 0 & 0 & 0\\
+			\end{pmatrix}\\
+		&= 
+			\begin{pmatrix}
+				w\\
+				\sfrac{w}{3}\\
+				z\\
+				w\\
+			\end{pmatrix}\\
+		&= \vspan
+			\left\lbrace
+				\begin{pmatrix}
+					0\\
+					0\\
+					1\\
+					0\\
+				\end{pmatrix}
+				,
+				\begin{pmatrix}
+					3\\
+					1\\
+					0\\
+					3\\
+				\end{pmatrix}
+			\right\rbrace
+	\end{align*}
+	For each eigenvalue, the algebraic multiplicity is equal to the geometeric multiplicity. Therefore $T$ is diagonalizable.
+\end{solution}
+
+\begin{example}
+	Let $A \in M_{2 \times 2} (\mathbb{R})$, s.t.
+	\begin{align*}
+		A
+			\begin{pmatrix}
+				1\\
+				3\\
+			\end{pmatrix}
+		&= 
+			\begin{pmatrix}
+				-2\\
+				-6\\
+			\end{pmatrix}\\
+		A
+			\begin{pmatrix}
+				2\\
+				5\\
+			\end{pmatrix}
+		&= 
+			\begin{pmatrix}
+				2\\
+				5\\
+			\end{pmatrix}
+	\end{align*}
+	Find $A$ and the eigenvalues and eigenspaces of $A^{-1}$.
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		A v_1 &= -2 v_1
+	\end{align*}
+	Therefore, -2 is an eigenvalue of $A$, and $v_1$ is an eigenvector of $A$, corresponding to -2.
+	\begin{align*}
+		A v_2 &= 1 v_2
+	\end{align*}
+	Therefore, 1 is an eigenvalue of $A$, and $v_2$ is an eigenvector of $A$, corresponding to 1.\\
+	Therefore, the characteristic polynomial is
+	\begin{align*}
+		p_A (\lambda) &= (\lambda - 1) (\lambda + 2)
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		V_{-2} &= \vspan
+			\left\lbrace
+				\begin{pmatrix}
+					1\\
+					3\\
+				\end{pmatrix}
+			\right\rbrace\\
+		V_{1} &= \vspan
+			\left\lbrace
+				\begin{pmatrix}
+					2\\
+					5\\
+				\end{pmatrix}
+			\right\rbrace
+	\end{align*}
+	Therefore, $A$ is diagonalizable, and its diagonal form is
+	\begin{align*}
+		D &= 
+			\begin{pmatrix}
+				-2 & 0\\
+				0 & 1\\
+			\end{pmatrix}
+	\end{align*}
+	and the corresponding $P$ is
+	\begin{align*}
+		\begin{pmatrix}
+			1 & 2\\
+			3 & 5\\
+		\end{pmatrix}
+	\end{align*}
+	\begin{align*}
+		A &= P D P^{-1}\\
+		\therefore A &= 
+			\begin{pmatrix}
+				1 & 2\\
+				3 & 5\\
+			\end{pmatrix}
+			\begin{pmatrix}
+				-2 & 0\\
+				0 & 1\\
+			\end{pmatrix}
+			\begin{pmatrix}
+				-5 & 2\\
+				3 & -1\\
+			\end{pmatrix}\\
+		&=
+			\begin{pmatrix}
+				16 & -6\\
+				45 & -17\\
+			\end{pmatrix}
+	\end{align*}
+	If $\lambda$ is an eigenvalue of an invertible matrix $A$, then $\lambda \neq 0$ and eigenvector $v$ of $A$, corresponding to $\lambda$ is also an eigenvector of $A^{-1}$ corresponding to $\lambda_{-1}$.\\
+	Therefore,
+	\begin{tabular}{|c|c|}
+		\hline
+		Eigenvalue & Eigenvector\\
+		\hline
+		$-\dfrac{1}{2}$ & 
+			$
+				\begin{pmatrix}
+					1\\
+					3\\
+				\end{pmatrix}
+			$\\
+		\hline
+		$1$ & 
+			$
+				\begin{pmatrix}
+					2\\
+					5\\
+				\end{pmatrix}
+			$\\
+		\hline
+	\end{tabular}
+\end{solution}
+
+\section{Inner Product Spaces}
+
+\begin{example}
+	Determine whether the following is an inner product.
+	\begin{align*}
+		V &= \mathbb{R}^2\\
+		\langle x, y \rangle &= x_1 y_1 - x_1 y_2 - x_2 y_1 + 3 x_2 y_2
+	\end{align*}
+\end{example}
+
+\begin{solution}
+	Let
+	\begin{align*}
+		x &= 
+			\begin{pmatrix}
+				x_1\\
+				x_2\\
+			\end{pmatrix}\\
+		y &= 
+			\begin{pmatrix}
+				y_1\\
+				y_2\\
+			\end{pmatrix}\\
+		z &= 
+			\begin{pmatrix}
+				z_1\\
+				z_2\\
+			\end{pmatrix}
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\langle x, x \rangle &= 
+			\left\langle
+				\begin{pmatrix}
+					x_1\\
+					x_2\\
+				\end{pmatrix}
+				,
+				\begin{pmatrix}
+					x_1\\
+					x_2\\
+				\end{pmatrix}
+			\right\rangle
+		&= {x_1}^2 - x_1 x_2 - x_2 x_1 + 3 {x_2}^2\\
+		&= {x_1}^2 - 2 x_1 x_2 + {x_2}^2 + 2 {x_2}^2\\
+		&= (x_1 - x_2)^2 + 2 {x_2}^2\\
+		&\geq 0
+	\end{align*}
+	\begin{align*}
+		\langle x, x \rangle = 0 \iff x_1 = x_2 = 0
+	\end{align*}
+	\begin{align*}
+		\langle x + y, z \rangle &= (x_1 + y_1) z_1 - (x_1 + y_1) z_2 - (x_2 + y_2) z_2 + 3 (x_2 + y_2) z_2\\
+		&= \langle x, z \rangle + \langle y, z \rangle
+	\end{align*}
+	\begin{align*}
+		\langle \alpha x, y \rangle &= \alpha \langle x, y \rangle
+	\end{align*}
+	\begin{align*}
+		\langle x, y \rangle &= \langle y, x \rangle
+	\end{align*}
+	Therefore, it is an inner product.
+\end{solution}
+
+\end{document}
