@@ -11,6 +11,7 @@
 \usepackage{tikz}
 \usepackage{enumerate, enumitem}
 \usepackage{cancel}
+\usepackage{xfrac}
 %\usepackage{background}
 \setcounter{secnumdepth}{4}
 
@@ -3584,7 +3585,7 @@ Let $V$ be a vector space over $\mathbb{F}$ with an inner product. Let $S \subse
 	\end{equation*}
 \end{proof}
 
-\begin{theorem}[Pythagoras Theorem]
+\begin{theorem}[Pythagoras Theorem]\label{Pythagoras Theorem}
 	Let $B = \{v_1, \dots, v_n\}$ be an orthonormal basis of $V$. Let $v \in V$. Let $[v]_B = 
 		\begin{pmatrix}
 			\alpha_1\\
@@ -3685,6 +3686,8 @@ Let $V$ be a vector space over $\mathbb{F}$ with an inner product. Let $S \subse
 
 \section{Projections}
 
+\subsection{Definition}
+
 \begin{definition}
 	Let $S \subset V$ be a set of vectors. 
 	\begin{equation*}
@@ -3762,6 +3765,298 @@ Let $V$ be a vector space over $\mathbb{F}$ with an inner product. Let $S \subse
 
 \subsection{Gram - Schmidt Process}
 
+\begin{tabular}{l l}
+	Input & Any basis $B = \{v_1, \dots, v_n\}$ of $V$.\\
+	Intermediate Output & Orthogonal basis $\widetilde{B} = \{\widetilde{v_1}, \dots, \widetilde{v_n}$ of $V$\\
+	Final Output & Orthonormal basis $B^0 = \{{v_1}^1, \dots, {v_n}^0\}$ of $V$\\
+\end{tabular}
 
+\begin{enumerate}[label=Step \arabic*]
+	\item $\widetilde{v_1} = v_1$, denote $w_1 = \vspan\{\widetilde{v_1}\} = \vspan\{v_1\}$, $B_1 = \{\widetilde{v_1}\}$
+	\item $\widetilde{v_2} = v_2 - \pi_{B_1}(v_2) = v_2 - \dfrac{\langle v_2, \widetilde{v_1}\rangle}{\langle \widetilde{v_1}, \widetilde{v_1}} \widetilde{v_1}$
+	\item[] As $\widetilde{v_2} \perp \widetilde{v_1}$, $B_2 = \{\widetilde{v_1}, \widetilde{v_2}\}$ is an orthogonal set. Denote $W_2 = \vspan \{\widetilde{v_1}, \widetilde{v_2}\} = \vspan \{v_1, v_2\}.$
+	\item $\widetilde{v_3} = v_3 - \pi_{B_2}(v_3) = v_3 - \dfrac{\langle v_2, \widetilde{v_1} \rangle}{\langle \widetilde{v_1}, \widetilde{v_1} \rangle} \widetilde{v_1} - \dfrac{\langle v_3, \widetilde{v_2} \rangle}{\langle \widetilde{v_2}, \widetilde{v_2} \rangle}$
+	\item[] As $\widetilde{v_3} \in {W_2}^{\perp}$, $B_3 = \{\widetilde{v_1}, \widetilde{v_2}, \widetilde{v_3}\}$ is an orthogonal set. Denote $W_2 = \vspan \{\widetilde{v_1}, \widetilde{v_2}, \widetilde{v_3}\} = \vspan \{v_1, v_2, v_3\}.$
+	\item[] $\vdots$
+	\item[Step n] The $n^{\text{th}}$ step gives $\widetilde{B_n} = \{\widetilde{v_1}, \dots, \widetilde{v_n}\}$ which is an orthogonal basis of $V$.
+	\item[] $B^0$ is obtained by normalization of $\widetilde{B_n}$.\\
+		\begin{align*}
+			{v_1}^0 &= \dfrac{1}{\|\widetilde{v_1}\|}\\
+			&\vdots\\
+			{v_n}^0 &= \dfrac{1}{\|\widetilde{v_n}\|}
+		\end{align*}
+\end{enumerate}
+
+\begin{example}
+	\begin{align*}
+		B &= \{v_1, v_2, v_3\}\\
+		&= 
+			\left\lbrace
+				\begin{pmatrix}
+					1\\
+					1\\
+					0\\
+				\end{pmatrix}
+				,
+				\begin{pmatrix}
+					0\\
+					2\\
+					0\\
+				\end{pmatrix}
+				,
+				\begin{pmatrix}
+					1\\
+					1\\
+					1\\
+				\end{pmatrix}
+			\right\rbrace
+	\end{align*}
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		\widetilde{v_1} &= v_1\\
+		&= 
+			\begin{pmatrix}
+				1\\
+				1\\
+				0\\
+			\end{pmatrix}\\
+		\widetilde{v_2} &= v_2 - \dfrac{\langle v_2, \widetilde{v_1} \rangle}{\langle \widetilde{v_1}, \widetilde{v_1} \rangle}\\
+		&= 
+			\begin{pmatrix}
+				0\\
+				2\\
+				0\\
+			\end{pmatrix}
+			- \dfrac{2}{2}
+			\begin{pmatrix}
+				1\\
+				1\\
+				0\\
+			\end{pmatrix}\\
+		&= 
+			\begin{pmatrix}
+				-1\\
+				1\\
+				0\\
+			\end{pmatrix}\\
+		\widetilde{v_3} &= v_3 - \dfrac{\langle v_3, \widetilde{v_1} \rangle}{\langle \widetilde{v_1}, \widetilde{v_1} \rangle} \widetilde{v_1} - \dfrac{\langle v_3, \widetilde{v_2} \rangle}{\langle \widetilde{v_2}, \widetilde{v_2} \rangle} \widetilde{v_2}\\
+		&= 
+			\begin{pmatrix}
+				1\\
+				1\\
+				1\\
+			\end{pmatrix}
+			- \dfrac{2}{2} 
+			\begin{pmatrix}
+				1\\
+				1\\
+				0\\
+			\end{pmatrix}
+			- 0
+			\begin{pmatrix}
+				-1\\
+				1\\
+				0\\
+			\end{pmatrix}\\
+		&= 
+			\begin{pmatrix}
+				0\\
+				0\\
+				1\\
+			\end{pmatrix}\\
+		\therefore \widetilde{B_3} &= 
+			\left\lbrace
+				\begin{pmatrix}
+					1\\
+					1\\
+					0\\
+				\end{pmatrix}
+				,
+				\begin{pmatrix}
+					-1\\
+					1\\
+					0\\
+				\end{pmatrix}
+				,
+				\begin{pmatrix}
+					0\\
+					0\\
+					1\\
+				\end{pmatrix}
+			\right\rbrace
+	\end{align*}
+	Therefore, normalizing $\widetilde{B_3}$, 
+	\begin{align*}
+		{v_1}^0 &= 
+			\begin{pmatrix}
+				\sfrac{1}{\sqrt{2}}\\
+				\sfrac{1}{\sqrt{2}}\\
+				0\\
+			\end{pmatrix}\\
+		{v_2}^0 &=
+			\begin{pmatrix}
+				-\sfrac{1}{\sqrt{2}}\\
+				\sfrac{1}{\sqrt{2}}\\
+				0\\
+			\end{pmatrix}\\
+		{v_3}^0 &=
+			\begin{pmatrix}
+				0\\
+				0\\
+				1\\
+			\end{pmatrix}\\
+		\therefore B^0 &= 
+			\left\lbrace
+				\begin{pmatrix}
+					\sfrac{1}{\sqrt{2}}\\
+					\sfrac{1}{\sqrt{2}}\\
+					0\\
+				\end{pmatrix}
+				,
+				\begin{pmatrix}
+					-\sfrac{1}{\sqrt{2}}\\
+					\sfrac{1}{\sqrt{2}}\\
+					0\\
+				\end{pmatrix}
+				,
+				\begin{pmatrix}
+					0\\
+					0\\
+					1\\
+				\end{pmatrix}
+			\right\rbrace
+	\end{align*}
+	\begin{tikzpicture}
+		\begin{scope}[scale = 3]
+		
+			\begin{scope}[lightgray, -stealth]
+				\draw (0,0,0) -- (1,0,0) node [right] {$x$};
+				\draw (0,0,0) -- (0,1,0) node [above] {$y$};
+				\draw (0,0,0) -- (0,0,1) node [left] {$z$};
+			\end{scope}
+		
+			\begin{scope}[red, -stealth]
+				\draw (0,0,0) -- (1,1,0) node [anchor = north west] {$v_1$};
+				\draw (0,0,0) -- (0,2,0) node [anchor = north west] {$v_2$};
+				\draw (0,0,0) -- (1,1,1) node [anchor = north west] {$v_3$};
+			\end{scope}
+			
+			\begin{scope}[green, -stealth]
+				\draw (0,0,0) -- ({1/sqrt(2)},{1/sqrt(2)},0) node [anchor = north west] {${v_1}^0$};
+				\draw (0,0,0) -- ({-1/sqrt(2)},{1/sqrt(2)},0) node [anchor = north east] {${v_2}^0$};
+				\draw (0,0,0) -- (0,0,1) node [anchor = north west] {${v_3}^0$};
+			\end{scope}
+		\end{scope}
+	\end{tikzpicture}
+\end{solution}
+
+\subsection{Inequalities}
+
+\begin{theorem}[Bessel's Inequality]\label{Bessel's Inequality}
+	Let $\{v_1, \dots, v_m\}$ be an orthonormal set. Let $v \in V$ be any vector. Then
+	\begin{align*}
+		{\| v \|}^2 &\geq {|\langle v, v_1 \rangle|}^2 + \dots + {|\langle v, v_m \rangle|}^2		
+	\end{align*}
+	and the equality holds if and only if $v \in \vspan \{v_1, \dots, v_m\}$.
+\end{theorem}
+
+\begin{proof}
+	$\{v_1, \dots, v_m\}$ can be completed to an orthonormal basis 
+	\begin{align*}
+		B = \{v_1, \dots, v_m, v_{m+1}, \dots, v_n\}
+	\end{align*}
+	Using \nameref{Pythagoras Theorem}, 
+	\begin{align*}
+		{\| v \|}^2 &= {|\langle v, v_1 \rangle|}^2 + \dots + {|\langle v, v_m \rangle|}^2 + {|\langle v, v_{m+1} \rangle|}^2 + \dots + {|\langle v, v_n \rangle|}^2\\
+		\therefore {\| v \|}^2 &\geq {|\langle v, v_1 \rangle|}^2 + \dots + {|\langle v, v_m \rangle|}^2
+	\end{align*}
+	The equality holds if and only if
+	\begin{align*}
+		{|\langle v, v_{m+1} \rangle|}^2 + \dots + {|\langle v, v_n \rangle|}^2 &= 0
+	\end{align*}
+	if and only if
+	\begin{align*}
+		{|\langle v, v_{m+1} \rangle|}^2 &= 0\\
+		&\vdots\\
+		{|\langle v, v_n \rangle|}^2 &= 0
+	\end{align*}
+	If $v \in \vspan \{v_1, \dots, v_m\}$,
+	\begin{align*}
+		v &= \alpha_1 v_1 + \dots + \alpha_m v_m
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\langle v, v_{m+1} \rangle &= \langle \alpha_1 v_1 + \dots + \alpha_m v_m, v_{m+1} \rangle\\
+		&= \alpha_1 \langle v_1, v_{m+1} \rangle + \dots + \alpha_m \langle v_m, v_{m+1} \rangle
+		\intertext{as the basis is orthonormal, $\langle v_i, v_{m+1} \rangle$}
+		\therefore \langle v, v_{m+1} \rangle &= 0
+	\end{align*}
+	Similarly,
+	\begin{align*}
+		{|\langle v, v_{m+2} \rangle|}^2 &= 0\\
+		&\vdots\\
+		{|\langle v, v_n \rangle|}^2 &= 0
+	\end{align*}
+	Conversely, if
+	\begin{align*}
+		{|\langle v, v_{m+1} \rangle|}^2 &= 0\\
+		&\vdots\\
+		{|\langle v, v_n \rangle|}^2 &= 0
+	\end{align*}
+	let
+	\begin{align*}
+		v &= \alpha_1 v_1 + \dots + \alpha_m v_m + \alpha_{m+1} v_{m+1} + \alpha_n v_n\\
+		\therefore 0 &= \langle v, v_{m+1} \rangle\\
+		\therefore 0 &= \langle \alpha_1 v_1 + \dots + \alpha_m v_m + \alpha_{m+1} v_{m+1} + \alpha_n v_n, v_{m+1} \rangle
+	\end{align*}
+	All $\langle v_i, v_{m+1} \rangle$ except $\langle v_{m+1}, v_{m+1} \rangle$ are 0.\\
+	Therefore,
+	\begin{align*}
+		{|\langle v, v_{m+1} \rangle|}^2 + \dots + {|\langle v, v_n \rangle|}^2 &= 0
+	\end{align*}
+\end{proof}
+
+\begin{theorem}[Cauchy - Schwarz Inequality]\label{Cauchy - Schwarz Inequality}
+	Let $u, v \in V$ be any vectors. Then
+	\begin{align*}
+		| \langle u, v \rangle | &\leq \| u \| \cdot \| v \|
+	\end{align*}
+	and the equality holds if and only if $\{u, v\}$ is linearly dependent.
+\end{theorem}
+
+\begin{proof}
+	If $u = \mathbb{O}$, the equality holds.\\
+	Let $u \neq \mathbb{O}$.\\
+	Let
+	\begin{align*}
+		u^0 &= \dfrac{1}{\| u \|}\\
+		\| u^0 \| &= 1
+	\end{align*}
+	Applying \nameref{Bessel's Inequality} to the orthonormal set $\{u^0\}$,
+	\begin{align*}
+		{\| v \|}^2 & \geq {| \langle v, u^0 \rangle |}^2\\
+		{| \langle v, u^0 \rangle |}^2 &= {\left\lvert \left\langle v, \dfrac{1}{\| u \|} u \right\rangle \right\rvert}^2\\
+		&= {\left\lvert \dfrac{1}{\| u \|} \langle v, u \rangle \right\rvert}^2\\
+		&= \left( \dfrac{1}{\| u \|} | \langle v, u \rangle | \right)^2\\
+		&= \dfrac{1}{{\| u \|}^2} {|\langle v, u \rangle|}^2\\
+		\therefore {\| v \|}^2 &\geq \dfrac{1}{{\| u \|}^2} {|\langle v, u \rangle|}^2
+	\end{align*}
+	By \nameref{Bessel's Inequality}, the equality holds if and only if
+	\begin{equation*}
+		v \in \vspan \{u^0\} = \vspan \{u\}
+	\end{equation*}
+	Therefore, $v$ and $u$ are linearly independent.
+\end{proof}
+
+\section{Angle}
+
+\begin{definition}[Angle]
+	Let $V$ be a vector space over $\mathbb{R}$ with inner product $\langle , \rangle$. Let $u, v \in V$, $u \neq \mathbb{O}$, $v \neq \mathbb{O}$. The angle between $u$ and $v$ is defined as
+	\begin{equation*}
+		\cos \varphi \doteq \dfrac{\langle u, v \rangle}{\| u \| \cdot \| v \|}
+	\end{equation*}
+\end{definition}
 
 \end{document}
