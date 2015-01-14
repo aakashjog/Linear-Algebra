@@ -47,6 +47,8 @@
 
 \newcommand{\im}{\mathrm{im}\,}
 
+\newcommand{\distance}{\mathrm{d}}
+
 \newenvironment{solution} %declares solution environment and removes qed at end
 	{\begin{proof}[Solution]\let\qed\relax}
 	{\end{proof}}
@@ -4058,5 +4060,277 @@ Let $V$ be a vector space over $\mathbb{F}$ with an inner product. Let $S \subse
 		\cos \varphi \doteq \dfrac{\langle u, v \rangle}{\| u \| \cdot \| v \|}
 	\end{equation*}
 \end{definition}
+
+\section{Triangle Inequality}
+
+\begin{theorem}[Triangle Inequality Theorem]
+	Let $u, v \in V$. Then
+	\begin{equation*}
+		\| u + v \| \leq \| u \| + \| v \|
+	\end{equation*}
+\end{theorem}
+
+\begin{proof}
+	\begin{align*}
+		{\| u + v \|}^2 &= \langle u + v, u + v \rangle\\
+		&= \langle u, u \rangle + \langle u, v \rangle + \langle v, u \rangle + \langle v, v \rangle\\
+		&= {\| u \|}^2 + \langle u, v \rangle + \overline{\langle u, v \rangle} + {\| v \|}^2\\
+		&= {\| u \|}^2 + 2 \Re \left( \langle u, v \right) + {\| v \|}^2\\
+		\intertext{As $\Re(z) \leq |z|$,}
+		{\| u + v\|}^2 &\leq {\| u \|}^2 + 2 \left\lvert \langle u, v \rangle \right\rvert + {\| v \|}^2\\
+		\intertext{Hence, by \nameref{Cauchy - Schwarz Inequality},}
+		{\| u + v\|}^2 &\leq {\| u \|}^2 + 2 \| u \| \| v \| + {\| v \|}^2\\
+		\therefore {\| u + v\|}^2 & \leq \left( \| u \| + \| v \| \right)^2\\
+		\therefore \| u + v\| & \leq \| u \| + \| v \|
+	\end{align*}
+\end{proof}
+
+\section{Orthogonal Decomposition}
+
+\begin{theorem}
+	Let $W$ be a subspace of $V$. Then
+	\begin{equation*}
+		V = W \oplus W^{\perp}
+	\end{equation*}
+\end{theorem}
+
+\begin{proof}
+	Let $B$ be an orthogonal basis of $V$. Consider a projection $\pi_B(v)$. Therefore,
+	\begin{align*}
+		v &= \pi_B(v) + \left( v - \pi_B(v) \right)
+	\end{align*}
+	\begin{align*}
+		\pi_B(v) &\in W\\
+		v - \pi_B(v) &\in W^{\perp}
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		V &= W + W^{\perp}
+	\end{align*}
+	If possible, let $u \in W \cap W^{\perp}$. Therefore, $u \in W$ and $u \in W^{\perp}$. By the definition of orthogonality, 
+	\begin{align*}
+		\langle u \in W, u \in W^{\perp} \rangle &= 0\\
+		\therefore u &= 0
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		V &= W \oplus W^{\perp}
+	\end{align*}
+\end{proof}
+
+\begin{corollary}
+	Let $B$ be an orthogonal basis of $W$. Then $\pi_B(v)$ does not depend on the choice of $B$.
+\end{corollary}
+
+\begin{proof}
+	As $B$ is an orthogonal basis of $W$,
+	\begin{align*}
+		v &= \pi_B(v) + \left( v - \pi_B(v) \right)
+	\end{align*}
+	Let $B'$ be another orthogonal basis of $W$. Therefore,
+	\begin{align*}
+		v &= \pi_{B'}(v) + \left( v - \pi_{B'}(v) \right)
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\pi_B(v) &\in W\\
+		\pi_{B'}(v) &\in W\\
+		\intertext{and}
+		v - \pi_B(v) &\in W^{\perp}\\
+		v - \pi_{B'}(v) &\in W^P{\perp}
+	\end{align*}
+	As
+	\begin{align*}
+		V &= W \oplus W^{\perp}
+	\end{align*}
+	such a representation is unique. Therefore, 
+	\begin{align*}
+		\pi_B(v) &= \pi_{B'}(v)
+	\end{align*}
+\end{proof}
+
+\begin{theorem}
+	Let $u, v \in V$, s.t. $u \perp v$. Then
+	\begin{align*}
+		{\| u \pm v \|}^2 &= {\| u \|}^2 + {\| v \|}^2
+	\end{align*}
+\end{theorem}
+
+\begin{proof}
+	\begin{align*}
+		{\| u \pm v \|}^2 &= {\| u \|}^2 + {\| v \|}^2\\
+		&= \langle u, u \rangle + \langle u, v \rangle + \langle v, u \rangle + \langle v, v \rangle\\
+		&= \langle u, u \rangle + \langle v, v \rangle\\
+		&= {\| u \|}^2 + {\| v \|}^2
+	\end{align*}
+\end{proof}
+
+\section{Distance}
+
+\begin{definition}[Distance]
+	Let $u, v \in V$. The distance $\distance(u, v)$ from $u$ to $v$ is defined as
+	\begin{align*}
+		\distance(u, v) &\doteq \| u - v \|
+	\end{align*}
+\end{definition}
+
+\begin{theorem}
+	Let $u, v \in V$. Then
+	\begin{equation*}
+		\distance(u,v) \geq 0
+	\end{equation*}
+	and the equality holds if and only if $u = v$.
+\end{theorem}
+
+\begin{theorem}
+	Let $u, v \in V$. Then
+	\begin{equation*}
+		\distance(u,v) = \distance(v,u)
+	\end{equation*}
+\end{theorem}
+
+\begin{theorem}
+	Let $u, v \in V$. Then
+	\begin{equation*}
+		\distance(u,v) + \distance(v,w) \geq \distance(u,w)
+	\end{equation*}
+\end{theorem}
+
+\begin{theorem}
+	The projection $\pi_W(v)$ is the vector in $W$ closest to $v$, i.e.
+	\begin{equation*}
+		\distance \left( v, \pi_W(v) \right) = \min_{w \in W} \distance(v,w)
+	\end{equation*}
+\end{theorem}
+
+\begin{proof}
+	Let $v \in V$. For any vector $w \in W$,
+	\begin{align*}
+		\left( \distance(v,u) \right)^2 &= {\| v - w \|}^2\\
+		&= \left\| \left( v = \pi_W(v) \right) + \left( \pi_W(v) - w \right) \right\|^2\\
+		&= \left\| v - \pi_W(v) \right\|^2 + \left\| \pi_W(v) - w \right\|^2\\
+		&\geq \left\| v - \pi_W(v) \right\|^2\\
+	\therefore \left( \distance(v,u) \right)^2 &\geq \distance \left( v, \pi_W(v) \right)^2
+	\end{align*}
+\end{proof}
+
+\section{Adjoint Map}
+
+\begin{definition}[Linear functional]
+	A linear functional $\varphi : V \to \mathbb{F}$ is a linear map, with $\mathbb{F}$ considered as a 1 dimensional vector space over itself.
+\end{definition}
+
+\begin{theorem}[Riesz Representation Theorem]
+	Let $V$ be an inner product space, s.t. $n = \dim V$. Let $\varphi : V \to \mathbb{F}$ be any linear functional. Then there exists a unique vector $u \in V$, dependent on $\varphi$, s.t. $\forall v \in V$,
+	\begin{equation*}
+		\varphi(v) = \langle v, u \rangle
+	\end{equation*}
+\end{theorem}
+
+\begin{proof}
+	If possible, let $u_1, u_2 \in V$, s.t. $\forall v \in V$,
+	\begin{equation*}
+		\varphi(v) = \langle v, u_1 \rangle = \langle v, u_2 \rangle
+	\end{equation*}
+	Therefore,
+	\begin{align*}
+		\langle v, u_1 - u_2 \rangle &= 0
+	\end{align*}
+	Let $v = u_1 - u_2$. Therefore,
+	\begin{align*}
+		\langle v, u_1 - u_2 \rangle &= \langle u_1 - u_2, u_1 - u_2 \rangle\\
+		\therefore \langle u_1 - u_2, u_1 - u_2 \rangle &= 0\\
+		\therefore u_1 - u_2 &= 0\\
+		\therefore u_1 &= u_2
+	\end{align*}
+	Therefore, $u$, if it exists, is unique.\\
+	~\\
+	Let
+	\begin{align*}
+		B &= \{v_1, \dots, v_2\}\\
+		\widetilde{B} &= \{1\}
+	\end{align*}
+	be orthonormal bases of $V$ and $\mathbb{F}$ respectively.\\
+	Let
+	\begin{align*}
+		A &= [\varphi]_{B, \widetilde{B}}\\
+		&=
+			\begin{pmatrix}
+				\alpha_1 & \dots & \alpha_n\\
+			\end{pmatrix}
+	\end{align*} 
+	be the representation matrix.\\
+	Therefore,
+	\begin{align*}
+		[\varphi(v)]_{\widetilde{B}} &= A [v]_B
+	\end{align*}
+	Let
+	\begin{align*}
+		v &= \beta_1 v_1 + \dots + \beta_n v_n\\
+		\therefore [v]_B &=
+			\begin{pmatrix}
+				\beta_1\\
+				\vdots\\
+				\beta_n\\
+			\end{pmatrix}
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		[\varphi(v)]_{\widetilde{B}} &= 
+			\begin{pmatrix}
+				\alpha_1 & \dots & \alpha_n\\
+			\end{pmatrix}
+			\begin{pmatrix}
+				\beta_1\\
+				\vdots\\
+				\beta_n\\
+			\end{pmatrix}\\
+		&= \alpha_1 \beta_1 + \dots + \alpha_n \beta_n\\
+		&= \beta_1 \alpha_1 + \dots + \beta_n \alpha_n\\
+		&= \beta_1 \overline{\overline{\alpha_1}} + \dots + \beta_n \overline{\overline{\alpha_n}}\\
+		&= 
+			\begin{pmatrix}
+				\beta_1 & \dots & \beta_n\\
+			\end{pmatrix}
+			\overline
+			{
+				\begin{pmatrix}
+					\overline{\alpha_1}\\
+					\vdots\\
+					\overline{\alpha_n}\\
+				\end{pmatrix}
+			}\\
+		&=
+			\left\langle
+				\begin{pmatrix}
+					\beta_1\\
+					\vdots\\
+					\beta_n\\
+				\end{pmatrix}
+				,
+				\begin{pmatrix}
+					\alpha_1\\
+					\vdots\\
+					\alpha_n\\
+				\end{pmatrix}
+			\right\rangle
+	\end{align*}
+	Let $u \in V$, s.t.
+	\begin{align*}
+		[u]_B &=
+			\begin{pmatrix}
+				\overline{\alpha_1}\\
+				\vdots\\
+				\overline{\alpha_n}\\
+			\end{pmatrix}
+	\end{align*}
+	
+	\begin{align*}
+		[\varphi(v)]_{\widetilde{B}} &= \langle v, u \rangle\\
+		\intertext{and}
+		[\varphi(v)]_{\widetilde{B}} &= \varphi(v) \cdot 1\\
+		\therefore \varphi(v) &= \langle v, u \rangle
+	\end{align*}
+\end{proof}
 
 \end{document}
