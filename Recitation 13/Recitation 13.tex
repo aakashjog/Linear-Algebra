@@ -1,0 +1,329 @@
+\documentclass[fleqn, a4paper, 12pt]{article}
+\setcounter{secnumdepth}{4}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathtools, xfrac}
+\usepackage{datetime}
+\usepackage{ulem}
+\usepackage{enumerate}
+\usepackage[table]{xcolor}
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+\newcommand{\rank}{\mathrm{rk\,}}
+
+\newcommand{\R}{\mathrm{R}}
+
+\newcommand{\C}{\mathrm{C}}
+
+\newcommand{\N}{\mathrm{N}}
+
+\newcommand{\im}{\mathrm{im}\,}
+
+\newenvironment{amatrix}[1]{%
+	\left(\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+	\end{array}\right)
+}
+
+%\setlength{\mathindent}{0pt}
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}
+
+\newenvironment{solution}
+{\begin{proof}[Solution]\let\qed\relax}
+	{\end{proof}}
+
+\DeclareMathOperator{\vspan}{\mathrm{span}} %declares span operator for matrices
+
+%opening
+\title{Recitation 13}
+\author{}
+\date{\formatdate{14}{1}{2015}}
+
+\begin{document}
+
+\maketitle
+%\setlength{\mathindent}{0pt}
+
+\tableofcontents
+
+\newpage
+\section{Orthogonality}
+
+\begin{example}
+	Find scalars $a, b, c \in \mathbb{R}$, s.t. 
+	\begin{align*}
+		B &= 
+			\left\lbrace
+				v_1 = 
+					\begin{pmatrix}
+						1\\
+						-2\\
+						1\\
+					\end{pmatrix}
+				,
+				v_2 = 
+					\begin{pmatrix}
+						1\\
+						1\\
+						1\\
+					\end{pmatrix}
+				,
+				v_2 = 
+					\begin{pmatrix}
+						a\\
+						b\\
+						c\\
+					\end{pmatrix}
+			\right\rbrace
+	\end{align*}
+	is an orthogonal basis of $\mathbb{R}^3$ with scalar product.
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		\langle v_1, v_2 \rangle &= 0\\
+		\langle v_2, v_3 \rangle &= 0\\
+		\langle v_3, v_1 \rangle &= 0
+	\end{align*}
+	Therefore,
+	\begin{align*}
+			\left\langle
+				\begin{pmatrix}
+					1\\
+					1\\
+					1\\
+				\end{pmatrix}
+				,
+				\begin{pmatrix}
+					a\\
+					b\\
+					c\\
+				\end{pmatrix}
+			\right\rangle
+		&= 0\\
+			\left\langle
+				\begin{pmatrix}
+					1\\
+					-2\\
+					1\\
+				\end{pmatrix}
+				,
+				\begin{pmatrix}
+					a\\
+					b\\
+					c\\
+				\end{pmatrix}
+			\right\rangle
+		&= 0
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		a &= -c\\
+		b &= 0
+	\end{align*}\\
+	Therefore,
+	\begin{align*}
+		v_3 &= 
+			\begin{pmatrix}
+				a\\
+				0\\
+				-a\\
+			\end{pmatrix}
+	\end{align*}
+\end{solution}
+
+\begin{example}
+	Find an orthonormal basis of the inner product space $V = \vspan\{B\}$ over $\mathbb{C}$.
+	\begin{equation*}
+		B =
+			\left\lbrace
+				b_1 = 
+					\begin{pmatrix}
+						1\\
+						i\\
+					\end{pmatrix}
+				,
+				b_2 = 
+					\begin{pmatrix}
+						2\\
+						0\\
+					\end{pmatrix}
+			\right\rbrace
+	\end{equation*}
+	\begin{equation*}
+		\langle x, y \rangle = x_1 \overline{y_1} + x_2 \overline{y_2}
+	\end{equation*}
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		\widetilde{v_1} &= 
+			\begin{pmatrix}
+				1\\
+				i\\
+			\end{pmatrix}\\
+		\widetilde{v_2} &= b_2 - \dfrac{\langle b_2, b_1 \rangle}{\| b_1 \|^2} \widetilde{v_1}\\
+		&= 
+			\begin{pmatrix}
+				2\\
+				0\\
+			\end{pmatrix}
+			-
+			\dfrac
+				{
+					\left\langle
+						\begin{pmatrix}
+							2\\
+							0\\
+						\end{pmatrix}
+						,
+						\begin{pmatrix}
+							1\\
+							i\\
+						\end{pmatrix}
+					\right\rangle
+				}
+				{
+					\left\|
+						\begin{pmatrix}
+							1\\
+							i\\
+						\end{pmatrix}
+					\right\|^2
+				}
+				\begin{pmatrix}
+					1\\
+					i\\
+				\end{pmatrix}\\
+		&= 
+			\begin{pmatrix}
+				2\\
+				0\\
+			\end{pmatrix}
+			-
+			\begin{pmatrix}
+				1\\
+				i\\
+			\end{pmatrix}\\
+		&= 
+			\begin{pmatrix}
+				1\\
+				-i\\
+			\end{pmatrix}\\
+		\therefore \widetilde{B} &= 
+			\left\lbrace
+				\begin{pmatrix}
+					1\\
+					i\\
+				\end{pmatrix}
+				,
+				\begin{pmatrix}
+					1\\
+					-i\\
+				\end{pmatrix}
+			\right\rbrace\\
+		\therefore {B}^0 &= 
+			\left\lbrace
+				\dfrac{1}{\sqrt{2}}
+					\begin{pmatrix}
+						1\\
+						i\\
+					\end{pmatrix}
+				,
+				\dfrac{1}{\sqrt{2}}
+					\begin{pmatrix}
+						1\\
+						-i\\
+					\end{pmatrix}
+			\right\rbrace
+	\end{align*}
+\end{solution}
+
+\begin{example}
+	Do there exist $a, b, c \in \mathbb{R}$, s.t. $U$ is orthogonal?
+	\begin{equation*}
+		U = 
+			\begin{pmatrix}
+				-\dfrac{1}{\sqrt{2}} & -\dfrac{1}{\sqrt{6}} & c\\
+				0 & b & \dfrac{1}{\sqrt{3}}\\
+				a & -\dfrac{1}{\sqrt{6}} & \dfrac{1}{\sqrt{3}}\\
+			\end{pmatrix}
+	\end{equation*}
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		U^t \cdot U &= I\\
+		\therefore I &=
+			\begin{pmatrix}
+				\dfrac{1}{2} + a^2 & \dfrac{1}{\sqrt{12}} - \dfrac{a}{\sqrt{6}} & -\dfrac{c}{\sqrt{2}} + \dfrac{a}{\sqrt{3}}\\
+				\dfrac{1}{\sqrt{12}} - \dfrac{a}{\sqrt{6}} & \dfrac{1}{6} + b^2 + \dfrac{1}{6} & -\dfrac{c}{\sqrt{6}} + \dfrac{b}{\sqrt{3}} - \dfrac{1}{\sqrt{18}}\\
+				-\dfrac{c}{\sqrt{2}} + \dfrac{a}{\sqrt{3}} & -\dfrac{c}{\sqrt{6}} + \dfrac{b}{\sqrt{3}} - \dfrac{1}{\sqrt{18}} & c^2 + \dfrac{2}{3}\\
+			\end{pmatrix}
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\dfrac{1}{2} + a^2 &= 1\\
+		\dfrac{1}{3} + b^2 &= 1\\
+		\dfrac{2}{3} + c^2 &= 1\\
+		\dfrac{1}{\sqrt{12}} - \dfrac{a}{\sqrt{6}} &= 0\\
+		-\dfrac{c}{\sqrt{2}} + \dfrac{a}{\sqrt{3}} &= 0\\
+		-\dfrac{c}{\sqrt{6}} + \dfrac{b}{\sqrt{3}} - \dfrac{1}{\sqrt{18}} &= 0
+	\end{align*}
+	Solving,
+	\begin{align*}
+		a &= \dfrac{1}{\sqrt{2}}\\
+		b &= \sqrt{\dfrac{2}{3}}\\
+		c &= \dfrac{1}{\sqrt{3}}
+	\end{align*}
+\end{solution}
+
+\begin{example}
+	Find a unitary matrix $U \in M_{3 \times 3}(\mathbb{C})$ that has the vector 
+	\begin{equation*}
+		b_1 = 
+			\begin{pmatrix}
+				\dfrac{1 + i}{\sqrt{3}} &  -\dfrac{1}{\sqrt{3}} & 0
+			\end{pmatrix}
+	\end{equation*}
+	as the first row.
+\end{example}
+
+\begin{solution}
+	Completing to a basis of $\mathbb{C}^3$, let
+	\begin{align*}
+		b_2 &= (0,1,0)\\
+		b_3 &= (0,0,1)
+	\end{align*}
+	Using Gram - Schmidt Process, the orthonormal basis is
+	\begin{align*}
+		B^0 &=
+			\left\lbrace
+				\begin{pmatrix}
+					\sfrac{1 + i}{\sqrt{3}}\\
+					-\sfrac{1}{\sqrt{3}}\\
+					0\\
+				\end{pmatrix}
+				,
+				\begin{pmatrix}
+					\sfrac{1 + i}{3}\\
+					\sfrac{2}{3}\\
+					0\\
+				\end{pmatrix}
+				,
+				\begin{pmatrix}
+					0\\
+					0\\
+					1\\
+				\end{pmatrix}
+			\right\rbrace
+	\end{align*}
+\end{solution}
+
+\end{document}
