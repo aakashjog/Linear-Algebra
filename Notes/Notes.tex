@@ -4220,7 +4220,7 @@ Let $V$ be a vector space over $\mathbb{F}$ with an inner product. Let $S \subse
 	A linear functional $\varphi : V \to \mathbb{F}$ is a linear map, with $\mathbb{F}$ considered as a 1 dimensional vector space over itself.
 \end{definition}
 
-\begin{theorem}[Riesz Representation Theorem]
+\begin{theorem}[Riesz's Representation Theorem]\label{Reisz's Representation Theorem}
 	Let $V$ be an inner product space, s.t. $n = \dim V$. Let $\varphi : V \to \mathbb{F}$ be any linear functional. Then there exists a unique vector $u \in V$, dependent on $\varphi$, s.t. $\forall v \in V$,
 	\begin{equation*}
 		\varphi(v) = \langle v, u \rangle
@@ -4332,5 +4332,105 @@ Let $V$ be a vector space over $\mathbb{F}$ with an inner product. Let $S \subse
 		\therefore \varphi(v) &= \langle v, u \rangle
 	\end{align*}
 \end{proof}
+
+\subsection{Construction}
+
+\begin{enumerate}
+	\item Let $T : V \to W$ be a linear map.
+	\item Fix $w \in W$.
+	\item Let $\varphi_w : V \to \mathbb{F}$ be a linear functional, s.t. $\varphi_w(v) = \langle T(v), w \rangle$.\\
+	$\varphi_w(\alpha_1 v_1 + \alpha_2 v_2) = \alpha_1 \varphi_w(v_1) + \alpha_2 \varphi_w(v_2)$.
+	\item By \nameref{Reisz's Representation Theorem}, $\exists ! u \in V$, s.t. $\varphi_w(v) = \langle v, u \rangle$.
+	\item Define $T^*(w) = u$.\\
+	Therefore, it can be expressed as 
+	\begin{equation*}
+		\langle T(v), w \rangle = \langle v, T^*(w) \rangle
+	\end{equation*}
+\end{enumerate}
+
+\subsection{Properties}
+
+\begin{theorem}
+	Let $B$ be an orthonormal basis of $V$ and let $\tilde{B}$ be an orthonormal basis of $W$. Let $A = [T]_{B, \tilde{B}}$ be the representing matrix of $T : V \to W$ with respect to $B, \tilde{B}$. Let $\tilde{A} = [T^*]_{B, \tilde{B}}$ be the representing matrix of $T^* : W \to V$ with respect to $B$, $\tilde{B}$. Then
+		\begin{equation*}
+			\tilde{A} = \overline{A}^t = A^*
+		\end{equation*}
+\end{theorem}
+
+\begin{theorem}
+	If $T_1, T_2 : V \to W$, then
+	\begin{equation*}
+		\left( T_1 + T_2 \right) = {T_1}^* + {T_2}^*
+	\end{equation*}
+\end{theorem}
+
+\begin{theorem}
+	If $T : V \to W$, $\alpha \in \mathbb{F}$, then
+	\begin{equation*}
+		(\alpha T)^* = \overline{\alpha} T^*
+	\end{equation*}
+\end{theorem}
+
+\begin{theorem}
+	\begin{equation*}
+		\left( T^* \right)^*
+	\end{equation*}
+\end{theorem}
+
+\begin{theorem}
+	If $T : V \to W$, $S : W \to U$, then
+	\begin{equation*}
+		(S \circ T)^* = T^* \circ S^*
+	\end{equation*}
+\end{theorem}
+
+\section{Special Linear Operators}
+
+\begin{definition}
+	Let $T : V \to V$ be a linear operator, and let $T^* : V \to V$ is the adjoint operator.\\
+	$T$ is said to be
+	\begin{enumerate}
+		\item normal if $T^* \circ T = T \circ T^*$
+		\item self-adjoint if $T^* = T$ (If $\mathbb{F} = \mathbb{R}$, $T$ is called symmeteric.)
+		\item unitary if $T^* = T^{-1}$ (If $\mathbb{F} = \mathbb{R}$, $T$ is called symmeteric.)
+	\end{enumerate}
+\end{definition}
+
+\begin{remark}
+	The same terminology is used for square matrices.
+\end{remark}
+
+\begin{remark}
+	If $B$ is orthonormal basis of $V$, $A = [T]_B$, then $A$ is the normal, self-adjoint or unitary according to $T$.
+\end{remark}
+
+\begin{theorem}
+	Let $v \in V$. $T$ is normal if and only if
+	\begin{equation*}
+		\| T(v) \| = \| T^*(v) \|
+	\end{equation*}
+\end{theorem}
+
+\begin{corollary}
+	Let $T : V \to V$ be normal, let $\lambda$ be its eigenvalue, and let $v$ be an eigenvector of $T$ corresponding to $\lambda$. Then $\overline{\lambda}$ is an eigenvalue of $T^*$, and $v$ is an eigenvector of $T^*$ corresonding to $\overline{\lambda}$.
+\end{corollary}
+
+\begin{theorem}
+	If $T$ is normal, $\lambda_1$, $\lambda_2$ are its eigenvalues, $v_1$, $v_2$ are eigenvectors corresponding to $\lambda_1$, $\lambda_2$ respectively. If $\lambda_1 \neq \lambda_2$, then $v_1 \perp v_2$.
+\end{theorem}
+
+\begin{theorem}
+	Let $T$ be a self-adjoint operator. Then any eigenvalue $\lambda$ of $T$ is real.
+\end{theorem}
+
+\begin{theorem}
+	Let $T : V \to V$ be a unitary operator. Then
+	\begin{enumerate}
+		\item $T$ preserves inner products.
+		\item $T$ preserves norms.
+		\item $T$ preserves distances.
+		\item $T$ preserves angles (in real case).
+	\end{enumerate}
+\end{theorem}
 
 \end{document}
