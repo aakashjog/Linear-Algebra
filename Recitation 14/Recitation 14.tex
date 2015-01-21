@@ -1,0 +1,410 @@
+\documentclass[fleqn, a4paper, 12pt]{article}
+\setcounter{secnumdepth}{4}
+\usepackage{amsmath, amssymb, amsthm, commath}
+\usepackage{mathtools, xfrac}
+\usepackage{datetime}
+\usepackage{ulem}
+\usepackage{enumerate}
+\usepackage[table]{xcolor}
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+\newcommand{\rank}{\mathrm{rk\,}}
+
+\newcommand{\R}{\mathrm{R}}
+
+\newcommand{\C}{\mathrm{C}}
+
+\newcommand{\N}{\mathrm{N}}
+
+\newcommand{\im}{\mathrm{im}\,}
+
+\newcommand{\trace}{\mathrm{trace\,}}
+
+\newenvironment{amatrix}[1]{%
+	\left(\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+	\end{array}\right)
+}
+
+%\setlength{\mathindent}{0pt}
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}
+
+\newenvironment{solution}
+{\begin{proof}[Solution]\let\qed\relax}
+	{\end{proof}}
+
+\DeclareMathOperator{\vspan}{\mathrm{span}} %declares span operator for matrices
+
+%opening
+\title{Recitation 14}
+\author{}
+\date{\formatdate{21}{1}{2015}}
+
+\begin{document}
+
+\maketitle
+%\setlength{\mathindent}{0pt}
+
+\tableofcontents
+
+\newpage
+\section{Orthogonal Complement}
+
+\begin{example}
+	Find the orthogonal complement of 
+	\begin{equation*}
+		U = \vspan
+			\left\lbrace
+				\begin{pmatrix}
+					1\\
+					1\\
+					0\\
+				\end{pmatrix}
+				,
+				\begin{pmatrix}
+					0\\
+					1\\
+					1\\
+				\end{pmatrix}
+			\right\rbrace
+	\end{equation*}
+	with inner product
+	\begin{equation*}
+		\langle u, v, \rangle = u^T v
+	\end{equation*}
+	over $\mathbb{R}^3$.
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		U^{\perp} &=
+			\left\{
+				\left.
+				\begin{pmatrix}
+					x\\
+					y\\
+					z\\
+				\end{pmatrix}
+				\right|
+				\left\langle
+					\begin{pmatrix}
+						x\\
+						y\\
+						z\\
+					\end{pmatrix}
+					,
+					\begin{pmatrix}
+						1\\
+						1\\
+						0\\
+					\end{pmatrix}
+				\right\rangle
+				=
+				\left\langle
+					\begin{pmatrix}
+						x\\
+						y\\
+						z\\
+					\end{pmatrix}
+					,
+					\begin{pmatrix}
+						1\\
+						1\\
+						0\\
+					\end{pmatrix}
+				\right\rangle
+				=
+				0
+			\right\}\\
+		&= 
+			\left\{
+				\left.
+				\begin{pmatrix}
+					x\\
+					y\\
+					z\\
+				\end{pmatrix}
+				\right|
+				x + y = y + z = 0
+			\right\}\\
+		&= 
+			\left\{
+				\begin{pmatrix}
+					1\\
+					-1\\
+					1\\
+				\end{pmatrix}
+			\right\}
+	\end{align*}
+\end{solution}
+
+\begin{example}
+	Find the orthogonal complement of 
+	\begin{equation*}
+		U = \{q(x) \in V | q(x) + q(-x) = 0\}
+	\end{equation*}
+	with inner product
+	\begin{equation*}
+	\langle p(x), q(x) \rangle = \dfrac{1}{2} \int\limits_{-1}^{1} p(x) q(x) \dif x
+	\end{equation*}
+	over $\mathbb{R}_2[x]$.
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		U &= \{a + bx + cx^2 | a + bx + cx^2 + a - bx + cx^2 = 0\}\\
+		&= \vspan\{x\}\\
+		\therefore U^{\perp} &= \{a + bx + cx^2 | \langle a + bx + cx^2, x \rangle = 0\}\\
+		&= \vspan\{1, x^2\}
+	\end{align*}
+\end{solution}
+
+\begin{example}
+	Find the orthogonal projection of
+	$
+		B = 
+		\begin{pmatrix}
+			1 & 1\\
+			0 & 1\\
+		\end{pmatrix}
+	$
+	on
+	\begin{equation*}
+		U = \{s \in V | s = s^T\} \subset M_{2 \times 2}(\mathbb{R})
+	\end{equation*}
+	with respect to
+	\begin{equation*}
+		\langle A, B \rangle = \trace \left( A^T \cdot B \right)
+	\end{equation*}
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		U &= 
+			\left\{
+				\begin{pmatrix}
+					a & b\\
+					b & d\\
+				\end{pmatrix}
+			\right\}\\
+		&= \vspan
+			\left\{
+				\begin{pmatrix}
+					1 & 0\\
+					0 & 0\\
+				\end{pmatrix}
+				,
+				\begin{pmatrix}
+					0 & 1\\
+					1 & 0\\
+				\end{pmatrix}
+				,
+				\begin{pmatrix}
+					0 & 0\\
+					0 & 1\\
+				\end{pmatrix}
+			\right\}\\
+	\end{align*}
+	\begin{align*}
+		B &= B_U + B_{U^{\perp}}\\
+		\therefore B - B_U &= B_{U^{\perp}}
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\langle B - B_U, s_1 \rangle &= 0\\
+		\langle B - B_U, s_2 \rangle &= 0\\
+		\langle B - B_U, s_3 \rangle &= 0
+	\end{align*}
+	Solving,
+	\begin{align*}
+		B_U &= 
+			\begin{pmatrix}
+				1 & \sfrac{1}{2}\\
+				\sfrac{1}{2} & 1\\
+			\end{pmatrix}
+	\end{align*}
+\end{solution}
+
+\begin{example}
+	Prove that for the Fibonacci series staring with 0 and 1, the $n^{\textnormal{th}}$ element is
+	\begin{equation*}
+		F_n = \dfrac{1}{\sqrt{5}} \left( \left( \dfrac{1 + \sqrt{5}}{2} \right)^n - \left( \dfrac{1 - \sqrt{5}}{2} \right)^n \right)
+	\end{equation*}
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		\begin{pmatrix}
+			F_1\\
+			F_0\\
+		\end{pmatrix}
+		&=
+		\begin{pmatrix}
+			1\\
+			0\\
+		\end{pmatrix}\\
+		\begin{pmatrix}
+			F_2\\
+			F_1\\
+			\end{pmatrix}
+		&=
+			\begin{pmatrix}
+			1\\
+			1\\
+		\end{pmatrix}\\
+		&\vdots\\
+			\begin{pmatrix}
+				F_{n + 1}\\
+				F_n\\
+			\end{pmatrix}
+		&=
+			\begin{pmatrix}
+				1 & 1\\
+				1 & 0\\
+			\end{pmatrix}
+			\begin{pmatrix}
+				F_n\\
+				F_{n - 1}\\
+			\end{pmatrix}\\
+		&= 			
+			\begin{pmatrix}
+				1 & 1\\
+				1 & 0\\
+			\end{pmatrix}^n
+			\begin{pmatrix}
+				F_1\\
+				F_0\\
+			\end{pmatrix}
+	\end{align*}
+	If $A = P^{-1} D P$,
+	\begin{align*}
+		A^n &= P D^n P^{-1}
+	\end{align*}
+	Let
+	\begin{align*}
+		A &= 
+			\begin{pmatrix}
+				1 & 1\\
+				1 & 0\\
+			\end{pmatrix}\\
+		\therefore p_A(\lambda) &= \lambda^2 - \lambda - 1\\
+		\therefore \lambda &= \dfrac{1 \pm \sqrt{5}}{2}\\
+		&= \phi_{\pm}
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		V_{\phi_{+}} &= \N
+			\begin{pmatrix}
+				1 - \phi_{+} & 1\\
+				1 & - \phi_{+}
+			\end{pmatrix}\\
+		&= \vspan
+			\left\{
+				\begin{pmatrix}
+					\phi_{+}\\
+					1\\
+				\end{pmatrix}
+			\right\}\\
+		V_{\phi_{+}} &= \N
+			\begin{pmatrix}
+				1 - \phi_{-} & 1\\
+				1 & - \phi_{-}
+			\end{pmatrix}\\
+		&= \vspan
+			\left\{
+				\begin{pmatrix}
+					\phi_{-}\\
+					1\\
+				\end{pmatrix}
+			\right\}
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		D &= 
+			\begin{pmatrix}
+				\phi_{+} & 0\\
+				0 & \phi_{-}\\
+			\end{pmatrix}\\
+		P &= 
+			\begin{pmatrix}
+				\phi_{+} & \phi_{-}\\
+				1 & 1\\
+			\end{pmatrix}\\
+		\therefore P^{-1} &= \dfrac{1}{\phi_{+} - \phi_{-}}
+			\begin{pmatrix}
+				1 & -\phi_{-}\\
+				-1 & \phi_{+}\\
+			\end{pmatrix}\\
+		&= \dfrac{1}{\sqrt{5}}
+			\begin{pmatrix}
+				1 & -\phi_{-}\\
+				-1 & \phi_{+}\\
+			\end{pmatrix}
+	\end{align*}
+	
+	\begin{align*}
+		A^n &= P D^n P^{-1}\\
+		&= \dfrac{1}{\sqrt{5}}
+			\begin{pmatrix}
+				{\phi_{+}}^{n+1} - {\phi_{-}}^{n+1} & {\phi_{+}}^n \cdot \phi_{-} - \phi_{+} \cdot {\phi_{+}}^{n+1}\\
+				{\phi_{+}}^n - {\phi_{-}}^n & {\phi_{+}}^n \cdot \phi_{-} - \phi_{+} \cdot {\phi_{-}}^n\\
+			\end{pmatrix}
+	\end{align*}
+	Therefore,
+	\begin{align*}
+			\begin{pmatrix}
+				F_{n+1}\\
+				F_n\\
+			\end{pmatrix}
+		&= \dfrac{1}{\sqrt{5}} A^n 
+			\begin{pmatrix}
+				1\\
+				0\\
+			\end{pmatrix}\\
+		&= \dfrac{1}{\sqrt{5}}
+			\begin{pmatrix}
+				{\phi_{+}}^{n+1} - {\phi_{-}}^{n+1}\\
+				{\phi_{+}}^n - {\phi_{-}}^n\\
+			\end{pmatrix}\\
+		\therefore F_n &= \dfrac{1}{\sqrt{5}} \left( {\phi_{+}}^n - {\phi_{-}}^n \right)\\
+		&= \dfrac{1}{\sqrt{5}} \left( \left( \dfrac{1 + \sqrt{5}}{2} \right)^n - \left( \dfrac{1 - \sqrt{5}}{2} \right)^n \right)
+	\end{align*}
+\end{solution}
+
+\begin{example}
+	Find the projection of $a = (1,2,3)$ on the subspace 
+	\begin{equation*}
+		U = \left\{ (a_1, a_2, a_3) | a_1 + a_2 + a_3 = 0 \right\}
+	\end{equation*}
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		U &= \left\{ (- a_2 - a_3, a_2, a_3) \right\}\\
+		&= \left\{ -a_2 (1, -1, 0) - a_3 (1, 0, -1) \right\}\\
+		&= \vspan \left\{ (1, -1, 0), (1, 0, -1) \right\}
+	\end{align*}
+	
+	\begin{align*}
+		a &= a_U + a_{u^{\perp}}\\
+		a_{U^{\perp}} &= a - a_U
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\langle a - a_U, u_1 \rangle &= 0\\
+		\langle a - a_U, u_2 \rangle &= 0
+	\end{align*}
+	Solving,
+	\begin{align*}
+		a_U &= (-1, 0, 1)
+	\end{align*}
+\end{solution}
+
+\end{document}          
