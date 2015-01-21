@@ -1,0 +1,339 @@
+\documentclass[fleqn, a4paper, 12pt]{article}
+\usepackage{amsmath, amssymb, amsthm, thmtools, amsfonts, commath}
+\usepackage{datetime}
+\usepackage{hyperref}
+\usepackage{ulem}
+\usepackage{tikz}
+\usepackage{enumerate, enumitem}
+\usepackage{cancel}
+\usepackage{xfrac}
+%\usepackage{background}
+\setcounter{secnumdepth}{4}
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+\DeclareMathOperator{\vspan}{\mathrm{span}} %declares span operator for matrices
+
+\newenvironment{amatrix}[1]{%declares augmented matrix environment
+	\left(\begin{array}{@{}*{#1}{c}|c@{}}
+	}{%
+\end{array}\right)
+} 
+
+\theoremstyle{definition}
+\newtheorem{example}{Example} %defines example environment
+\newtheorem{definition}{Definition} %defines definition environment
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem} %defines theorem environment
+\newtheorem{corollary}{Corollary}
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\newtheorem{case}{Case}
+
+\newcommand{\suchthat}{\mathrm{\,s.t.\,}}
+
+\newcommand{\R}{\mathrm{R}}
+
+\newcommand{\C}{\mathrm{C}}
+
+\newcommand{\N}{\mathrm{N}}
+
+\newcommand{\rr}{\mathrm{rr}}
+
+\newcommand{\im}{\mathrm{im}\,}
+
+\newcommand{\distance}{\mathrm{d}}
+
+\newenvironment{solution} %declares solution environment and removes qed at end
+	{\begin{proof}[Solution]\let\qed\relax}
+	{\end{proof}}
+
+\makeatletter
+\@addtoreset{section}{part} %resets section numbers in new part
+\makeatother
+
+\makeatletter
+\@addtoreset{theorem}{part} %resets theorem numbers in new part
+\makeatother
+
+\makeatletter
+\@addtoreset{corollary}{theorem} %resets corollary numbers after a theorem
+\makeatother
+
+\numberwithin{corollary}{theorem}
+
+\numberwithin{equation}{theorem}
+
+\makeatletter %changes spacing between rows of matrices to fit fractions
+\newif\ifcenter@asb@\center@asb@false
+\def\center@arstrutbox{%
+	\setbox\@arstrutbox\hbox{$\vcenter{\box\@arstrutbox}$}%
+}
+\newcommand*{\CenteredArraystretch}[1]{%
+	\ifcenter@asb@\else
+	\pretocmd{\@mkpream}{\center@arstrutbox}{}{}%
+	\center@asb@true
+	\fi
+	\renewcommand{\arraystretch}{#1}%
+}
+\makeatother
+
+\title{Review Session 1}
+\author{Aakash Jog}
+\date{\formatdate{21}{1}{2015}}
+
+\begin{document}
+
+\maketitle
+
+\begin{example}
+	Let $T : \mathbb{R}^3 \to \mathbb{R}^3$ be a linear operator given by
+	\begin{equation*}
+		T
+			\begin{pmatrix}
+				x\\
+				y\\
+				z\\
+			\end{pmatrix}
+		=
+			\begin{pmatrix}
+				2x + y\\
+				y - z\\
+				2y + 4z\\
+			\end{pmatrix}
+	\end{equation*}
+	Is $T$ diagonalizable?
+\end{example}
+
+\begin{solution}
+	Let $B = \{e_1, e_2, e_3\}$ be the standard basis of $\mathbb{R}$.\\
+	Therefore,
+	\begin{align*}
+		T(e_1) &=
+			\begin{pmatrix}
+				2\\
+				0\\
+				0\\
+			\end{pmatrix}\\
+		T(e_2) &= 
+			\begin{pmatrix}
+				1\\
+				1\\
+				2\\
+			\end{pmatrix}\\
+		T(e_3) &=
+			\begin{pmatrix}
+				0\\
+				-1\\
+				4\\
+			\end{pmatrix}
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		T(e_1) &= 2 e_1\\
+		T(e_2) &= e_1 + e_2 + 2 e_3\\
+		T(e_3) &= -e_2 + 4 e_3\\
+		\therefore [T]_B &= 
+			\begin{pmatrix}
+				2 & 1 & 0\\
+				0 & 1 & -1\\
+				0 & 2 & 4\\
+			\end{pmatrix}
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		p_T(\lambda) &= 
+			\begin{vmatrix}
+				2 - \lambda & 1 & 0\\
+				0 & 1 - \lambda & -1\\
+				0 & 2 & 4 - \lambda\\
+			\end{vmatrix}\\
+		&= (2 - \lambda) \left( (1 - \lambda) (4 - \lambda) + 2 \right)\\
+		&= (2 - \lambda) (6 - 5 \lambda + \lambda^2 )\\
+		&= - (\lambda - 2) (\lambda - 2) (\lambda - 3)\\
+		\therefore \lambda &= 2, 3
+	\end{align*}
+	\begin{align*}
+		V_2 &= \N
+			\begin{pmatrix}
+				0 & 1 & 0\\
+				0 & -1 & -1\\
+				0 & 2 & 2\\
+			\end{pmatrix}\\
+		&= \N
+			\begin{pmatrix}
+				0 & 1 & 0\\
+				0 & 1 & 1\\
+				0 & 0 & 0\\
+			\end{pmatrix}\\
+		&= \vspan
+			\left\lbrace
+				\begin{pmatrix}
+					1\\
+					0\\
+					0\\
+				\end{pmatrix}
+			\right\rbrace
+	\end{align*}
+	Therefore, $\dim V_2 = 1$. Hence the transformation is not diagonalizable.
+\end{solution}
+
+\begin{example}
+	Let 
+	\begin{equation*}
+		A =
+			\begin{pmatrix}
+				1 & b & b^2\\
+				0 & a & 2ab\\
+				0 & 0 & a^2\\
+			\end{pmatrix}
+	\end{equation*}
+	Find all $(a,b)$ such that $A$ is diagonalizable. Find all $(a,b)$ such that $A$ is invertible, and for these $(a,b)$, find $A^{-1}$.
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		p_A(x) &= 
+			\begin{vmatrix}
+				x - 1 & b & b^2\\
+				0 & x - a & 2ab\\
+				0 & 0 & x - a^2\\
+			\end{vmatrix}\\
+		&= (x - 1) (x - a) (x - a^2)\\
+		\therefore \lambda &= 1, a, a^2
+	\end{align*}\\
+	If $a \neq 0$, $a \neq 1$, $a \neq -1$, the algebraic and geometric multiplicities are 1. Therefore, $A$ is diagonalizable.\\
+	If $a = 0$,
+	\begin{align*}
+		\lambda &= 0, 1
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		V_0 &= \N
+			\begin{pmatrix}
+				-1 & -b & -b^2\\
+				0 & 0 & 0\\
+				0 & 0 & 0\\
+			\end{pmatrix}\\
+		&= \N
+			\begin{pmatrix}
+				1 & b & b^2\\
+				0 & 0 & 0\\
+				0 & 0 & 0\\
+			\end{pmatrix}\\
+		&= \vspan
+			\left\lbrace
+				\begin{pmatrix}
+					-b\\
+					1\\
+					0\\
+				\end{pmatrix}
+				,
+				\begin{pmatrix}
+					-b^2\\
+					0\\
+					1\\
+				\end{pmatrix}
+			\right\rbrace
+	\end{align*}
+	Therefore, for $a = 0$, $A$ is diagonalizable.\\
+	~\\
+	If $a = 1$,
+	\begin{align*}
+		\lambda &= 1
+	\end{align*}
+	If $b = 0$,
+	\begin{align*}
+		V_1 &= \N
+			\begin{pmatrix}
+				0 & 0 & 0\\
+				0 & 0 & 0\\
+				0 & 0 & 0\\
+			\end{pmatrix}\\
+		&=
+			\left\lbrace
+				\begin{pmatrix}
+					1\\
+					0\\
+					0\\
+				\end{pmatrix}
+				,
+				\begin{pmatrix}
+					0\\
+					1\\
+					0\\
+				\end{pmatrix}
+				,
+				\begin{pmatrix}
+					0\\
+					0\\
+					1\\
+				\end{pmatrix}
+			\right\rbrace
+	\end{align*}
+	If $b \neq 0$,
+	\begin{align*}
+		V_1 &= \N
+			\begin{pmatrix}
+				0 & b & b^2\\
+				0 & 0 & 2b\\
+				0 & 0 & 0\\
+			\end{pmatrix}\\
+		&=
+			\left\lbrace
+				\begin{pmatrix}
+					1\\
+					0\\
+					0\\
+				\end{pmatrix}
+			\right\rbrace
+	\end{align*}
+	Therefore, for $a = 1$, $A$ is diagonalizable if $b = 0$.\\
+	~\\
+	If $a = -1$,
+	\begin{align*}
+		p_A(x) &= (x - 1)^2 (x + 1)\\
+		\therefore \lambda &= -1, 1
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		V_1 &= \N
+			\begin{pmatrix}
+				0 & b & b^2\\
+				0 & -2 & -2b\\
+				0 & 0 & 0\\
+			\end{pmatrix}\\
+		&= \N
+			\left\lbrace
+				\begin{pmatrix}
+					1\\
+					0\\
+					0\\
+				\end{pmatrix}
+				,
+				\begin{pmatrix}
+					0\\
+					-b\\
+					1\\
+				\end{pmatrix}
+			\right\rbrace
+	\end{align*}
+	Therefore, for $a = -1$, $A$ is diagonalizable.\\
+	~\\
+	Therefore, $A$ is diagonalizable for all $(a,b) \in \mathbb{R}^2 \setminus (1, b \neq 0)$.\\
+	~\\
+	~\\
+	For $A$ to be invertible, $\det(A) \neq 0$. Therefore, $A$ is invertible if and only if $a \neq 0$.\\
+	\begin{align*}
+		\therefore A^{-1} &=
+			\begin{pmatrix}
+				1 & -\sfrac{b}{a} & \sfrac{b^2}{a^2}\\
+				0 & \sfrac{1}{a} & -\sfrac{2b}{a^2}\\
+				0 & 0 & \sfrac{1}{a^2}\\
+			\end{pmatrix}
+	\end{align*}
+\end{solution}
+
+\end{document}
