@@ -1,0 +1,625 @@
+%\date{}
+\documentclass[fleqn, a5paper, 10pt]{amsart}
+%\usepackage[top=1in, left=1in, right=1in, bottom=1in]{geometry}
+\usepackage[top=2cm, left=1cm, right=1cm, bottom=1cm]{geometry}
+\usepackage{amsmath, amssymb, amsthm, thmtools, amsfonts, commath}
+\usepackage{datetime}
+\usepackage{hyperref}
+\usepackage{ulem}
+\usepackage{tikz}
+\usepackage{enumerate, enumitem}
+\usepackage{cancel}
+\usepackage{xfrac}
+%\usepackage{background}
+\setcounter{secnumdepth}{4}
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+\DeclareMathOperator{\vspan}{\mathrm{span}} %declares span operator for matrices
+
+\newenvironment{amatrix}[1]{%declares augmented matrix environment
+	\left(\begin{array}{@{}*{#1}{c}|c@{}}
+	}{%
+\end{array}\right)
+} 
+
+\theoremstyle{definition}
+\newtheorem{example}{Example} %defines example environment
+\newtheorem{definition}{Definition} %defines definition environment
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem} %defines theorem environment
+\newtheorem{corollary}{Corollary}
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\newtheorem{case}{Case}
+
+\newcommand{\suchthat}{\mathrm{\,s.t.\,}}
+
+\newcommand{\R}{\mathrm{R}}
+
+\newcommand{\C}{\mathrm{C}}
+
+\newcommand{\rr}{\mathrm{rr}}
+
+\newcommand{\im}{\mathrm{im}\,}
+
+\newcommand{\distance}{\mathrm{d}}
+
+\newenvironment{solution} %declares solution environment and removes qed at end
+	{\begin{proof}[Solution]\let\qed\relax}
+	{\end{proof}}
+
+\makeatletter
+\@addtoreset{section}{part} %resets section numbers in new part
+\makeatother
+
+\makeatletter
+\@addtoreset{theorem}{part} %resets theorem numbers in new part
+\makeatother
+
+\makeatletter
+\@addtoreset{corollary}{theorem} %resets corollary numbers after a theorem
+\makeatother
+
+\numberwithin{corollary}{theorem}
+
+\numberwithin{equation}{theorem}
+
+\makeatletter %changes spacing between rows of matrices to fit fractions
+\newif\ifcenter@asb@\center@asb@false
+\def\center@arstrutbox{%
+	\setbox\@arstrutbox\hbox{$\vcenter{\box\@arstrutbox}$}%
+}
+\newcommand*{\CenteredArraystretch}[1]{%
+	\ifcenter@asb@\else
+	\pretocmd{\@mkpream}{\center@arstrutbox}{}{}%
+	\center@asb@true
+	\fi
+	\renewcommand{\arraystretch}{#1}%
+}
+\makeatother
+
+\title{Linear Algebra : Compendium}
+\author{Aakash Jog}
+\date{\formatdate{26}{1}{2015}}
+
+\begin{document}
+
+\maketitle
+
+%\tableofcontents
+
+%\newpage
+
+\section{Matrices}
+
+\begin{definition}[Adjoint matrix]
+	\begin{equation*}
+		A^* \dot{=} \overline{A}^t
+	\end{equation*}
+\end{definition}
+
+\begin{definition}[Row rank]
+	The number of non-zero rows in $A_R$ is called the row rank of $A$. It is denoted by $r$.
+	\begin{equation*}
+		r \leq n
+	\end{equation*}
+\end{definition}
+
+\begin{theorem}[Gaussian Elimination]
+	~\\
+	\begin{enumerate}[label=Step \arabic*]
+		\item Find the first non-zero column $C_p$ of $A$. \label{First step}
+		\item Denote by $a_{ip}$ the first non-zero entry of $C_p$.
+		\item Switch the $1^{\text{st}}$ and $i^{\text{th}}$ rows.
+		\item Multiply the $1^{\text{st}}$ row by $\dfrac{1}{a_{ip}}$.
+		\item Using row operations of type III, make all other entries of the $p^{\text{th}}$ column zeros. \label{Last step}
+		\item Ignoring the top row and $C_p$, repeat steps \ref{First step} to \ref{Last step}.
+	\end{enumerate}
+\end{theorem}
+
+\section{Vector Spaces}
+
+\begin{definition}[Subspace]
+	Let $U \subseteq V$. 
+	\begin{enumerate}[label=Axiom \arabic*]
+		\item $\mathbb{O} \in U$ \label{Axiom 1}
+		\item If $x, y \in U$, then, $(x + y) \in U$ \label{Axiom 2}
+		\item If $x \in U, \alpha \in \mathbb{F}$, then, $\alpha x \in U$ \label{Axiom 3}
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}[Operations on subspaces]
+	\begin{align*}
+		U_1 \cap U_2 &= \{x \in V : x \in U_1 \text{ and } x \in U_2\}\\
+		U_1 \cup U_2 &= \{x \in V : x \in U_1 \text{ or } x \in U_2\}\\
+		U_1 + U_2 &= \{x \in V : x = x_1 + x_2, x_1 \in U_1, x_2 \in U_2\}\\
+	\end{align*}
+\end{definition}
+
+\begin{definition}[Span]
+	$\vspan(S)$ is the collection of all linear combinations of finite number of vectors of $S$ with coefficients from $\mathbb{F}$. $\vspan(S)$ is a subspace of $V$ 
+\end{definition}
+
+\begin{definition}[Spanning sets and dimensionality]
+	If $V$ has atleast one finite spanning set, $V$ is said to be finite-dimensional.
+\end{definition}
+
+\begin{definition}[Isomorphic spaces]
+	Let $V/\mathbb{F}$ and $W/\mathbb{F}$ be vector spaces. We say that $V$ is isomorphic to $W$ if there is a map $\varphi : V \to W$, s.t.
+	\begin{enumerate}
+		\item $\varphi$ is one-to-one and onto
+		\item $\varphi(v_1 + v_2) = \varphi(v_1) + \varphi(v_2) ; \forall v_1, v_2 \in V$
+		\item $\varphi(\alpha v) = \alpha \varphi(v) ; \forall v \in V, \forall \alpha \in \mathbb{F}$
+	\end{enumerate}
+\end{definition}
+
+\begin{theorem}
+	If $S = \{v_1, \dots, v_m\}$ is a spanning set of $V$, and if $S$ is not a basis of $V$, a basis $B$ of $V$ can be obtained by removing some elements from $S$.
+\end{theorem}
+
+\begin{proof}
+	If $S$ is linearly independent, then it is a basis.\\
+	Otherwise, if $S$ is linearly dependent, it has an element, WLG, say $v_m$, which is a linear combination of the others.
+	\begin{equation*}
+		v_m = \alpha_1 v_1 + \dots + \alpha_{m-1} v_{m-1}
+	\end{equation*} 
+	Let 
+	\begin{equation*}
+		S' = S - \{v_m\}
+	\end{equation*}
+	$S'$ is a spanning set.\\
+	Therefore, $\forall v \in V$
+	\begin{align*}
+		v &= \beta_1 v_1 + \dots + \beta_{m-1} v_{m-1} + \beta_m v_m \\
+		&= \beta_1 v_1 + \dots + \beta_{m-1} + \beta_m (\alpha_1 v_1 + \dots + \alpha_{m-1} v_{m-1})\\
+		&= \gamma_1 v_1 + \dots + \gamma_{m-1} v_{m-1}
+	\end{align*}
+	If $S'$ is linearly independent, then it is a basis, else the same process above can be repeated till we get a basis.\\
+	Therefore, a basis is a smallest spanning set.
+\end{proof}
+
+\begin{theorem}
+	If $B_0 = \{v_1, \dots, v_n\}$ is a linearly independent set, and if $B_0$ is a basis of $V$, a basis of $V$ can be obtained by adding elements to $B_0$.
+\end{theorem}
+
+\begin{theorem}
+	Let $V$ be a vector space, s.t. $\dim V = n$.\\
+	If $B$ satisfies 2 out of the 3 following conditions, then it is a basis.
+	\begin{enumerate}
+		\item $B$ has $n$ elements.
+		\item $B$ is a spanning set.
+		\item $B$ is linearly dependent.
+	\end{enumerate}
+\end{theorem}
+
+\begin{theorem}[Dimension Theorem]
+	\begin{equation*}
+		\dim (U + W) = \dim U + \dim W - \dim (U \cap W)
+	\end{equation*}
+\end{theorem}
+
+\begin{theorem}
+	\begin{equation*}
+		U + W = \vspan (U \cup W)\\
+	\end{equation*}
+	If $U = \vspan (B)$ and $W = \vspan (B')$
+	then, $U + W = \vspan (B \cup B')$.
+\end{theorem}
+
+\begin{theorem}[Changing a basis]
+	Let $B = \{v_1, \dots, v_n\}$ be a basis of $V$, s.t. $\dim V = n$. Let $B' = \{v'_1, \dots, v'_n\}$.\\
+	As $B$ is a spanning set, all of $v'_1, \dots, v'_n$ can be expressed as a linear combination of $v_1, \dots, v_n$.
+	\begin{align*}
+		v'_1 &= \gamma_{11} v_1 + \dots + \gamma_{n1} v_n\\
+		&\vdots\\
+		v'_n &= \gamma_{1n} v_1 + \dots + \gamma_{nn} v_n
+	\end{align*}
+\end{theorem}
+
+\begin{definition}[Transition matrix]
+	The matrix
+	\begin{equation*}
+		C = 
+		\begin{pmatrix}
+			\gamma_{11} & \dots &\gamma _{1n}\\
+			\vdots & &\vdots\\
+			\gamma_{n1} & \dots &\gamma_{nn}\\
+		\end{pmatrix}
+	\end{equation*}
+	is called the transition matrix from $B$ to $B'$.
+	\begin{equation*}
+		B'_{1 \times n} = B_{1 \times n} C_{n \times n}
+	\end{equation*}
+\end{definition}
+
+\begin{theorem}
+	$B'$ is a basis of $V$ iff $C$ is invertible.
+\end{theorem}
+
+\begin{corollary}
+	If $A$ has two identical rows, then $\det (A) = 0$.
+\end{corollary}
+
+\begin{theorem}
+	If $A$, $B$, $C$ are some matrices, and $\mathbb{O}$ is the zero matrix,
+	\begin{align*}
+		\begin{pmatrix}
+			A_{m \times m} & B\\
+			\mathbb{O} & C_{n \times n}\\
+		\end{pmatrix}
+		=
+		\det (A) \cdot \det (C)
+	\end{align*}
+\end{theorem}
+
+\begin{theorem}
+	\begin{equation*}
+		\det (A B) = \det (A) \det (B)
+	\end{equation*}
+\end{theorem}
+
+\begin{theorem}[Calculation of determinant]
+	Let $A$ be a $m \times n$ matrix, and let $A_{ij}$ be the matrix obtained by removing the $i^{\text{th}}$ row and $j^{\text{th}}$ column from $A$.
+	\begin{align*}
+		\det (A) &= \sum_{j = 1}^{n} (-1)^{i + j} a_{ij} \det (A_{ij})
+	\end{align*}
+\end{theorem}
+
+\begin{definition}[Linear map]
+	Let $V$ and $W$ be vector spaces over the same field $\mathbb{F}$. 
+	\begin{equation*}
+		\varphi : V \to W
+	\end{equation*}
+	is said to be a linear map if
+	\begin{enumerate}
+		\item $\varphi(v_1 + v_2) = \varphi(v_1) + \varphi(v_2) ; \forall v_1, v_2 \in V$
+		\item $\varphi(\alpha v) = \alpha \varphi(v) ; \forall v \in V, \forall \alpha \in \mathbb{F}$
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}[Matrix of a linear map]
+	Let $\varphi : V \to W$ be a linear map.
+	\begin{align*}
+		B &= \{v_1, \dots, v_n\}\\
+		B' &= \{w_1, \dots, w_m\}
+	\end{align*}
+	be bases of $V$ and $W$ respectively.\\
+	Let 
+	\begin{align*}
+		\varphi (v_1) &= \alpha_{11} w_{1} + \dots + \alpha_{m1} w_{m}\\
+		\vdots\\
+		\varphi (v_n) &= \alpha_{1n} w_{1} + \dots + \alpha_{mn} w_{m}
+	\end{align*}
+	The matrix
+	\begin{equation*}
+		A = [\varphi]_{B, B'} =
+		\begin{pmatrix}
+			\alpha_{11} & \dots & \alpha_{1n}\\
+			\vdots & & \vdots\\
+			\alpha_{m1} & \dots & \alpha_{mn}
+		\end{pmatrix}
+	\end{equation*}
+	is called the matrix of $\varphi$ with respect to the bases $B$ and $B'$.
+\end{definition}
+
+\begin{theorem}
+	\begin{equation*}
+		[\varphi(z)]_{B'} = [\varphi]_{B, B'} [z]_B
+	\end{equation*}
+\end{theorem}
+
+\begin{theorem}
+	Let $V$, $W$ be vector spaces over $\mathbb{F}$, $\dim (V) = n$, $\dim (W) = m$. Let $\varphi : V \to W$ be a linear map. Let $B$, $\widetilde{B}$ be bases of $V$ and let $B'$ and $\widetilde{B'}$ be bases of $W$. Let $A = [\varphi]_{B, B'}$ and $\widetilde{A} = [\varphi]_{\widetilde{B}, \widetilde{B'}}$ be the matrices of $\varphi$ w.r.t. the pairs $B$, $B'$ and $\widetilde{B}$, $\widetilde{B'}$. Let $P$ denote the transition matrix from $B$ to $\widetilde{B}$, and let $Q$ denote the transition matrix from $B'$ to $\widetilde{B'}$. Then,
+	\begin{equation*}
+		\widetilde{A}_{m \times n} = Q^{-1}_{m \times m} A_{m \times n} P_{n \times n}
+	\end{equation*}
+\end{theorem}
+
+\begin{definition}[Operations on linear maps]
+	\begin{align*}
+		(\varphi + \varphi')(v) &\doteq \varphi(v) + \varphi'(v)\\
+		(\alpha \varphi)(v) &\doteq \alpha \varphi(v)
+	\end{align*}
+\end{definition}
+
+\begin{definition}[Composed map]
+	\begin{align*}
+		(\varphi' \circ \varphi)(v) &\doteq \varphi'(\varphi(v))
+	\end{align*}
+\end{definition}
+
+\begin{theorem}[Matrix of composed map]
+	\begin{equation*}
+		[\varphi' \circ \varphi]_{B, B''} = [\varphi']_{B', B''} [\varphi]_{B, B'}
+	\end{equation*}
+\end{theorem}
+
+\begin{definition}[Kernel and image]
+	Let $\varphi : V \to W$ be a linear map.
+	\begin{align*}
+		\ker \varphi &\doteq \{v \in V : \varphi (v) = \mathbb{O}\}\\
+		\im \varphi &\doteq \{\phi (v) : v \in V\}
+	\end{align*}
+\end{definition}
+
+\begin{theorem}
+	$\ker \varphi$ is a subspace of $V$ and $\im \varphi$ is a subspace of $W$.
+\end{theorem}
+
+\begin{theorem}
+	Let $\varphi : V \to W$ be a linear map. Then
+	\begin{equation*}
+		\dim V = \dim (\ker (\varphi)) + \dim (\im (\varphi))
+	\end{equation*}
+\end{theorem}
+
+\section{Linear Operators}
+
+\begin{definition}[Linear operator]
+	A linear operator or transformation
+	\begin{equation*}
+		T : V \to V
+	\end{equation*}
+	is a linear map from a vector space $V$ to itself.
+\end{definition}
+
+\begin{definition}[Similarity of matrices]
+	\begin{equation*}
+		A \sim \widetilde{A} \iff \widetilde{A} = P^{-1} A P
+	\end{equation*}
+\end{definition}
+
+\begin{definition}[Diagonalizability]
+	If $A$ is similar to a diagonal matrix, $A$ is said to be diagonalizable. $P$, s.t. $P^{-1} A P = D$ is called a diagonalizing matrix for $A$. $D$ is called a diagonal form of $A$.
+\end{definition}
+
+\begin{theorem}[Explicit criterion for diagonalization]
+	Let $A$ be an $n \times n$ matrix, s.t. $p_A (x)$ splits completely. Then $A$ is diagonalizable if and only if $\forall \lambda_i$ of $A$, the algebraic multiplicity coincides with the geometric multiplicity.
+\end{theorem}
+
+\begin{theorem}
+	Let $\lambda_1, \dots, \lambda_s$ be pairwise distinct eigenvalues of an $n \times n$ matrix $A$, i.e. $\forall i \neq j, \lambda_i \neq \lambda_j$. Let $v_1, \dots, v_s$ be eigenvalues of $A$ corresponding to $\lambda_1, \dots, \lambda_s$. Then the set $S = \{v_1, \dots, v_s\}$ is linearly independent.
+\end{theorem}
+
+\begin{corollary}
+	Let $A_{n \times n}$ have $n$ distinct eigenvalues. Then, $A$ is diagonalizable.
+\end{corollary}
+
+\begin{definition}[Characteristic Polynomial]
+	Let $A$ be any $n \times n$ matrix.
+	\begin{equation*}
+		p_A (x) = \det (x I_n - A)
+	\end{equation*}
+	is called the characteristic polynomial. Its roots are eigenvalues of $A$.
+\end{definition}
+
+\begin{theorem}
+	If $A \sim A'$, then $p_A (x) = p_{A'} (x)$.
+\end{theorem}
+
+\begin{definition}[Algebraic multiplicity of eigenvalue]\label{algebraic multiplicity}
+	Largest possible integer value of $k$ such that $p_A(x)$ is divisible by $(x - \lambda)^k$.
+\end{definition}
+
+\begin{definition}[Eigenspace]
+	\begin{equation*}
+		V_{\lambda} = \{V \in \mathbb{F}^n ; A v = \lambda v \}
+	\end{equation*} 
+\end{definition}
+
+\begin{theorem}
+	An eigenspace of a matrix is a subspace of the field over which the matrix is defined.
+\end{theorem}
+
+\begin{definition}[Geometric multiplicity of eigenvalue]
+	$m = \dim V_{\lambda}$
+\end{definition}
+
+\begin{theorem}
+	The geometric multiplicity of an eigenvalue is less than or equal to the algebraic multiplicity.
+\end{theorem}
+
+\begin{theorem}[Criterion for triangularization]
+	An operator $T : V \to V$ is triangularizable, if and only if $p_T (x)$ splits completely.
+\end{theorem}
+
+\begin{theorem}[Jordan Theorem]
+	Let $T : V \to V$ be a linear operator such that $p_T (x)$ splits completely. Then there exists a basis $B$ of $V$ such that $[T]_B$ is of the form
+	\begin{align*}
+		[T]_B = 
+		\begin{pmatrix}
+			J_1 & 0 & 0\\
+			0 & \ddots & 0\\
+			0 & 0 & J_l\\
+		\end{pmatrix}
+		&
+		J_i = 
+			\begin{pmatrix}
+				\lambda & 1 & 0 & 0 & 0 & 0\\
+				0 & \lambda & 1 & 0 & 0 & 0\\
+				0 & 0 & \ddots & \ddots & 0 & 0\\
+				0 & 0 & 0 & \ddots & 1 & 0\\
+				0 & 0 & 0 & 0 &\lambda & 1\\
+				0 & 0 & 0 & 0 & 0 & \lambda\\
+			\end{pmatrix}
+		\end{align*}
+\end{theorem}
+
+\section{Inner Product Spaces}
+
+\begin{definition}[Inner product]
+	Let $V$ be a vector space over $\mathbb{R}$ or $\mathbb{C}$.
+	\begin{enumerate}
+		\item $\langle \alpha_1 v_1 + \alpha_2 v_2, w \rangle = \alpha_1 \langle v_1, w \rangle + \alpha_2 \langle v_2, w \rangle$, $\forall v_1, v_2, w \in V$, $\forall \alpha_1, \alpha_2 \in \mathbb{F}$
+		\item $\langle v, w \rangle = \overline{\langle w, v \rangle}$, $\forall v, w \in V$
+		\item $\langle v, v \rangle$ is a real non-negative number, $\forall v \in V$
+	\end{enumerate}
+\end{definition}
+
+\begin{theorem}[Sesquilinearity]
+	\begin{align*}
+		\langle v, \beta_1 w_1 + \beta_2 w_2 \rangle &= \overline{\beta_1} \langle v, w_1 \rangle + \overline{\beta_2} \langle v, w_2 \rangle
+	\end{align*}
+\end{theorem}
+
+\begin{definition}[Gram matrix]
+	Let $V$ be an inner product space. Let 
+	\begin{equation*}
+		B = \{v_1, \dots, v_n\}
+	\end{equation*}
+	be a basis of $V$.
+	\begin{equation*}
+		G_B = 
+			\begin{pmatrix}
+				\langle v_1, v_1 \rangle & \dots & \langle v_1, v_n \rangle\\
+				\vdots & & \vdots\\
+				\langle v_n, v_1 \rangle & \dots & \langle v_n, v_n \rangle\\
+			\end{pmatrix}
+	\end{equation*}
+\end{definition}
+
+\begin{theorem}
+	$ \langle v, w \rangle = [v]_B^t G_B \overline{[w]}_B $
+\end{theorem}
+
+\begin{theorem}
+	Let $B$, $\widetilde{B}$ be bases of $V$. Let $P$ be the transition matrix from $B$ to $\widetilde{B}$. Then 
+	\begin{equation*}
+		G_{\widetilde{B}} = P^t G_B \overline{P}
+	\end{equation*}
+	where $\overline{P}$ is the matrix obtained by replacing all elements of $P$ by their complex conjugates.
+\end{theorem}
+
+\begin{definition}[Norm]
+	$ \| v \| \doteq \sqrt{\langle v, v \rangle} $
+\end{definition}
+
+\begin{definition}[Orthogonality]
+	$ u \perp v \iff \langle u, v \rangle = 0$
+\end{definition}
+
+\begin{theorem}
+	Let $S$ be an orthogonal set such that $\mathbb{O} \notin S$. Then $S$ is linearly independent.
+\end{theorem}
+
+\begin{corollary}
+	Any orthonormal set is linearly independent.
+\end{corollary}
+
+\begin{corollary}
+	Any orthonormal set consisting of $n = \dim V$ vectors is an orthonormal basis of $V$.
+\end{corollary}
+
+\begin{theorem}
+	Let $B = \{v_1, \dots, v_n\}$ be an orthonormal basis of $V$. Let $v \in V$. Let $[v]_B = 
+		\begin{pmatrix}
+			\alpha_1\\
+			\vdots\\
+			\alpha_n\\
+		\end{pmatrix}
+		$.
+	Then,
+	\begin{align*}
+		\alpha_1 &= \langle v, v_1 \rangle\\
+		&\vdots\\
+		\alpha_n &= \langle v, v_n \rangle
+	\end{align*}
+\end{theorem}
+
+\begin{theorem}[Pythagoras Theorem]\label{Pythagoras Theorem}
+	Let $B = \{v_1, \dots, v_n\}$ be an orthonormal basis of $V$. Let $v \in V$. Let $[v]_B = 
+		\begin{pmatrix}
+			\alpha_1\\
+			\vdots\\
+			\alpha_n\\
+		\end{pmatrix}
+		$.
+	Then,
+	\begin{equation*}
+		{\| v \|}^2 = |\alpha_1|^2 + \dots + |\alpha_n|^2
+	\end{equation*}
+\end{theorem}
+
+\begin{definition}[Unitary matrix]
+	Let $\mathbb{F} = \mathbb{R}$ or $\mathbb{F} = \mathbb{C}$. Let $A$ be an $n \times n$ matrix. $A$ is said to be a unitary matrix if
+	\begin{equation*}
+		A^* = \overline{A}^t = \overline{A^t} = A^{-1}
+	\end{equation*}
+	If $\mathbb{F} = \mathbb{R}$, unitary matrices are called orthogonal matrices.
+\end{definition}
+
+\begin{theorem}
+	Let $A$ be an $n \times n$ matrix. Let $v_1, \dots, v_n$ be the columns of $A$. Let $A$ be an $n \times n$ matrix. Let $r_1, \dots, r_n$ be the columns of $A$.
+	Then the following are equivalent.
+	\begin{enumerate}
+		\item $A$ is unitary.
+		\item $\{v_1, \dots, v_n\}$ is an orthonormal basis of $\mathbb{F}^n$, with respect to standard dot product.
+		\item $\{r_1, \dots, r_n\}$ is an orthonormal basis of $\mathbb{F}^n$, with respect to standard dot product.
+	\end{enumerate}
+\end{theorem}
+
+\begin{theorem}
+	Let $V$ be an inner product space. Let $B$ be an orthonormal basis of $V$. Let $B'$ be another basis of $V$. Let $P$ be the transition matrix from $B$ to $B'$. Then $B'$ is orthonormal if and only if $P$ is unitary.
+\end{theorem}
+
+\begin{definition}
+	Let $S \subset V$ be a set of vectors. 
+	\begin{equation*}
+		S^{\perp} \doteq \{v \in V | \langle u, v \rangle = 0 , \forall u \in S\}
+	\end{equation*}
+\end{definition}
+
+\begin{theorem}
+	$S^{\perp}$ is a subspace of $V$.
+\end{theorem}
+
+\begin{theorem}[Gram - Schmidt Process]
+	~\\
+	\begin{enumerate}[label=Step \arabic*]
+		\item $\widetilde{v_1} = v_1$, denote $w_1 = \vspan\{\widetilde{v_1}\} = \vspan\{v_1\}$, $B_1 = \{\widetilde{v_1}\}$
+		\item $\widetilde{v_2} = v_2 - \pi_{B_1}(v_2) = v_2 - \dfrac{\langle v_2, \widetilde{v_1}\rangle}{\langle \widetilde{v_1}, \widetilde{v_1} \rangle} \widetilde{v_1}$
+		\item[] As $\widetilde{v_2} \perp \widetilde{v_1}$, $B_2 = \{\widetilde{v_1}, \widetilde{v_2}\}$ is an orthogonal set. Denote $W_2 = \vspan \{\widetilde{v_1}, \widetilde{v_2}\} = \vspan \{v_1, v_2\}.$
+		\item $\widetilde{v_3} = v_3 - \pi_{B_2}(v_3) = v_3 - \dfrac{\langle v_2, \widetilde{v_1} \rangle}{\langle \widetilde{v_1}, \widetilde{v_1} \rangle} \widetilde{v_1} - \dfrac{\langle v_3, \widetilde{v_2} \rangle}{\langle \widetilde{v_2}, \widetilde{v_2} \rangle}$
+		\item[] As $\widetilde{v_3} \in {W_2}^{\perp}$, $B_3 = \{\widetilde{v_1}, \widetilde{v_2}, \widetilde{v_3}\}$ is an orthogonal set. Denote $W_2 = \vspan \{\widetilde{v_1}, \widetilde{v_2}, \widetilde{v_3}\} = \vspan \{v_1, v_2, v_3\}.$
+		\item[] $\vdots$
+		\item[Step n] The $n^{\text{th}}$ step gives $\widetilde{B_n} = \{\widetilde{v_1}, \dots, \widetilde{v_n}\}$ which is an orthogonal basis of $V$.
+		\item[] $B^0$ is obtained by normalization of $\widetilde{B_n}$.\\
+			\begin{align*}
+				{v_1}^0 &= \dfrac{1}{\|\widetilde{v_1}\|}\\
+				&\vdots\\
+				{v_n}^0 &= \dfrac{1}{\|\widetilde{v_n}\|}
+			\end{align*}
+	\end{enumerate}
+\end{theorem}
+
+\begin{theorem}[Bessel's Inequality]\label{Bessel's Inequality}
+	Let $\{v_1, \dots, v_m\}$ be an orthonormal set. Let $v \in V$ be any vector. Then
+	\begin{align*}
+		{\| v \|}^2 &\geq {|\langle v, v_1 \rangle|}^2 + \dots + {|\langle v, v_m \rangle|}^2		
+	\end{align*}
+	and the equality holds if and only if $v \in \vspan \{v_1, \dots, v_m\}$.
+\end{theorem}
+
+\begin{theorem}[Cauchy - Schwarz Inequality]\label{Cauchy - Schwarz Inequality}
+	Let $u, v \in V$ be any vectors. Then
+	\begin{align*}
+		| \langle u, v \rangle | &\leq \| u \| \cdot \| v \|
+	\end{align*}
+	and the equality holds if and only if $\{u, v\}$ is linearly dependent.
+\end{theorem}
+
+\begin{theorem}
+	Let $W$ be a subspace of $V$. Then
+	\begin{equation*}
+		V = W \oplus W^{\perp}
+	\end{equation*}
+\end{theorem}
+
+\begin{corollary}
+	Let $B$ be an orthogonal basis of $W$. Then $\pi_B(v)$ does not depend on the choice of $B$.
+\end{corollary}
+
+\end{document}
