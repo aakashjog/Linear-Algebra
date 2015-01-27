@@ -1,0 +1,179 @@
+\documentclass[fleqn, a4paper, 12pt]{article}
+\usepackage{amsmath, amssymb, amsthm, thmtools, amsfonts, commath}
+\usepackage{datetime}
+\usepackage{hyperref}
+\usepackage{ulem}
+\usepackage{tikz}
+\usepackage{enumerate, enumitem}
+\usepackage{cancel}
+\usepackage{xfrac}
+%\usepackage{background}
+\setcounter{secnumdepth}{4}
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+\DeclareMathOperator{\vspan}{\mathrm{span}} %declares span operator for matrices
+
+\newenvironment{amatrix}[1]{%declares augmented matrix environment
+	\left(\begin{array}{@{}*{#1}{c}|c@{}}
+	}{%
+\end{array}\right)
+} 
+
+\theoremstyle{definition}
+\newtheorem{example}{Example} %defines example environment
+\newtheorem{definition}{Definition} %defines definition environment
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem} %defines theorem environment
+\newtheorem{corollary}{Corollary}
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\newtheorem{case}{Case}
+
+\newcommand{\suchthat}{\mathrm{\,s.t.\,}}
+
+\newcommand{\R}{\mathrm{R}}
+
+\newcommand{\C}{\mathrm{C}}
+
+\newcommand{\N}{\mathrm{N}}
+
+\newcommand{\rr}{\mathrm{rr}}
+
+\newcommand{\im}{\mathrm{im}\,}
+
+\newcommand{\trace}{\mathrm{trace}}
+
+\newcommand{\distance}{\mathrm{d}}
+
+\newenvironment{solution} %declares solution environment and removes qed at end
+	{\begin{proof}[Solution]\let\qed\relax}
+	{\end{proof}}
+
+\makeatletter
+\@addtoreset{section}{part} %resets section numbers in new part
+\makeatother
+
+\makeatletter
+\@addtoreset{theorem}{part} %resets theorem numbers in new part
+\makeatother
+
+\makeatletter
+\@addtoreset{corollary}{theorem} %resets corollary numbers after a theorem
+\makeatother
+
+\numberwithin{corollary}{theorem}
+
+\numberwithin{equation}{theorem}
+
+\makeatletter %changes spacing between rows of matrices to fit fractions
+\newif\ifcenter@asb@\center@asb@false
+\def\center@arstrutbox{%
+	\setbox\@arstrutbox\hbox{$\vcenter{\box\@arstrutbox}$}%
+}
+\newcommand*{\CenteredArraystretch}[1]{%
+	\ifcenter@asb@\else
+	\pretocmd{\@mkpream}{\center@arstrutbox}{}{}%
+	\center@asb@true
+	\fi
+	\renewcommand{\arraystretch}{#1}%
+}
+\makeatother
+
+\title{Review Session 2}
+\author{Aakash Jog}
+\date{\formatdate{25}{1}{2015}}
+
+\begin{document}
+
+\maketitle
+
+\begin{example}
+	Consider $V = M_{2 \times 2}(\mathbb{R})$ with inner product 
+	\begin{equation*}
+		\langle A, B \rangle = \trace 
+			\left(
+				B^T 
+					\begin{pmatrix}
+						1 & 2\\
+						2 & 5\\
+					\end{pmatrix}
+				A
+			\right)
+	\end{equation*}
+	Find an orthonormal basis of $V$ with respect to this inner product.
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		v_1 &= e_1\\
+		v_2 &= e_2 - \dfrac{\langle e_2, v_1 \rangle}{{\| v_1 \|}^2} v_1\\
+		&= e_2 - 
+			\dfrac
+			{\trace
+				\left( 
+					\begin{pmatrix}
+						1 & 0\\
+						0 & 0\\
+					\end{pmatrix}
+					\begin{pmatrix}
+						1 & 2\\
+						2 & 5\\
+					\end{pmatrix}
+					\begin{pmatrix}
+						0 & 1\\
+						0 & 0\
+					\end{pmatrix}
+				\right)
+			}
+			{\trace
+				\left( 
+				\begin{pmatrix}
+				1 & 0\\
+				0 & 0\\
+				\end{pmatrix}
+				\begin{pmatrix}
+				1 & 2\\
+				2 & 5\\
+				\end{pmatrix}
+				\begin{pmatrix}
+				1 & 0\\
+				0 & 0\
+				\end{pmatrix}
+				\right)
+			}
+			e_1\\
+		&= e_2\\
+		v_3 &= 
+			\begin{pmatrix}
+				-2 & 0\\
+				1 & 0\\
+			\end{pmatrix}\\
+		v_4 &= 
+			\begin{pmatrix}
+				0 & -2\\
+				0 & 1\\
+			\end{pmatrix}
+	\end{align*}
+\end{solution}
+
+\begin{example}
+	Let $A \in M_{6 \times 6} (\mathbb{C})$. Given
+	\begin{equation*}
+		p_A(\lambda) = \lambda^2 (\lambda - 2) (\lambda + 1)^3
+	\end{equation*}
+	find $\det(A^2 + A)$.
+\end{example}
+
+\begin{solution}
+	\begin{align*}
+		\det(A + A^2) &= \det(A (A + I))\\
+		&= \det(A) \det(A + I)
+	\end{align*}
+	As $0$ is an eigenvalue of $A$, the product of all eigenvalues is $0$. Therefore, $\det(A) = 0$.\\
+	Therefore, $\det(A^2 + A) = 0$.
+\end{solution}
+
+\end{document}
