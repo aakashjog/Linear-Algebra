@@ -12,6 +12,9 @@
 \usepackage{enumerate, enumitem}
 \usepackage{cancel}
 \usepackage{xfrac}
+\usepackage{float}
+\usepackage{microtype}
+\usepackage{lmodern}
 %\usepackage{background}
 \setcounter{secnumdepth}{4}
 
@@ -83,12 +86,30 @@
 }
 \makeatother
 
+\newcommand\blfootnote[1]{%
+	\begingroup
+	\renewcommand\thefootnote{}\footnote{#1}%
+	\addtocounter{footnote}{-1}%
+	\endgroup
+}
+
 \title{Linear Algebra}
 \author{Aakash Jog}
 
 \begin{document}
 
 \maketitle
+
+\blfootnote
+{	
+	\begin{figure}[H]
+		\includegraphics[height = 12pt]{cc.eps}
+		\includegraphics[height = 12pt]{by.eps}
+		\includegraphics[height = 12pt]{nc.eps}
+		\includegraphics[height = 12pt]{sa.eps}
+	\end{figure}
+	This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License. To view a copy of this license, visit \url{http://creativecommons.org/licenses/by-nc-sa/4.0/}.
+} %CC-BY-NC-SA license
 
 \tableofcontents
 
